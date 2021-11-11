@@ -1,0 +1,60 @@
+<h2 mat-dialog-title>Add</h2>
+<div class="close_modal">
+    <mat-icon mat-dialog-close (click)="cancel()" class="v-align-middle display" matTooltip="Close">close
+    </mat-icon>
+</div>
+<mat-dialog-content class="mat-typography">
+    <form [formGroup]="settingform" class="form_sec"  autocomplete="off">
+        <div class="row_sec">
+            <mat-form-field appearance="outline">
+                <mat-label>Machine Name</mat-label>
+                <input matInput formControlName="L1Name" type="text" readonly>
+            </mat-form-field>
+
+            
+            <mat-form-field appearance="outline">
+                <mat-label>Operator Id</mat-label>
+                <input matInput formControlName="operator_id" type="text" >
+            </mat-form-field>
+
+
+            <mat-form-field appearance="outline">
+                <mat-label>Route Card</mat-label>
+                <input matInput formControlName="route_card" type="text" >
+            </mat-form-field>
+
+
+            <mat-form-field appearance="outline">
+                <mat-label>Operation Number</mat-label>
+                <input matInput formControlName="operation_number" type="text" >
+            </mat-form-field>
+       
+
+            
+            <mat-form-field appearance="outline">
+                <mat-label>Idle Reason</mat-label>
+                <input matInput formControlName="idle_reason" type="text" >
+            </mat-form-field>
+
+               
+            <mat-form-field appearance="outline">
+                <mat-label>Rejection</mat-label>
+                <input matInput formControlName="rejection" type="text" >
+            </mat-form-field>
+
+               
+            <mat-form-field appearance="outline">
+                <mat-label>Rework</mat-label>
+                <input matInput formControlName="rework" type="text" >
+            </mat-form-field>
+        </div>
+    </form>
+
+</mat-dialog-content>
+
+<mat-dialog-actions align="end">
+    <!-- <mat-slide-toggle *ngIf="notificationSettings?.status" [checked]=notificationSettings.data.active
+        (change)="status($event)"></mat-slide-toggle> -->
+    <button mat-raised-button color="primary" type="submit" class="filter_btn btn_orange ml-16" (click)="submit()">
+        Save</button>
+</mat-dialog-actions>

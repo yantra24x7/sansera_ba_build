@@ -1,0 +1,72 @@
+<div *ngIf="myLoader1" class="spinner">
+    <img src="assets/images/spinner.gif">
+</div>
+
+<div class="close_modal">
+    <mat-icon mat-dialog-close  class="v-align-middle display" matTooltip="Close">close
+    </mat-icon>
+</div>
+<h2 mat-dialog-title>Macro Value</h2><br>
+<div class="overflow">
+<table class="tableflow">
+    <tr>
+        <th><h3>Machine Name</h3></th>
+        <th><h3>Value</h3></th>
+        <th><h3>Signal</h3></th> 
+        <th><h3>Actions</h3></th>
+    </tr>
+
+    <tr>
+        <td><h5>{{get_macro.L1Name}}</h5></td>
+        <td><h5>
+            <p>{{get_macro.value[0]}}</p>
+            <p>{{get_macro.value[1]}}</p>
+            <p>{{get_macro.value[2]}}</p>
+            <p>{{get_macro.value[3]}}</p>
+            <p>{{get_macro.value[4]}}</p>
+        </h5>
+
+        </td>
+
+        <td>
+            <h5>
+            <p>operator_id : {{get_macro.signal[0].operator_id}}
+
+                <span><input  class="textlo" *ngIf="enableEdit1" [formControl]="operator_id"  (keypress)="keyPress($event)">
+                </span>
+            </p>
+            <p>component ID: {{get_macro.signal[1].route_card}}
+                <span><input  class="textlo" *ngIf="enableEdit1" [formControl]="route_card"   (keypress)="keyPress($event)">
+                </span>
+
+            </p>
+            <p>operation_number : {{get_macro.signal[2].operation_number}}
+                <span><input  class="textlo" *ngIf="enableEdit1" [formControl]="operation_number"   (keypress)="keyPress($event)">
+                </span>
+
+            </p>
+            <p>idle_reason : {{get_macro.signal[3].idle_reason}}
+                <span><input  class="textlo" *ngIf="enableEdit1" [formControl]="idle_reason"   (keypress)="keyPress($event)">
+                </span>
+
+            </p>
+            <p>rejection : {{get_macro.signal[4].rejection}}
+
+                <span><input  class="textlo" *ngIf="enableEdit1" [formControl]="rejection1"   (keypress)="keyPress($event)">
+                </span>
+            </p>
+            <p>rework : {{get_macro.signal[5].rework}}
+
+                <span><input  class="textlo" *ngIf="enableEdit1" [formControl]="rework" (keypress)="keyPress($event)">
+                </span>
+            </p>
+        </h5>
+
+        </td>
+        <td (click)="toggleShow1()"><h5>Edit</h5></td>
+        <td (click)="savemacro(get_macro.L1Name)"><h5>Save</h5></td>
+
+    </tr>
+</table>
+
+</div>

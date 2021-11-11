@@ -1,0 +1,382 @@
+<section class="page">
+    <div class="section_top_padding">
+        <div class="page_title_sec">
+          <h2 class="sub_title">
+            <!-- <mat-icon class="v-align-middle display">laptop</mat-icon> -->
+            <span class="v-align-middle">Report</span>
+        </h2>        </div>
+        <div class="filter_sec mt-10">
+            <form [formGroup]="login" (ngSubmit)="logintest('true')">
+                <div class="filter_fields">
+
+                  <div class="filter_field date_picker" color="primary">
+                       
+                    <!-- <ejs-daterangepicker placeholder='Select a range' (change)="ValueChange()" [value]="value" formControlName="date">
+                        <e-presets>
+                            <e-preset label="This Week" [start]='weekStart' [end]='weekEnd'></e-preset>
+                            <e-preset label="This Month" [start]='monthStart' [end]='monthEnd'></e-preset>
+                            <e-preset label="Last Month" [start]='lastStart' [end]='lastEnd'></e-preset>
+                            <e-preset label="Last Year" [start]='yearStart' [end]='yearEnd'></e-preset>
+                        </e-presets>
+                    </ejs-daterangepicker> -->
+
+                    <!-- <mat-form-field>
+                      <input matInput
+                             placeholder="Choose a date"
+                             [satDatepicker]="picker2"
+                             formControlName="date"  (dateInput)="addEvent('input', $event)" (dateChange)="addEvent('change', $event)">
+                      <sat-datepicker #picker2 [rangeMode]="true">
+                      </sat-datepicker>
+                      <sat-datepicker-toggle matSuffix [for]="picker2"></sat-datepicker-toggle>
+                  </mat-form-field> -->
+
+
+                  <mat-form-field class="date_select" (click)="picker.open()">
+                    <input matInput placeholder="Choose a date" class="date_select" formControlName="date"
+                      [satDatepicker]="picker" [max]="maxDate" (dateInput)="addEvent('input', $event)" (dateChange)="addEvent('change', $event)">
+                    <sat-datepicker-toggle matSuffix [for]="picker"></sat-datepicker-toggle>
+                    <sat-datepicker #picker [rangeMode]="true">
+                    </sat-datepicker>
+                  </mat-form-field>
+
+                </div>
+
+              
+                    <div class="filter_field">
+                        <mat-form-field appearance="outline">
+                            <mat-select placeholder="Select Line" matNativeControl required
+                                formControlName="line" (selectionChange)="getsplit($event.value)">
+                                <mat-option value="all"  *ngIf="rolename === 'Admin'">All</mat-option>
+                                <mat-option *ngFor="let mod of module_response" [value]="mod">
+                                  {{mod}}
+                              </mat-option>
+
+                            </mat-select>
+                        </mat-form-field>
+                    </div>
+                    <div class="filter_field">
+                        <!--have commmented out conditions feel free to use them again *ngIf="type == 'ShiftWise'" -->
+                        <mat-form-field appearance="outline">
+                            <mat-select placeholder="Select Machine" matNativeControl required
+                                formControlName="machine_name" (selectionChange)="getm($event.value)">
+                                <mat-option value="all">All</mat-option>
+
+                                <mat-option *ngFor="let Machine of mac_response" [value]="Machine">
+                                    {{Machine}}
+                                </mat-option>
+                            </mat-select>
+                        </mat-form-field>
+                    </div>
+
+                    <div class="filter_field">
+                      <mat-form-field appearance="outline">
+                          <mat-select placeholder="Select Shift" matNativeControl required
+                              formControlName="shift_num"  (selectionChange)="getshift($event.value)">
+                              <mat-option value="all">All</mat-option>
+    
+                              <mat-option *ngFor="let shift of shift_response" [value]="shift.shift_no">
+                                  {{shift.shift_no}}
+                              </mat-option>
+                          </mat-select>
+                      </mat-form-field>
+                  </div>
+
+                    <div class="filter_field">
+                        <mat-form-field appearance="outline">
+                            <mat-select placeholder="Shiftwise" matNativeControl required
+                                formControlName="type" (selectionChange)="gettype($event.value)">
+                                <mat-option value="Shiftwise">Shiftwise</mat-option>
+                                <mat-option value="Operatorwise">Operatorwise</mat-option>
+
+                              
+                            </mat-select>
+                        </mat-form-field>
+                    </div>
+ 
+                    <div class="filter_field"  *ngIf="types === 'Operatorwise' ">
+                      <mat-form-field appearance="outline">
+                          <mat-select placeholder="Select Operator" matNativeControl required
+                              formControlName="operator" >
+                              <mat-option *ngFor="let op of op_response" [value]="op">
+                                {{op}}
+                            </mat-option>
+                            
+                          </mat-select>
+                      </mat-form-field>
+                      <!-- <p *ngIf="op_response.length==0">No Operators Found</p> -->
+                      <div *ngIf="op_response.length==0" class="no_data_found">
+                        <h2>No Operators found</h2>
+                      </div>
+                  </div>
+
+                    <button type="submit" color="primary" mat-raised-button>Submit</button>
+                </div>
+
+            </form>
+ 
+            <div class="table_export" (click)="downlosd()">
+                <button class="export_btn" mat-raised-button (click)="exporter.exportTable('xlsx',{fileName:'Report'})"> Export</button>
+                <!-- <a href="" class="export_btn">
+                        <i class="material-icons">
+                            file_copy
+                        </i>
+                        Export
+                    </a> -->
+            </div>
+        </div>
+        <!-- <mat-card class="card_sec">
+            <div class="table_wrapper">
+                <table class="table report_table">
+                    <thead>
+                        <tr></tr>
+                        <tr>
+                            <th>S.no</th>
+                            <th class="date">Date</th>
+                            <th>Line</th>
+                            <th>Machine</th>
+                            <th>Shift</th>
+                            <th>Time</th>
+                            <th>Operator Name</th>
+                            <th>Operator ID</th>
+
+                            <th>Route Card Number</th>
+                            <th>Target</th>
+                            <th>Actual Parts Produced</th>
+                         
+                            <th>Efficiency</th>
+                            <th>Utilization</th>
+                            <th class="run_bg">Run Time <span>(min)</span></th>
+                            <th class="idle_bg">Setup Idle <span>(min)</span></th>
+                            <th class="alarm_bg">Alarm Time <span>(min)</span></th>
+                            <th class="non_bg">Non Utilized Time <span>(min)</span></th>
+                            <th>Duration</th>
+
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let show_report of get_report; let i = index">
+                            <td>{{i+1}}</td>
+                            <td>{{show_report?.date | date:'dd-MM-yyyy'}}</td>
+                            <td>{{show_report?.line || '---'}}</td>
+                            <td>{{show_report?.machine_name || '---'}}</td>
+
+                            <td>{{show_report?.shift_num || '---'}}</td>
+                            <td>{{show_report?.time || '---'}}</td>
+
+
+                            <td>{{show_report?.operator || '---'}}</td>
+                            <td>{{show_report?.operator_id || '---'}}</td>
+                            
+
+                            <td>{{show_report?.root_card || '---'}}</td>
+                            <td>{{show_report?.target || '---'}}</td>
+
+                            <td>{{show_report?.actual || '---'}}</td>
+                           
+                            <td>{{show_report?.efficiency || '---'}}</td>
+                            <td>{{show_report?.utilisation || '---'}}</td>
+                            <td>{{show_report?.run_time || '---'}}
+                             
+                            </td>
+                            <td>{{show_report?.idle_time || '---'}}</td>
+                            <td>{{show_report?.alarm_time || '---'}}</td>
+                            <td>{{show_report?.disconnect || '---'}}</td>
+                            <td>{{show_report?.duration || '---'}}</td>
+
+                        </tr>
+                    </tbody>
+                </table>
+
+            </div>
+            <div *ngIf="get_report?.length==0" class="no_data_found">
+                <h4>No Data found</h4>
+            </div>
+        </mat-card> -->
+     
+        <mat-card class="card_sec">
+            <mat-card-content class="table_responsive">
+              <table class="row" mat-table  matTableExporter #exporter="matTableExporter" [dataSource]="dataSource" class="mat-elevation-z0">
+      
+                <ng-container matColumnDef="position">
+                  <th mat-header-cell *matHeaderCellDef> # </th>
+                  <td mat-cell *matCellDef="let i=index;"> {{i+1}} </td>
+      
+                </ng-container>
+      
+                <!-- Name Column -->
+                <ng-container matColumnDef="date">
+                  <th mat-header-cell *matHeaderCellDef> Date </th>
+                  <td mat-cell *matCellDef="let element"> {{element.date | date:'dd-MM-yyyy'}} </td>
+                </ng-container>
+      
+                <!-- Weight Column -->
+                <ng-container matColumnDef="line">
+                  <th mat-header-cell *matHeaderCellDef>Line</th>
+                  <td mat-cell *matCellDef="let element"> {{element.line || '---'}} </td>
+                </ng-container>
+      
+    
+                <!-- Symbol Column -->
+                <ng-container matColumnDef="machine_name">
+                  <th mat-header-cell *matHeaderCellDef>Machine</th>
+                  <td mat-cell *matCellDef="let element"> {{element.machine_name || '---'}} </td>
+                </ng-container>
+      
+      
+                <!-- Symbol Column -->
+                <ng-container matColumnDef="shift_num">
+                  <th mat-header-cell *matHeaderCellDef>Shift</th>
+                  <td mat-cell *matCellDef="let element"> {{element.shift_num || '---'}} </td>
+                </ng-container>
+      
+                <ng-container matColumnDef="time">
+                    <th mat-header-cell *matHeaderCellDef>Time</th>
+                    <td mat-cell *matCellDef="let element"> {{element.time || '---'}} </td>
+                  </ng-container>
+
+
+                  <ng-container matColumnDef="operator">
+                    <th mat-header-cell *matHeaderCellDef>Operator Name</th>
+                    <td mat-cell *matCellDef="let element"> 
+                      <span *ngIf="element.operator.length === 0">No Operator Name</span>
+                      <span *ngIf="element.operator.length != 0">{{element.operator}}</span>
+                    
+                    </td>
+                  </ng-container>
+
+
+                  <ng-container matColumnDef="operator_id">
+                    <th mat-header-cell *matHeaderCellDef>Operator ID</th>
+                    <td mat-cell *matCellDef="let element"> 
+                      
+                      <span *ngIf="element.operator_id.length === 0">No Operator Id</span>
+                      <span *ngIf="element.operator_id.length != 0">{{element.operator_id}}</span>
+
+                      <!-- {{element.operator_id || '---'}}  -->
+                    </td>
+
+
+                  </ng-container>
+
+                  <ng-container matColumnDef="op_no">
+                    <th mat-header-cell *matHeaderCellDef>Operation Number</th>
+                    <td mat-cell *matCellDef="let element"> 
+                      
+                      <span *ngIf="element.ope_no.length === 0">No Operation Number</span>
+                      <span *ngIf="element.ope_no.length != 0">{{element.ope_no}}</span>
+
+                      <!-- {{element.operator_id || '---'}}  -->
+                    </td>
+
+
+                  </ng-container>
+
+                  <ng-container matColumnDef="root_card">
+                    <th mat-header-cell *matHeaderCellDef>Component ID</th>
+                    <td mat-cell *matCellDef="let element"> 
+                      <span *ngIf="element.root_card.length === 0">No Route Card Number</span>
+                      <span *ngIf="element.root_card.length != 0">{{element.root_card}}</span>
+
+                    </td>
+                  </ng-container>
+
+
+                  <ng-container matColumnDef="target">
+                    <th mat-header-cell *matHeaderCellDef>Target</th>
+                    <td mat-cell *matCellDef="let element"> {{element.target }} </td>
+                  </ng-container>
+
+                  <ng-container matColumnDef="actual">
+                    <th mat-header-cell *matHeaderCellDef>Actual Parts Produced</th>
+                    <td mat-cell *matCellDef="let element"> {{element.actual }} </td>
+                  </ng-container>
+                
+
+                  <ng-container matColumnDef="ncq">
+                    <th mat-header-cell *matHeaderCellDef>NCQ</th>
+                    <td mat-cell *matCellDef="let element"> {{element.ncq }} </td>
+                  </ng-container>
+
+                  <ng-container matColumnDef="accept">
+                    <th mat-header-cell *matHeaderCellDef>Accept</th>
+                    <td mat-cell *matCellDef="let element"> {{element.accept }} </td>
+                  </ng-container>
+
+
+                  
+
+                  <ng-container matColumnDef="reject">
+                    <th mat-header-cell *matHeaderCellDef>Reject</th>
+                    <td mat-cell *matCellDef="let element"> {{element.reject }} </td>
+                  </ng-container>
+
+
+                  
+
+                  <ng-container matColumnDef="rework">
+                    <th mat-header-cell *matHeaderCellDef>Rework</th>
+                    <td mat-cell *matCellDef="let element"> {{element.rework }} </td>
+                  </ng-container>
+
+                  <ng-container matColumnDef="efficiency">
+                    <th mat-header-cell *matHeaderCellDef>Efficiency(%)</th>
+                    <td mat-cell *matCellDef="let element"> {{element.efficiency }} </td>
+                  </ng-container>
+
+
+                  <ng-container matColumnDef="utilisation">
+                    <th mat-header-cell *matHeaderCellDef>Utilization(%)</th>
+                    <td mat-cell *matCellDef="let element"> {{element.utilisation }} </td>
+                  </ng-container>
+
+                  <ng-container matColumnDef="run_time" class="run_bg">
+                    <th mat-header-cell *matHeaderCellDef >Run Time(min)</th>
+                    <td mat-cell *matCellDef="let element"> {{element.run_time || '---'}} </td>
+                  </ng-container>
+
+
+                  <ng-container matColumnDef="idle_time">
+                    <th mat-header-cell *matHeaderCellDef>Setup Idle(min)</th>
+                    <td mat-cell *matCellDef="let element"> {{element.idle_time || '---'}} </td>
+                  </ng-container>
+
+                  <ng-container matColumnDef="alarm_time">
+                    <th mat-header-cell *matHeaderCellDef>Alarm Time(min)</th>
+                    <td mat-cell *matCellDef="let element"> {{element.alarm_time || '---'}} </td>
+                  </ng-container>
+
+                  <ng-container matColumnDef="disconnect">
+                    <th mat-header-cell *matHeaderCellDef>Non Utillized Time(min)</th>
+                    <td mat-cell *matCellDef="let element"> {{element.disconnect || '---'}} </td>
+                  </ng-container>
+
+                  <ng-container matColumnDef="duration">
+                    <th mat-header-cell *matHeaderCellDef>Duration(min)</th>
+                    <td mat-cell *matCellDef="let element"> {{element.duration || '---'}} </td>
+                  </ng-container>
+
+                <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+                <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+              </table>
+              
+               
+
+
+              <!-- <mat-paginator [length]="total_count" [pageSize]="page_size" [pageSizeOptions]="pageSizeOptions"
+                (page)="pageEvent($event)">
+              </mat-paginator> -->
+            </mat-card-content>
+
+            <mat-card-content *ngIf="dataSource.filteredData.length==0" class="no_data_found">
+              <h2>No data found</h2>
+            </mat-card-content>
+          </mat-card>
+          
+    </div>
+    <div *ngIf="myLoader" class="spinner">
+        <img src="assets/images/spinner.gif">
+    </div>
+
+
+
+</section>

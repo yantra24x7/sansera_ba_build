@@ -1,0 +1,47 @@
+
+.tableflow{
+    color: whitesmoke;
+    width: 100%;
+    white-space: nowrap;
+    // height: 100%;
+
+}
+
+table.tableflow h5 {
+    cursor: pointer;
+}
+
+
+
+.mat-dialog-container {
+    display: block;
+    padding: 24px;
+    border-radius: 4px;
+    box-sizing: border-box;
+    overflow: scroll;
+    outline: 0;
+    width: 100%;
+    height: auto !important;
+    min-height: inherit;
+    max-height: inherit;
+    color: whitesmoke;
+
+}
+
+td, th {
+    padding: 10px;
+}
+.overflow {
+    overflow: auto;
+}
+
+.close_modal {
+    position: absolute;
+    top: 32px;
+    right: 24px;
+    color: #a3a0a0;
+}
+
+.container.sadd {
+    overflow: auto;
+}

@@ -1,0 +1,279 @@
+<section class="page">
+    <div class="section_top_padding">
+        <div class="page_title_sec">
+          <h2 class="sub_title">
+            <!-- <mat-icon class="v-align-middle display">laptop</mat-icon> -->
+            <span class="v-align-middle">Efficiency Report</span>
+        </h2>
+              </div>
+        <div class="filter_sec mt-10">
+            <form [formGroup]="login" (ngSubmit)="logintest('true')">
+                <div class="filter_fields">
+                     
+                  <div class="filter_field">
+                    <mat-form-field appearance="outline">
+                        <mat-select placeholder="Select Line" matNativeControl required
+                            formControlName="line" (selectionChange)="getsplit($event.value)">
+                            <mat-option value="all" *ngIf="rolename === 'Admin'">All</mat-option>
+                            <mat-option *ngFor="let mod of module_response" [value]="mod">
+                              {{mod}}
+                          </mat-option>
+
+                        </mat-select>
+                    </mat-form-field>
+                </div>
+
+                    <div class="filter_field">
+                        <!--have commmented out conditions feel free to use them again *ngIf="type == 'ShiftWise'" -->
+                        <mat-form-field appearance="outline">
+                            <mat-select placeholder="Select Machine" matNativeControl required
+                                formControlName="machine_name">
+                                <!-- <mat-option value="all">All</mat-option> -->
+
+                                <mat-option *ngFor="let machine of mac_response" [value]="machine">
+                                    {{machine}}
+                                </mat-option> 
+                            </mat-select>
+                        </mat-form-field>
+                    </div>
+
+                    <div class="filter_field">
+                        <!--have commmented out conditions feel free to use them again *ngIf="type == 'ShiftWise'" -->
+                        <mat-form-field appearance="outline">
+                            <mat-select placeholder="Select Shift" matNativeControl required
+                                formControlName="shift_num">
+                                <!-- <mat-option value="all">All</mat-option> -->
+                                <mat-option value="all">All</mat-option>
+
+                                <mat-option *ngFor="let shift of shift_response" [value]="shift.shift_no">
+                                    {{shift.shift_no}}
+                                </mat-option>
+                            </mat-select>
+                        </mat-form-field>
+                    </div>
+                    <div class="filter_field date_picker" color="primary">
+                      
+                      <mat-form-field> 
+                        <mat-label>Date</mat-label>
+                        <input matInput [matDatepicker]="picker"  [max]="maxDate" formControlName="from_date" (dateInput)="addEvent('input', $event)" (dateChange)="addEvent('change', $event)">
+                        <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                        <mat-datepicker #picker startView="year" [startAt]="startDate"></mat-datepicker>
+                      </mat-form-field>
+                    </div>
+
+                    <button [disabled]="login.invalid" type="submit" color="primary" mat-raised-button>Submit</button>
+                </div>
+
+            </form>
+
+            <div class="table_export">
+                <button class="export_btn" mat-raised-button (click)="export()"> Export</button>
+              
+            </div>
+        </div>
+        <mat-card class="card_sec" > 
+            <div class="table_wrapper">
+                <table class="table report_table" *ngIf="lnth?.length>0">
+                    <thead>
+                        <tr></tr>
+                        <tr class="sticky">
+                            <th>S.no</th>
+                            <th class="date">Date</th>
+
+                            <th>Shift</th>
+                            <th>Line</th>
+                            <th>Machine Name</th>
+                            <th>Operator Name</th>
+                            <th>Operator Id</th>
+                            <th>Operation Number</th>
+                            <th>Mode</th>
+                            <th>Component ID</th>
+                            <th>Component Start Time</th>
+                            <th>Component End Time</th>
+                            <!-- <th>Duration</th> -->
+                            <th>Target</th>
+                            <th>Actual</th>
+                            <th>NCQ</th>
+                            <th>Accept</th>
+                            <th>Reject</th>
+                            <th>Rework</th>
+                            <th>Efficiency(%)</th>
+                          
+                           
+                          
+                        </tr>
+                    </thead>
+                    <tbody *ngFor="let gating of fina;let i = index">
+                      <!-- {{gating.accept}} -->
+                        <tr *ngFor="let show_report of gating.route_card_report;let i = index">
+                            <td>{{i+1}}</td>
+                            <td>{{g_report?.date | date:'dd-MM-yyyy'}}</td>
+
+                            <td>{{g_report?.shift_num || '---'}}</td>
+                            <td>{{show_report?.line || '---'}}</td>
+
+                             <td>{{g_report?.machine_name || '---'}}</td>
+                             <td>
+                                 
+                                <span *ngIf="show_report?.operator_name.length === 0">No Operator Name</span>
+                                <span *ngIf="show_report?.operator_name.length != 0">{{show_report?.operator_name}}</span></td>
+                             <td>
+                                <span *ngIf="show_report?.operator_id.length === 0">No Operator Id</span>
+                                <span *ngIf="show_report?.operator_id.length != 0"> {{show_report?.operator_id || '---'}}</span> 
+                                
+                               </td>
+                               <td>
+
+                                <span *ngIf="show_report?.opeation_no.length === 0">No Operation Number</span>
+                                <span *ngIf="show_report?.opeation_no.length != 0"> {{show_report?.opeation_no || '---'}}</span> 
+
+                               </td>
+                             <td>{{show_report?.mode || '---'}}</td>
+                            <td>{{show_report?.card_no || '---'}}</td>
+                            <td>{{show_report?.rout_start | date:'yyyy-MM-dd ; HH:mm:ss'}}</td>
+                            <td>{{show_report?.rout_end | date:'yyyy-MM-dd ; HH:mm:ss'}}</td>
+                            <!-- <td>{{g_report?.duration || '---'}}</td> -->
+                            <!-- <td>{{show_report?.rout_start | date:'yyyy-MM-dd ; HH:mm:ss'}} -{{show_report?.rout_end | date:'yyyy-MM-dd ; HH:mm:ss'}} </td> -->
+                            <td>{{show_report?.tar}}</td>
+
+                            <td>{{show_report?.actual}}</td>
+                            <td>{{show_report?.rejection}}</td>
+                            <td>{{show_report?.accept}}</td>
+                            <td>{{show_report?.rejection1 }}</td>
+                            <td>{{show_report?.rework }}</td>
+                            <td>{{show_report?.efficiency}}</td>
+
+                           
+
+                        </tr>
+                    </tbody>
+
+
+
+                 
+                </table>
+
+
+                <table class="table report_table" *ngIf="lnth?.length==0">
+                  <thead>
+                      <tr></tr>
+                      <tr class="sticky">
+                          <th>S.no</th>
+                          <th class="date">Date</th>
+
+                          <th>Shift</th>
+                          <th>Line</th>
+                          <th>Machine Name</th>
+                          <th>Operator Name</th>
+                          <th>Operator Id</th>
+                          <th>Mode</th>
+                          <th>Component ID</th>
+                          <th>Component Start Time</th>
+                          <th>Component End Time</th>
+                          <!-- <th>Duration</th> -->
+                          <th>Target</th>
+                          <th>Actual</th>
+                          <th>Accept</th>
+                          <th>Reject</th>
+                          <th>Rework</th>
+                          <th>Efficiency(%)</th>
+                        
+                         
+                        
+                      </tr>
+                  </thead>
+                  <tbody>
+                    <!-- {{gating.accept}} -->
+                     
+                  </tbody>
+
+
+
+               
+              </table>
+
+            </div>
+            <div *ngIf="get_report?.length==0" class="no_data_found">
+                <h4>No Data found</h4>
+            </div>
+        </mat-card>
+<!--     
+        <mat-card class="card_sec">
+            <mat-card-content class="table_responsive">
+              <table class="row" mat-table  matTableExporter #exporter="matTableExporter" [dataSource]="dataSource" class="mat-elevation-z0">
+      
+                <ng-container matColumnDef="position">
+                  <th mat-header-cell *matHeaderCellDef> # </th>
+                  <td mat-cell *matCellDef="let i=index;"> {{i+1}} </td>
+      
+                </ng-container>
+      
+                <ng-container matColumnDef="date">
+                  <th mat-header-cell *matHeaderCellDef> Date </th>
+                  <td mat-cell *matCellDef="let element"> {{element.date | date:'dd-MM-yyyy'}} </td>
+                </ng-container>
+      
+                <ng-container matColumnDef="shift_num">
+                  <th mat-header-cell *matHeaderCellDef>Shift</th>
+                  <td mat-cell *matCellDef="let element"> {{element.shift_num}} </td>
+                </ng-container>
+               
+                <ng-container matColumnDef="machine_name">
+                  <th mat-header-cell *matHeaderCellDef>Machine Name</th>
+                  <td mat-cell *matCellDef="let element"> {{element.machine_name }} </td>
+                </ng-container>
+      
+      
+                <ng-container matColumnDef="card_no">
+                  <th mat-header-cell *matHeaderCellDef>Route Card Number</th>
+                  <td mat-cell *matCellDef="let element"> {{element.card_no}} </td>
+                </ng-container>
+      
+                <ng-container matColumnDef="rout_start">
+                    <th mat-header-cell *matHeaderCellDef>Route Card Start Time</th>
+                    <td mat-cell *matCellDef="let element"> {{element.rout_start}} </td>
+                  </ng-container>
+
+                  <ng-container matColumnDef="rout_end">
+                    <th mat-header-cell *matHeaderCellDef>Route Card End Time</th>
+                    <td mat-cell *matCellDef="let element"> {{element.rout_end}} </td>
+                  </ng-container>
+
+
+                  <ng-container matColumnDef="tar">
+                    <th mat-header-cell *matHeaderCellDef>Target</th>
+                    <td mat-cell *matCellDef="let element"> {{element.tar}} </td>
+                  </ng-container>
+
+
+                  <ng-container matColumnDef="actual">
+                    <th mat-header-cell *matHeaderCellDef>Actual</th>
+                    <td mat-cell *matCellDef="let element"> {{element.actual}} </td>
+                  </ng-container>
+
+                  <ng-container matColumnDef="efficiency">
+                    <th mat-header-cell *matHeaderCellDef>Efficiency(%)</th>
+                    <td mat-cell *matCellDef="let element"> {{element.efficiency}} </td>
+                  </ng-container>
+
+                <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+                <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+              </table>
+              
+
+              
+         
+            </mat-card-content>
+
+            <mat-card-content *ngIf="dataSource.filteredData.length==0" class="no_data_found">
+                <h2>No data found</h2>
+              </mat-card-content>
+          </mat-card> -->
+    </div>
+    <div *ngIf="myLoader" class="spinner">
+        <img src="assets/images/spinner.gif">
+    </div>
+
+
+
+</section>

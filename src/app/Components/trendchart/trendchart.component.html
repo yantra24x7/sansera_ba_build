@@ -1,0 +1,184 @@
+<section class="page">
+    
+    <div class="container_fluid pt-3">
+          <div class="page_title_sec">
+             <!-- <h2 class="sub_title">[m
+    [31m-                    <mat-icon class="v-align-middle display">laptop</mat-icon>[m
+    [31m-                    <span class="v-align-middle">Report</span>[m
+    [31m-                </h2> -->
+    
+            </div>
+           <div class="filter_sec mt-10">
+                <form [formGroup]="test" (ngSubmit)="testfunc('true')">
+                 <div class="filter_fields">
+                    <div class="filter_field">
+                        <!--have commmented out conditions feel free to use them again *ngIf="type == 'ShiftWise'" -->
+                   <mat-form-field appearance="outline">
+                        <mat-select placeholder="Select Machine" matNativeControl required formControlName="machine_name">
+                               <mat-option value="all">All</mat-option>
+    
+                               <mat-option *ngFor="let machine of machine_response" [value]="machine">
+                               {{machine}}
+                              </mat-option>
+                            </mat-select>
+                          </mat-form-field>
+                    </div>
+                   <div class="filter_field">
+                       <mat-form-field appearance="outline">
+                           <mat-select placeholder="Select Shift" matNativeControl required formControlName="shift_num">
+                                <mat-option value="all">All</mat-option>
+    
+                                <mat-option *ngFor="let shift of shift_response" [value]="shift.shift_no">
+                               {{shift.shift_no}}
+                              </mat-option>
+                            </mat-select>
+                          </mat-form-field>
+                    </div>
+                    <!-- <div class="filter_field">[m
+    [31m-                    <mat-form-field appearance="outline" placeholder="Select Shift">[m
+    [31m-                        <mat-select required>[m
+    [31m-                            <mat-option value="">Select Machine</mat-option>[m
+    [31m-                            <mat-option value="All">All</mat-option>[m
+    [31m-                            <mat-option value="">Lorem Ipsum</mat-option>[m
+    [31m-                            <mat-option value="">Lorem Ipsum</mat-option>[m
+    [31m-                            <mat-option value="">Lorem Ipsum</mat-option>[m
+    [31m-                        </mat-select>[m
+    [31m-                    </mat-form-field>[m
+    [31m-                </div> -->
+              <!-- <div class="filter_field">[m
+    [31m-                    <mat-form-field appearance="outline" placeholder="Select Shift">[m
+    [31m-                        <mat-select required>[m
+    [31m-                            <mat-option value="">Select Machine</mat-option>[m
+    [31m-                            <mat-option value="All">All</mat-option>[m
+    [31m-                            <mat-option value="">Lorem Ipsum</mat-option>[m
+    [31m-                            <mat-option value="">Lorem Ipsum</mat-option>[m
+    [31m-                            <mat-option value="">Lorem Ipsum</mat-option>[m
+    [31m-                        </mat-select>[m
+    [31m-                    </mat-form-field>[m
+    [31m-                </div> -->
+               <!-- <div class="filter_field">[m
+    [31m-                    <mat-form-field appearance="outline" placeholder="Select Shift">[m
+    [31m-                        <mat-select required>[m
+    [31m-                            <mat-option value="">Select Machine</mat-option>[m
+    [31m-                            <mat-option value="All">All</mat-option>[m
+    [31m-                            <mat-option value="">Lorem Ipsum</mat-option>[m
+    [31m-                            <mat-option value="">Lorem Ipsum</mat-option>[m
+    [31m-                            <mat-option value="">Lorem Ipsum</mat-option>[m
+    [31m-                        </mat-select>[m
+    [31m-                    </mat-form-field>[m
+    [31m-                </div> -->
+             <div class="filter_field date_picker" color="primary">
+                    <!-- <label>Select Date</label> -->
+                    <!-- <ejs-daterangepicker id='daterangepicker' placeholder='Select a range' [startDate]='start' [endDate]='end'></ejs-daterangepicker> -->
+                        <ejs-daterangepicker placeholder='Select a range' formControlName="date"
+                            (click)="ejs-daterangepicker.open()" >
+                            <e-presets>
+                                <e-preset label="This Week" [start]='weekStart' [end]='weekEnd'></e-preset>
+                                <e-preset label="This Month" [start]='monthStart' [end]='monthEnd'></e-preset>
+                               <e-preset label="Last Month" [start]='lastStart' [end]='lastEnd'></e-preset>
+                                <e-preset label="Last Year" [start]='yearStart' [end]='yearEnd'></e-preset>
+                            </e-presets>
+                       </ejs-daterangepicker>
+                    </div>
+                    <button color="primary" mat-raised-button> Filter</button>
+              </div>
+            </form>
+    
+              <!--  <div class="filter_fields">
+                   <label>Show Only :</label>
+                 <mat-checkbox color="primary">Running</mat-checkbox>
+                   <mat-checkbox color="primary">Idle</mat-checkbox>
+                   <mat-checkbox color="primary">No-Data</mat-checkbox>
+                </div> -->
+    
+                <div class="table_export">
+                    <!-- <button color="primary" mat-raised-button> Export</button> -->
+                    <!-- <a href="" class="export_btn">[m
+    [31m-                        <i class="material-icons">[m
+    [31m-                            file_copy[m
+    [31m-                        </i>[m
+    [31m-                        Export[m
+    [31m-                    </a> -->
+           </div>
+           </div>
+       <mat-card class="card_sec">
+           <mat-tab-group animationDuration="0ms">
+                    <!-- <mat-tab label="Show Chart">[m
+    [31m-[m
+    [31m-[m
+    [31m-                    <div id="container"></div>[m
+    [31m-[m
+    [31m-[m
+    [31m-                </mat-tab> -->
+                  <mat-tab label="Show Report">
+                       <table class="table">
+                         <thead>
+                               <tr>
+                                   <th rowspan="2">S.no</th>
+                                 <th rowspan="2">Date</th>
+                                    <th rowspan="2">Shift</th>
+                                    <th rowspan="2">Machine Name</th>
+                                    <th colspan="2">Operator Details</th>
+                                    <th colspan="11">Production Details</th>
+                                   <th colspan="4">Machine Details</th>
+                                </tr>
+                                <tr>
+                                    <th>NAME</th>
+                                    <th>ID</th>
+                                    <th>Part name</th>
+                                   <th>Part No</th>
+                                    <th>Work Order No</th>
+                                    <th>Operation No</th>
+                                   <th>Parts Produced</th>
+                                    <!-- <th>Qty Rejected</th> -->
+                                  <th>Cycle time</th>
+                                   <th>Cutting Time</th>
+                                    <th>Spindle Speed</th>
+                                    <th>Spindle Load</th>
+                                    <th>Feed Rate</th>
+                                    <th>Utilization</th>
+                                   <th class="green">Run Time in (min)</th>
+                                    <th class="yellow">Setup Idle in (min)</th>
+                                    <!-- <th>Alarm time in min</th> -->
+                                    <th class="grey">Non Utilized Time</th>
+    
+                              </tr>
+                            </thead>
+                            <tbody *ngFor="let show_report of get_report; let i = index">
+                               <td>{{i+1}}</td>
+                             <td>{{show_report?.date}}</td>
+                                <td>{{show_report?.shift_num}}</td>
+                                <td>{{show_report?.machine_name}}</td>
+                                <td>---</td>
+                               <td>---</td>
+                               <td>{{show_report?.part_name}}</td>
+                                <td>---</td>
+                                <td>---</td>
+                               <td>---</td>
+                                <td>{{show_report?.part_count}}</td>
+                                <!-- <td>---</td> -->
+                                <td>---</td>
+                           <td>---</td>
+                                <td>---</td>
+                                <td>---</td>
+                                <td>---</td>
+                                <td>{{show_report?.utilisation}}</td>
+                                <td>{{show_report?.run_time}}
+                                    <!-- <button color="primary" mat-button>More Info</button> -->
+                                </td>
+                                <td>{{show_report?.idle_time}}</td>
+                                <!-- <td>8</td> -->
+                        <td>{{show_report?.disconnect}}</td>
+                            </tbody>
+                        </table>
+                    </mat-tab>
+                </mat-tab-group>
+    
+    
+            </mat-card>
+        </div>
+        <div *ngIf="myLoader" class="spinner">
+            <img src="assets/images/spinner.gif">
+          </div>
+    
+    </section>

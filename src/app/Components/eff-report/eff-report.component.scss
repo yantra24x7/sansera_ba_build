@@ -1,0 +1,25 @@
+.table_wrapper {
+    // height: calc(100vh - 640px);
+    overflow-y: scroll;
+    overflow-x: scroll;
+    /* overflow: scroll; */
+    margin-top: 20px;
+}
+.red{
+	background-color:red;
+	color:white;
+}
+.part_name{
+     width: 8%;
+}
+.date{
+    width:6%
+}
+.no_data_found{
+    color: white;
+    font-variant-caps: all-petite-caps;
+}
+.mat-select-value-text {
+    font-size: 20px;
+    font-family: 'Barlow Condensed', sans-serif;
+}

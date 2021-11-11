@@ -1,0 +1,61 @@
+<div class="dialog-wrapper">
+    <div class="dialog-title">
+        <h1 mat-dialog-title>Setup Idle in (min)</h1>
+        <div>
+            <label>SBE/TC/BA/M-M123(E)</label>
+            <span>12/02/2020</span>
+        </div>
+    </div>
+    <!-- <div mat-dialog-content>
+    <p>What's your favorite animal?</p>
+    <mat-form-field>
+        <mat-label>Favorite Animal</mat-label>
+        <input matInput [(ngModel)]="data.animal">
+    </mat-form-field>
+</div> -->
+    <!-- <div mat-dialog-actions>
+    <button mat-button (click)="onNoClick()">No Thanks</button>
+    <button mat-button [mat-dialog-close]="data.animal" cdkFocusInitial>Ok</button>
+</div> -->
+
+    <mat-card class="card_sec">
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>Setup</th>
+                    <th>Inspection</th>
+                    <th>Multi machine</th>
+                    <th>Tools</th>
+                    <th>Fixture</th>
+                    <th>Process</th>
+                    <th>Documents</th>
+                    <th>Breakdown</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>Mode change (Not in operation mode like MDI, Edit, Manual etc)
+                        <span class="highlit">00:15:00</span>
+                    </td>
+                    <td>Single block stoppage <span class="highlit">00:15:00</span></td>
+                    <td>Mc stopped by M01, M00 <span class="highlit">00:15:00</span></td>
+                    <td>-</td>
+                    <td>Reduced feed rate <span class="highlit">00:15:00</span></td>
+                    <td>-</td>
+                    <td>-</td>
+                    <td>-</td>
+                </tr>
+                <tr>
+                    <td>-</td>
+                    <td>-</td>
+                    <td>-</td>
+                    <td>-</td>
+                    <td>Reduced rapid rate<span class="highlit">00:15:00</span> </td>
+                    <td>Feed hold button pressed<span class="highlit">00:15:00</span></td>
+                    <td>-</td>
+                    <td>-</td>
+                </tr>
+            </tbody>
+        </table>
+    </mat-card>
+</div>

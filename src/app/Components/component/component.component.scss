@@ -1,0 +1,57 @@
+.search {
+    padding: 12px;
+    color: black;
+}
+.mat-form-field-outline {
+    background: #990000!important;
+    
+}
+// .mat-form-field-flex{
+//     height: 59px!important;
+// }
+// .mat-input-element{
+//     height: 40px;
+// }
+.mat-form-field-wrapper{
+    background: #990000!important;
+}
+::ng-deep .mat-form-field-appearance-outline{
+    .mat-form-field-outline {
+    background: #202739;
+    border-radius: 5px!important;
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 20px;
+    }
+}
+::ng-deep .mat-select-content{
+    width:2000px;
+    background-color: red;
+    font-size: 10px;   
+}
+// .mat-input-element{
+//     font-family: 'Barlow Condensed', sans-serif!important;
+//     font-size: 24px!important;
+//     color: #fff!important;
+// }
+.form_sec .mat-form-field {
+    margin-bottom: 10px;
+}
+// .mat-form-field-appearance-outline{
+//     .mat-form-field-outline-thick {
+    
+//     height: 40px;
+//     }
+// }
+// ::ng-deep .mat-form-field-flex{
+//     height: 50px;
+// }
+.row_sec .mat-form-field {
+    width: 100%;
+}
+.mat-form-field{
+    font-family: 'Barlow Condensed', sans-serif!important;
+}
+.mat-form-field-infix{
+    font-family: 'Barlow Condensed', sans-serif!important;
+}
+

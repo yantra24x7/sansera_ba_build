@@ -1,0 +1,66 @@
+<h2 mat-dialog-title>Component Registration</h2>
+<div class="close_modal">
+    <mat-icon mat-dialog-close  class="v-align-middle display" matTooltip="Close">close
+    </mat-icon>
+</div>
+<mat-dialog-content class="mat-typography">
+    <div class="filter_sec">
+        <form [formGroup]="componentForm" (ngSubmit)="submit()" class="form_sec componentForm">
+            <div class="row_sec">
+                <div class="col-6">
+                <mat-form-field appearance="outline">
+                    <mat-label>Component Name</mat-label>
+                    <input matInput formControlName="name" type="text">
+                    <mat-error *ngIf="componentForm.controls['name'].errors?.required">Route Card Name is Required
+                    </mat-error>
+                </mat-form-field>
+                <mat-form-field appearance="outline">
+                    <mat-label>Component ID</mat-label>
+                    <input matInput formControlName="spec_id"  maxlength="10" minlength="0"  (keypress)="keyPress($event)" type="text" required>
+                    <mat-error *ngIf="componentForm.controls['spec_id'].errors?.required">Route Card Id is Required
+                    </mat-error> 
+                </mat-form-field>
+            
+            
+                <mat-form-field appearance="outline">
+                    <mat-label>Target</mat-label>
+                    <input matInput formControlName="target" type="number">
+                    <mat-error *ngIf="componentForm.controls['target'].errors?.required"> Target is Required
+                    </mat-error>
+                </mat-form-field>
+                <mat-form-field appearance="outline">
+                    <mat-label>Multiplication Factor</mat-label>
+                    <input matInput formControlName="multiplication_factor" type="number">
+                    <mat-error *ngIf="componentForm.controls['multiplication_factor'].errors?.required"> Multiplication
+                        Factor is Required
+                    </mat-error>
+                </mat-form-field>
+            </div>
+            <div class="col-6">
+                <mat-form-field appearance="outline">
+                    <mat-label>Select</mat-label>
+                    <mat-select required formControlName="L0_name">
+                        <input matInput placeholder="Search" (keyup)="search_machines($event.target.value)"
+                            (keydown)="$event.stopPropagation()" class="search">
+                        <mat-option value="" disabled>Select Machine</mat-option>
+                        <mat-option *ngFor="let machine of machine_list" [value]="machine.name">
+                            {{machine.name}}
+                        </mat-option>
+                    </mat-select>
+                </mat-form-field>
+                <div class="form-group time_field_bg">
+                    <mat-label>Cycle Time</mat-label>
+                    <ngb-timepicker formControlName="cycle_time" [seconds]="seconds"></ngb-timepicker>
+                </div>
+                <div class="form-button text-right">
+                    <button mat-raised-button type="submit" class="filter_btn btn_orange">
+                        Save</button>
+                </div>
+                </div>
+            </div>
+            
+            
+        </form>
+
+    </div>
+</mat-dialog-content>

@@ -1,0 +1,26 @@
+<h2 mat-dialog-title>Forgot Password</h2>
+<div class="close_modal">
+    <mat-icon class="v-align-middle display" mat-dialog-close (click)="onNoClick()" matTooltip="Close">close
+    </mat-icon>
+</div>
+<mat-dialog-content class="mat-typography">
+    <form [formGroup]="test" (ngSubmit)="testform(test.value)" class="form_sec" autocomplete="off">
+        <mat-form-field appearance="outline">
+            <mat-label>Email Id</mat-label>
+            <input matInput formControlName="email_id" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$"
+                ng-reflect-pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a" type="email" required>
+            <mat-error *ngIf="test.get('email_id').hasError('email')"> Enter valid email address</mat-error>
+        </mat-form-field>
+        <mat-form-field appearance="outline">
+            <mat-label>Mobile Number</mat-label>
+            <input matInput formControlName="phone_number" maxlength="10" minlength="10" (keypress)="keyPress($event)"
+                type="text" required>
+        </mat-form-field>
+        <div class="form-button text-right">
+            <button mat-raised-button color="primary" [disabled]="test.invalid" class="filter_btn btn_orange"> Save</button>
+        </div>
+    </form>
+</mat-dialog-content>
+<!-- <mat-dialog-actions align="end">
+    <button mat-raised-button color="primary" class="filter_btn btn_orange"> Save</button>
+</mat-dialog-actions> -->

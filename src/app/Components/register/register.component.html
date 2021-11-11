@@ -1,0 +1,134 @@
+<section class=" page register_page">
+    <div class="register_sec">
+        <mat-card class="form_inner">
+            <mat-card-content>
+                <div class="brand_logo">
+                    <img src="assets/images/yantra2.png" class="brand-img">
+                </div>
+                <p class="mb-16">Register to continue with Yantra24x7 </p>
+                <form [formGroup]="login" (ngSubmit)="logintest(login.value)" class="register_form">
+                    <div class="register_row_sec">
+                        <mat-form-field appearance="outline">
+                            <mat-label>First Name</mat-label>
+                            <input matInput formControlName="first_name" type="text" required>
+                            <mat-error *ngIf="login.controls['first_name'].errors?.required">First Name is Required
+                            </mat-error>
+                        </mat-form-field>
+                        <mat-form-field appearance="outline">
+                            <mat-label>Last Name</mat-label>
+                            <input matInput formControlName="last_name" type="text" required>
+
+                            <mat-error *ngIf="login.controls['last_name'].errors?.required">Last Name is Required
+                            </mat-error>
+                        </mat-form-field>
+                        <mat-form-field appearance="outline">
+                            <mat-label>Email Id</mat-label>
+                            <input matInput formControlName="email"
+                                pattern="[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[a-z]{2,3}$"
+                                ng-reflect-pattern="[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[a" required type="email">
+
+                            <mat-error *ngIf="login.controls['email'].errors?.required">Email Id is Required
+                            </mat-error>
+                            <mat-error *ngIf="login.controls['email'].errors?.pattern">Email Valid Email Address
+                            </mat-error>
+                        </mat-form-field>
+
+
+                        <mat-form-field appearance="outline">
+                            <mat-label>Password</mat-label>
+                            <input matInput formControlName="password" maxlength="14"
+                                [type]=" hide ? 'password' : 'text'" required
+                                pattern="(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[$@$!%*#?&])[A-Za-z\d$@$!%*#?&].{7,}$">
+
+                            <mat-icon class="eye" matSuffix (click)="hide = !hide">{{hide ? 'visibility_off' :
+                                'visibility'}}
+                            </mat-icon>
+                            <mat-error *ngIf="login.controls['password'].errors?.required">password is Required
+                            </mat-error>
+
+                            <mat-error *ngIf="login.controls['password'].errors?.pattern"><b>password Should be this
+                                    format eg:('A','a','7','#' and password in 8 char)</b> </mat-error>
+                        </mat-form-field>
+
+                        <mat-form-field appearance="outline">
+                            <mat-label>Mobile Number</mat-label>
+                            <input matInput formControlName="phone_no" maxlength="10" minlength="10"
+                                (keypress)="keyPress($event)" type="text" required>
+
+                            <mat-error *ngIf="login.controls['phone_no'].errors?.required">Mobile Number is Required
+                            </mat-error>
+                            <mat-error *ngIf="login.controls['phone_no'].errors?.pattern">Please Enter a valid number
+                            </mat-error>
+                            <mat-error *ngIf="login.controls['phone_no'].errors?.minlength">Mobile Number Should be 10
+                                digit
+                            </mat-error>
+                        </mat-form-field>
+                        <mat-form-field appearance="outline">
+                            <mat-label>Company Name</mat-label>
+                            <textarea matInput formControlName="tenant_name" type="text" required></textarea>
+                            <mat-error *ngIf="login.controls['tenant_name'].errors?.required">Company Name Required
+                            </mat-error>
+                        </mat-form-field>
+                        <mat-form-field appearance="outline">
+                            <mat-label>Address Line1</mat-label>
+                            <textarea matInput formControlName="address_line1" type="text" required></textarea>
+                            <mat-error *ngIf="login.controls['address_line1'].errors?.required">Address Line Required
+                            </mat-error>
+                        </mat-form-field>
+                        <mat-form-field appearance="outline">
+                            <mat-label>Address Line2</mat-label>
+                            <textarea matInput formControlName="address_line2" type="text" required></textarea>
+                            <mat-error *ngIf="login.controls['address_line2'].errors?.required">Address Line Required
+                            </mat-error>
+                        </mat-form-field>
+
+
+                        <mat-form-field appearance="outline">
+                            <mat-label>City</mat-label>
+                            <input matInput formControlName="city" type="text" required>
+
+                            <mat-error *ngIf="login.controls['city'].errors?.required">City Required
+                            </mat-error>
+                        </mat-form-field>
+                        <mat-form-field appearance="outline">
+                            <mat-label> State</mat-label>
+                            <input matInput formControlName="state" type="text" required>
+                            <mat-error *ngIf="login.controls['state'].errors?.required">State Required
+                            </mat-error>
+                        </mat-form-field>
+
+                        <mat-form-field appearance="outline">
+                            <mat-label>Pincode</mat-label>
+                            <input matInput formControlName="pincode" maxlength="6" minlength="6"
+                                (keypress)="keyPress($event)" type="text" required>
+                            <mat-error *ngIf="login.controls['pincode'].errors?.required">Pincode is Required
+                            </mat-error>
+                            <mat-error *ngIf="login.controls['pincode'].errors?.minlength">Pincode Should be 6
+                                digit
+                            </mat-error>
+                        </mat-form-field>
+                    </div>
+                    <span class="agree_link">
+                        <input formControlName="isactive" type="checkbox" id="my-check" (change)="onChange($event)"
+                            [checked]="checkModel" required />
+                        <mat-error *ngIf="login.controls['isactive'].errors?.minlength">Required
+                        </mat-error>
+                        <mat-label for="my-check">Agree the terms and policy</mat-label>
+                    </span>
+                    <div class="form-btn">
+                        <button mat-raised-button [disabled]="login.invalid" class="Submit">Register</button>
+                    </div>
+                </form>
+                <mat-card-footer>
+                    <p class="help_msg">Already have an account?
+                        <a [routerLink]="['/']" class="sign_link">Login</a>
+                    </p>
+                </mat-card-footer>
+            </mat-card-content>
+        </mat-card>
+    </div>
+    <!-- <div *ngIf="myLoader" class="spinner">
+        <img src="assets/images/spinner.gif">
+    </div> -->
+
+</section>

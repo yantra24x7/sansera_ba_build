@@ -1,0 +1,252 @@
+<section class="page">
+    <div *ngIf="myLoader" class="spinner">
+        <img src="assets/images/spinner.gif">
+    </div>
+    <div class="section_top_padding">
+        <div class="page_title_sec">
+            <h2>Dashboard - {{lname}}</h2>
+
+            <div class="filter_details">
+
+            </div>
+        </div>
+
+        <div class="dashboardline_page">
+            <div class="dashboardline_list left_side side_sec">
+                <div class="inner_card" [ngClass]="classList" *ngFor="let val of alname"
+                    (click)="valvo(val?.line,val?.machine,val?.run,val?.run_time,val?.stop,val?.disconnect,val?.reason)">
+                    <div class="dashboardline_item active" (click)="onClick(val)"
+                        [ngClass]="{ 'as-selected': val == selectedItem }" *ngIf="val.status === 'DISCONNECT'">
+                        <div>
+                            <h3>{{val?.machine}}</h3>
+                            <p>Machine Disconnect</p>
+                        </div>
+                        <span>{{val?.run}}%</span>
+                    </div>
+
+                    <div class="dashboardline_item run" (click)="onClick(val)"
+                        [ngClass]="{ 'as-selected': val == selectedItem }" *ngIf="val.status === 'OPERATE'">
+                        <div>
+                            <h3>{{val?.machine}}</h3>
+                            <p>Machine Running</p>
+                        </div>
+                        <span>{{val?.run}}%</span>
+                    </div>
+
+                    <div class="dashboardline_item idle" (click)="onClick(val)"
+                        [ngClass]="{ 'as-selected': val == selectedItem }" *ngIf="val.status === 'STOP'">
+                        <div>
+                            <h3>{{val?.machine}}</h3>
+                            <p>{{val?.reason}}</p>
+                        </div>
+                        <span>{{val?.run}}%</span>
+                    </div>
+                </div>
+                <div *ngIf="alname?.length==0">
+                    <h2 class="blocks">No Machines Found</h2>
+                </div>
+            </div>
+
+            <div class="right_side side_sec">
+                <div class="circle_chart utilize_chart">
+                    <div class="overall_utilization">
+                        <h3>{{operator?.machine}}</h3>
+                        <div class="circle_chart as-chart-height">
+                            <circle-progress radius="65" percent={{operator?.utlization}} outerStrokeColor="#21a477"
+                                innerStrokeColor="#1E2634" animation="true" animationDuration="300">
+                            </circle-progress>
+                            <div class="chart_text">
+                                <h3><span class="value">{{operator?.utlization}}</span> %</h3>
+                                <p>Utilization</p>
+                            </div>
+                        </div>
+
+                        <div class="job_desc">
+                            <p>Component ID : <span>{{operator?.job}}</span></p>
+                            <p>Operator Name: <span>{{operator?.operator}}</span></p>
+                            <p>Operation Number: <span>{{operator?.o_p_num}}</span></p>
+
+                        </div>
+
+                        <div class="line_desc">
+                            <div class="line_mac_target">
+                                <!-- <div class="target_box box_bg">
+                                    <span>00</span>
+                                    <p>Prog.no</p>
+                                </div> -->
+                                <div class="target_box box_bg">
+                                    <span>{{operator?.target}}</span>
+                                    <p>target</p>
+                                </div>
+                                <div class="parts_count_box box_bg">
+                                    <span>{{operator?.actual}}</span>
+                                    <p>Part Count</p>
+                                </div>
+                            </div>
+                            <ul class="time_sec">
+                                <li>
+                                    <span>{{operator?.run_time}}%</span>
+                                    <div class="progress">
+
+                                        <!-- <progress class="progress-bar running" max="100" value={{operator?.run_time}}>
+                                          </progress> -->
+
+                                        <progress class="bar run" max="100" value={{operator?.run_time}}>
+                                        </progress>
+                                    </div>
+                                    <p>Run Time</p>
+                                </li>
+                                <li>
+                                    <span>{{operator?.stop}}%</span>
+                                    <div class="progress">
+
+                                        <!-- <progress class="bar idle" max="100" value={{operator?.stop}}>
+                                          </progress> -->
+                                        <progress class="bar idle" max="100" value={{operator?.stop}}>
+                                        </progress>
+                                    </div>
+                                    <p>Idle Time</p>
+                                </li>
+                                <li>
+                                    <span>{{operator?.diconnect}}%</span>
+                                    <div class="progress">
+
+                                        <!-- <progress class="progress-bar no-data" max="100" value={{operator?.diconnect}}>
+                                          </progress> -->
+                                        <progress class="bar disconnect" max="100" value={{operator?.diconnect}}>
+                                        </progress>
+
+                                    </div>
+                                    <p>Disconnect /Balance Time</p>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <div class="utilization_load">
+                    <div class="overall_efficiency d-flex bg">
+                        <div class="circle_chart ">
+                            <div>
+                                <circle-progress radius="45" percent={{operator?.effe}} outerStrokeColor="#21a477"
+                                    innerStrokeColor="#1E2634" animation="true" animationDuration="300">
+                                </circle-progress>
+                                <div class="chart_text">
+                                    <h3><span class="value">{{operator?.effe}}</span> %</h3>
+                                    <!-- <p>Efficiency</p> -->
+                                </div>
+                            </div>
+                        </div>
+                        <div class="chart_sub_title">Overall Efficiency</div>
+                    </div>
+
+                    <div class="spindle_loader d-flex bg">
+                        <!-- <figure class="highcharts-figure">
+                        <div id="vumeter"></div>
+ 
+                    </figure> -->
+                        <!-- <div id="container2" class="chart-container"></div> -->
+
+                        <!-- *ngIf="spi_count > 0" -->
+                        <div class="circle_chart">
+                            
+                                <div (click)="openDialog(spid_check_line,spid_check_machine)" *ngIf="spi_count > '0'">
+                                    <div class="trpiu">
+                                        <img class="volkomn" src="assets/images/tool-touch.png">
+                                        <!-- <img class="volkom" src="assets/images/chart tes.png">   -->
+                                        <img class="volkom" src="assets/images/PngItem_2961898 (1).png">
+                                        <!-- <i class="fa-area-chart" aria-hidden="true"></i> -->
+                                    </div>
+                                    <!-- <mat-icon class="vtr">opacity</mat-icon> -->
+                                </div>
+                            
+                            <!-- <div class="awseome">
+                    
+                    <i class="fa fa-bell-o" aria-hidden="true"></i>
+                </div> -->
+                            <!-- <p (click)="openDialog(spid_check_line,spid_check_machine)" >cli</p> -->
+                            <circle-progress  radius="45" percent={{spindle_load}} outerStrokeColor="#21a477"
+                                innerStrokeColor="#1E2634" animation="true" animationDuration="300">
+                            </circle-progress>
+                           
+                            <div class="chart_text">
+                                <h3><span class="value">{{spindle_load}}</span> %</h3>
+                            </div>
+                        </div>
+                        <!-- <figure class="highcharts-figure">
+                        <div id="container-speed" class="chart-container"></div>
+                    </figure> -->
+                    <div class="m-auto">
+                        <div class="chart_sub_title">Max value : {{sp_mac_value}}</div>
+                        <div class="chart_sub_title justify-content-left">Spindle Load</div>
+                    </div>
+                       
+                    </div>
+                </div>
+                    <div class="utilization_load">
+                    <div class="axis_chart bg">
+                        <div class="circle_chart" *ngIf="axis1">
+                            <circle-progress  percent={{servo_load}} outerStrokeColor="#21a477"
+                                innerStrokeColor="#1E2634" animation="true" animationDuration="300">
+                            </circle-progress>
+                            <div class="chart_text">
+                                <h3><span class="value">{{servo_load}}</span> %</h3>
+                            </div>
+                            <div class="chart_sub_title">{{axis1}}</div>
+                        </div>
+                        <div class="circle_chart" *ngIf="axis2">
+                            <circle-progress  percent={{servo_load1}} outerStrokeColor="#21a477"
+                                innerStrokeColor="#1E2634" animation="true" animationDuration="300">
+                            </circle-progress>
+                            <div class="chart_text">
+                                <h3><span class="value">{{servo_load1}}</span> %</h3>
+                            </div>
+                            <div class="chart_sub_title">{{axis2}}</div>
+                        </div>
+
+                        <div class="circle_chart" *ngIf="axis3">
+                            <circle-progress  percent={{servo_load2}} outerStrokeColor="#21a477"
+                                innerStrokeColor="#1E2634" animation="true" animationDuration="300">
+                            </circle-progress>
+                            <div class="chart_text">
+                                <h3><span class="value">{{servo_load2}}</span> %</h3>
+                            </div>
+                            <div class="chart_sub_title">{{axis3}}</div>
+                        </div>
+                    </div>
+
+                    <div class="axis_chart bg" *ngIf="axis4">                        
+                        <div class="circle_chart" *ngIf="axis4">
+                            <circle-progress  percent={{servo_load3}} outerStrokeColor="#21a477"
+                                innerStrokeColor="#1E2634" animation="true" animationDuration="300">
+                            </circle-progress>
+                            <div class="chart_text">
+                                <h3><span class="value">{{servo_load3}}</span> %</h3>
+                            </div>
+                            <div class="chart_sub_title">{{axis4}}</div>
+                        </div>
+
+                        <div class="circle_chart" *ngIf="axis5">
+                            <circle-progress  percent={{servo_load4}} outerStrokeColor="#21a477"
+                                innerStrokeColor="#1E2634" animation="true" animationDuration="300">
+                            </circle-progress>
+                            <div class="chart_text">
+                                <h3><span class="value">{{servo_load4}}</span> %</h3>
+                            </div>
+                            <div class="chart_sub_title">{{axis5}}</div>
+                        </div>
+                    </div>
+                </div>
+                <!-- <div class="utilization_load">
+                    
+                </div> -->
+                
+            </div>
+        </div>
+
+
+    </div>
+    <!-- <div *ngIf="myLoader" class="spinner">
+        <img src="assets/images/spinner.gif">
+    </div> -->
+
+</section>

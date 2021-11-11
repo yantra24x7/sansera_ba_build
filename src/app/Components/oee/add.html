@@ -1,0 +1,119 @@
+<div class="modal_sec" style="height: 80vh;">
+  <mat-toolbar class="forum">
+    <h3>OEE Registration</h3>
+    <button type="button" class="close" aria-label="Close" mat-dialog-close>
+      <span aria-hidden="true">×</span>
+    </button>
+  </mat-toolbar>
+  <div class="dialog-form">
+    <div class="filter_sec">
+      <form [formGroup]="login" class="form_sec">
+
+        <div>
+          <mat-form-field appearance="outline">
+            <mat-select required formControlName="machine_name">
+              <mat-option value="" disabled>Select Machine</mat-option>
+              <mat-option *ngFor="let machine of machine_response" [value]="machine">
+                {{machine.name}}
+              </mat-option>
+            </mat-select>
+          </mat-form-field><br>
+          <mat-form-field appearance="outline">
+            <mat-select required formControlName="shift_num" (selectionChange)="getShiftTime($event)"
+            >
+              <mat-option value="" disabled>Select Shift</mat-option>
+              <mat-option *ngFor="let shift of shift_response" [value]="shift">
+                {{shift.shift_no}} ({{shift.start_time}}-{{shift.end_time}})
+              </mat-option>
+            </mat-select>
+          </mat-form-field><br>
+          <!--  <div class="filter_field date_picker" color="primary"> -->
+          <!-- <label>Select Date</label> -->
+          <!-- <ejs-daterangepicker id='daterangepicker' placeholder='Select a range' [startDate]='start' [endDate]='end'></ejs-daterangepicker> -->
+
+          <!--    </div> -->
+
+          <mat-form-field appearance="outline">
+            <!-- <mat-label>Choose a date</mat-label> -->
+            <input matInput [matDatepicker]="picker" formControlName="date" (click)="picker.open()"
+              placeholder="Select Date">
+            <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+            <mat-datepicker #picker startView="year" [startAt]="startDate"></mat-datepicker>
+          </mat-form-field>
+          <br>
+          <mat-form-field appearance="outline">
+            <mat-select required formControlName="operator">
+              <mat-option value="" disabled>Select Operator</mat-option>
+              <mat-option *ngFor="let operator of operator_list" [value]="operator.id.$oid">
+                {{operator.operator_name}} </mat-option>
+            </mat-select>
+          </mat-form-field><br>
+         
+          <div class="row_sec">
+            <mat-form-field appearance="outline">
+              <mat-label>Target</mat-label>
+              <input matInput formControlName="target" type="text" [readonly]="true">
+            </mat-form-field>
+            <mat-form-field appearance="outline">
+              <mat-label>Duration</mat-label>
+              <input matInput formControlName="availability" [readonly]="true" type="text">
+            </mat-form-field>
+            <mat-form-field appearance="outline">
+              <mat-label>Production Time</mat-label>
+              <input matInput formControlName="total_runtime" type="text">
+            </mat-form-field>
+            <mat-form-field appearance="outline">
+              <mat-label>Balance</mat-label>
+              <input matInput formControlName="balance" type="text">
+            </mat-form-field>
+          </div>
+          <mat-form-field appearance="outline">
+            <mat-select required formControlName="component" (selectionChange)="getcomponent($event.value)">
+              <mat-option value="" disabled>Select Component</mat-option>
+              <mat-option *ngFor="let component of component_list" [value]="component.id.$oid">
+                {{component.name}}
+              </mat-option>
+            </mat-select>
+          </mat-form-field><br>
+          <!-- formarray -->
+          <div class="row_sec" formArrayName="idle_run_rate"
+            *ngFor="let item of login.get('idle_run_rate')['controls']; let i = index;">
+            <div [formGroupName]="i">
+              <mat-form-field appearance="outline">
+                <mat-label>Program Number</mat-label>
+                <input matInput formControlName="program_number" placeholder="Program Number" [readonly]="true">
+              </mat-form-field>
+              <mat-form-field appearance="outline">
+                <mat-label>Run Rate</mat-label>
+                <input matInput formControlName="run_rate" placeholder="Idle Run Date"
+                  (keyup)="timeCalculation(i)">
+              </mat-form-field>
+              <mat-form-field appearance="outline">
+                <mat-label>Count</mat-label>
+                <input type="number" matInput formControlName="count" placeholder="Count" (keyup)="timeCalculation(i)">
+              </mat-form-field>
+              <mat-form-field appearance="outline">
+                <mat-label>Cycle Time</mat-label>
+                <input matInput formControlName="cycle_time" placeholder="Cycle Time" [readonly]="true">
+              </mat-form-field>
+
+
+              <!-- <button (click)="removeQuestion(i)" class="btn btn-secondary">Remove</button> -->
+
+            </div>
+          </div>
+        </div>
+        <!-- <button (click)="add()">Add choice</button> -->
+
+        <div class="form-button text-right">
+          <button mat-raised-button class="filter_btn btn_orange" [disabled]="login.invalid" (click)="logintest()">
+            Save</button>
+          <button mat-raised-button mat-dialog-close class="filter_btn btn_default ml-16">Close</button>
+        </div>
+        <!--          <button [disabled]="login.invalid">Submit</button>
+ -->
+      </form>
+
+    </div>
+  </div>
+</div>

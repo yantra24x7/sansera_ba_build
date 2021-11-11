@@ -1,0 +1,78 @@
+<div *ngIf="myLoader1" class="spinner">
+    <img src="assets/images/spinner.gif">
+</div>
+
+<div class="close_modal">
+    <mat-icon mat-dialog-close  class="v-align-middle display" matTooltip="Close">close
+    </mat-icon>
+</div>
+
+<div class="container sadd">
+    
+
+    <div class="section_one">
+<h2 mat-dialog-title>Spindle Load</h2>
+<table class="tableflow">
+    <tr>
+        <!-- <th>#</th> -->
+        <th><h3>Machine Name</h3></th>
+        <th><h3>Value</h3></th>
+        <th><h3>Max</h3></th>
+        <th><h3>Actions</h3></th>
+    </tr><br>
+
+    <tr>
+        <!-- <td>{{i+1}}</td> -->
+        <td><h5>{{get_load?.L1Name}}</h5></td>
+        <td><h5>{{get_load?.value}}</h5></td>
+        <td><h5>{{get_load?.max}} </h5>
+            <input  class="textlo" *ngIf="enableEdit" [formControl]="rejection">
+        </td>
+        <td (click)="toggleShow()"><h5>Edit</h5></td>
+        <td (click)="save(get_load.L1Name)"><h5>Save</h5></td>
+
+    </tr>
+</table>
+
+
+
+<h2 mat-dialog-title>Servo Load</h2>
+<table class="tableflow">
+    <tr>
+        <th><h3>Machine Name</h3></th><br>
+        <th><h3>Value</h3></th>
+        <th><h3>Signal</h3></th>
+        <th><h3>Actions</h3></th>
+    </tr><br>
+
+    <tr >
+        <td><h5>{{get_load1?.L1Name}}</h5></td><br>
+        <td><h5>
+            <p>{{get_load1.value[0]}}</p>
+            <p>{{get_load1.value[1]}}</p>
+            <p>{{get_load1.value[2]}}</p>
+            <p>{{get_load1.value[3]}}</p>
+            <p>{{get_load1.value[4]}}</p>
+        </h5>
+        </td>
+      
+        <td><h5>
+            <mat-checkbox class="example-margin" [checked] = "get_load1?.signal[0]?.x_axis == true" [formControl]="x_axis">x_axis</mat-checkbox><br>
+            <mat-checkbox class="example-margin" [checked] = "get_load1?.signal[0]?.y_axis == true" [formControl]="y_axis">y_axis</mat-checkbox><br>
+            <mat-checkbox class="example-margin" [checked] = "get_load1?.signal[0]?.z_axis == true" [formControl]="z_axis">z_axis</mat-checkbox><br>
+            <mat-checkbox class="example-margin" [checked] = "get_load1?.signal[0]?.a_axis == 'true'" [formControl]="a_axis">a_axis</mat-checkbox><br>
+            <mat-checkbox class="example-margin" [checked] = "get_load1?.signal[0]?.b_axis == true" [formControl]="b_axis">b_axis</mat-checkbox><br>
+           
+        </h5>
+        </td>
+        <td (click)="Slide(get_load1.L1Name)"><h5>Save</h5></td>
+    </tr>
+</table>
+
+</div>
+
+
+
+
+
+</div>

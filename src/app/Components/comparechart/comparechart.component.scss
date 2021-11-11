@@ -1,0 +1,113 @@
+.flexor {
+    >mat-card {
+        background-color: transparent;
+    }
+
+    mat-card:last-child {
+        margin-right: 0;
+    background: transparent;
+    border: 0;
+    padding: 0;
+    box-shadow: none;
+    }
+
+    .table_wrapper {
+        overflow-y: scroll;
+        overflow-x: scroll;
+        margin-top: 20px;
+    }
+}
+
+ul.pie_charts_utilizations {
+    height: 100%;
+    display: flex;
+    flex-flow: column;
+    justify-content: center;
+}
+
+ul.pie_charts_utilizations li {
+    display: -webkit-box;
+    display: flex;
+    -webkit-box-align: center;
+    align-items: center;
+    padding: 16px;
+    -webkit-box-pack: left;
+    justify-content: space-between;
+    border-bottom: 2px solid #3e3e3e;
+}
+
+ul.pie_charts_utilizations li:last-child {
+    border-bottom: 0px;
+}
+
+ul.pie_charts_utilizations li img {
+    margin-right: 10px;
+    width: 42px;
+}
+
+ul.pie_charts_utilizations label {
+    font-size: 25px;
+    color: #A8A8A8;
+    display: flex;
+    align-items: center;
+}
+
+
+ul.pie_charts_utilizations span {
+    font-size: 38px;
+    color: #fff;
+}
+
+.two_row {
+    background: #212226;
+    border-radius: 5px;
+    border: 1px solid #3e3f43;
+}
+
+
+::ng-deep .highcharts-figure {
+    margin: 0;
+    padding: 15px 0;
+    margin: 0 auto;
+}
+
+form{
+    width: 100%;
+}
+.compare_page{
+    .filter_fields{
+        width: 100%;
+        flex-wrap: wrap;
+    }
+}
+
+.filter_sec .filter_fields .filter_field .mat-form-field {
+    max-width: 100%;
+    width: 214px;
+}
+
+
+@media (max-width: 1440px) {
+    ul.pie_charts_utilizations li {
+        padding: 16px 0;
+    }
+    ul.pie_charts_utilizations label {
+        font-size: 18px;
+        display: flex;
+    }
+    ul.pie_charts_utilizations li img{
+        margin-right: 10px;
+        width: 32px;
+    }
+    ul.pie_charts_utilizations span {
+        font-size: 20px!important;
+    }
+}
+
+
+@media (max-width: 600px) {
+    .compare_page .chart_sec ul{
+        display: flex;
+        width: 100% !important;
+    }
+    }

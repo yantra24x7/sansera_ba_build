@@ -1,0 +1,35 @@
+<h2 mat-dialog-title>Operator Registration</h2>
+<div class="close_modal">
+    <mat-icon mat-dialog-close  class="v-align-middle display" matTooltip="Close">close
+    </mat-icon>
+</div>
+<mat-dialog-content class="mat-typography">
+    <form [formGroup]="operatorForm" (ngSubmit)="submit()" class="form_sec"  autocomplete="off">
+        <div class="row_sec">
+            <mat-form-field appearance="outline">
+                <mat-label>Operator Name</mat-label>
+                <input matInput formControlName="operator_name" type="text">
+                <mat-error *ngIf="operatorForm.controls['operator_name'].errors?.required">Operator Name is Required
+                </mat-error>
+            </mat-form-field>
+            <mat-form-field appearance="outline">
+                <mat-label>Operator Id</mat-label>
+                <input matInput formControlName="operator_spec_id"  pattern="[0-9]*" minlength="0" maxlength="10"  
+                (keypress)="keyPress($event)" type="text">
+                <mat-error *ngIf="operatorForm.controls['operator_spec_id'].errors?.required">Operator Id is Required
+                </mat-error>
+            </mat-form-field>
+            <mat-form-field appearance="outline">
+                <mat-label>Others</mat-label>
+                <input matInput formControlName="description" type="text">
+                <mat-error *ngIf="operatorForm.controls['description'].errors?.required">Others is Required
+                </mat-error>
+            </mat-form-field>
+        </div>
+    </form>
+</mat-dialog-content>
+
+<mat-dialog-actions align="end">
+    <button mat-raised-button color="primary" type="submit" (click)="submit()" class="filter_btn btn_orange">
+        Save</button>
+</mat-dialog-actions>

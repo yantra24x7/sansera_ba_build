@@ -1,0 +1,654 @@
+<!-- <section class="page">
+
+    <div class="container_fluid pt-3">
+        <div class="row flexor">
+            <div class="col-lg-6 col-md-12 mb-2">
+                <mat-card class="card_sec">
+                    <div class="filter_sec mt-1 mb-2">
+                        <form [formGroup]="login" (ngSubmit)="logintest('true')">
+                        <div class="filter_fields">
+                            <div class="filter_field">
+                                <mat-form-field appearance="outline">
+                                    <mat-select  matNativeControl required formControlName="machine_name">
+                                        <mat-option value="all">All</mat-option>
+
+                                        <mat-option *ngFor="let machine of machine_response" [value]="machine">
+                                        {{machine}}
+                                      </mat-option>
+                                    </mat-select>
+                                  </mat-form-field>
+                            </div>
+                            <div class="filter_field">
+
+                                <mat-form-field appearance="outline">
+                                    <mat-select placeholder="Select Shift" matNativeControl required formControlName="shift_num">
+                                        <mat-option value="all">All</mat-option>
+
+                                        <mat-option *ngFor="let shift of shift_response" [value]="shift.shift_no">
+                                        {{shift.shift_no}}
+                                      </mat-option>
+                                    </mat-select>
+                                  </mat-form-field>
+                            </div>
+                            <div class="filter_field date_picker" color="primary">
+
+                                <ejs-daterangepicker placeholder='Select a range' 
+                                    (click)="daterangepicker.open()" formControlName="date">
+                                    <e-presets>
+                                        <e-preset label="This Week" [start]='weekStart' [end]='weekEnd'></e-preset>
+                                        <e-preset label="This Month" [start]='monthStart' [end]='monthEnd'>
+                                        </e-preset>
+                                        <e-preset label="Last Month" [start]='lastStart' [end]='lastEnd'></e-preset>
+                                        <e-preset label="Last Year" [start]='yearStart' [end]='yearEnd'></e-preset>
+                                    </e-presets>
+                                </ejs-daterangepicker>
+                            </div>
+                            <button [disabled]="login.invalid" type="submit" color="primary" mat-raised-button>Submit</button>
+
+                        </div>
+                    </form>
+                    <div *ngIf="myLoader" class="spinner">
+                        <img src="assets/images/spinner.gif">
+                      </div>
+                    </div>
+                    <div class="two_row">
+                        <div class="col-md-6 col-sm-12">
+                            <ul class="pie_charts_utilizations">
+                                <li>
+
+                                    <label> <img src="../assets/images/running.png">Operate</label>
+                                    <span>{{get_report?.run_time}}%</span>
+                                </li>
+
+                                <li>
+                                    
+                                    <label><img src="../assets/images/idle.png">Stop</label>
+                                    <span>{{get_report?.idle_time}}%</span>
+                                </li>
+                                <li>
+
+                                    <label><img src="../assets/images/ic_nodata.png">Disconnect</label>
+                                    <span>{{get_report?.disconnect_time}}%</span>
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="col-md-6 col-sm-12 pie-vh">
+                            <figure class="highcharts-figure">
+                                <div id="comparepie"></div>
+                            </figure>
+                        </div>
+                    </div>
+                    <div class="table_wrapper">
+                        <table class="table">
+                            <thead>
+                                <tr >
+                                    <th>S.No</th>
+                                    <th>Machine Name</th>
+                                    <th>Parts Targeted</th>
+                                    <th>Parts Produced</th>
+                                    <th>Run Time</th>
+
+                                    <th>Idle Time</th>
+                                    <th>No Data Time</th>
+                                </tr>
+                            </thead>
+                            <tbody *ngFor="let show_table of get_report?.table ;let i= index" >
+                                <tr>
+                                    <td>{{i+1}}</td>
+                                    <td>{{show_table?.machine_name}}</td>
+                                    <td>---</td>
+                                    <td>{{show_table?.part_count}}</td>
+                                    <td>{{show_table?.run_time}}</td>
+                                    <td>{{show_table?.idle_time}}</td>
+                                    <td>{{show_table?.disconnect}}</td>
+                                </tr>
+                                
+                            </tbody>
+                        </table>
+
+                       
+                    </div>
+                    <div *ngIf="first?.length==0" class="no_data_found">
+                        <h4>No Data found</h4>
+                      </div>
+                </mat-card>
+            </div>
+            <div class="col-lg-6 col-md-12">
+                <mat-card class="card_sec">
+                    <div class="filter_sec mt-1 mb-2">
+                        <form [formGroup]="test" (ngSubmit)="testfunction('true')">
+                        <div class="filter_fields">
+                            <div class="filter_field">
+
+                                <mat-form-field appearance="outline">
+                                    <mat-select placeholder="Select Machine" matNativeControl required formControlName="machine_name">
+                                        <mat-option value="all">All</mat-option>
+
+                                        <mat-option *ngFor="let a of machine_get" [value]="a">
+                                        {{a}}
+                                      </mat-option>
+                                    </mat-select>
+                                  </mat-form-field>
+                            </div>
+                            <div class="filter_field">
+
+                                <mat-form-field appearance="outline">
+                                    <mat-select placeholder="Select Shift" matNativeControl required formControlName="shift_num">
+                                        <mat-option value="all">All</mat-option>
+
+                                        <mat-option *ngFor="let b of select_shift" [value]="b.shift_no">
+                                        {{b.shift_no}}
+                                      </mat-option>
+                                    </mat-select>
+                                  </mat-form-field>
+                            </div>
+                            <div class="filter_field date_picker" color="primary">
+
+                                <ejs-daterangepicker placeholder='Select a range'  
+                                    (click)="daterangepicker.open()" formControlName="date"  >
+                                    <e-presets>
+                                        <e-preset label="This Week" [start]='weekStart' [end]='weekEnd'></e-preset>
+                                        <e-preset label="This Month" [start]='monthStart' [end]='monthEnd'>
+                                        </e-preset>
+                                        <e-preset label="Last Month" [start]='lastStart' [end]='lastEnd'></e-preset>
+                                        <e-preset label="Last Year" [start]='yearStart' [end]='yearEnd'></e-preset>
+                                    </e-presets>
+                                </ejs-daterangepicker>
+                            </div>
+                            <button [disabled]="test.invalid" type="submit" color="primary" mat-raised-button>Submit</button>
+
+                        </div>
+
+                    </form >
+                    </div>
+                    
+                    <div class="two_row">
+                        <div class="col">
+                            <ul class="pie_charts_utilizations">
+                                <li>
+
+                                    <label> <img src="../assets/images/running.png">Operate</label>
+                                    <span>{{report_table?.run_time}}%</span>
+                                </li>
+
+                                <li>
+
+                                    <label> <img src="../assets/images/idle.png">Stop</label>
+                                    <span>{{report_table?.idle_time}}%</span>
+                                </li>
+                                <li>
+
+                                    <label><img src="../assets/images/ic_nodata.png">Disconnect</label>
+                                    <span>{{report_table?.disconnect_time}}%</span>
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="col pie-vh">
+                            <figure class="highcharts-figure">
+                                <div id="comparepie2"></div>
+                            </figure>
+                        </div>
+                    </div>
+                    <div class="table_wrapper">
+                        <table class="table">
+                            <thead>
+                                <tr>
+                                    <th>S.No</th>
+                                    <th>Machine Name</th>
+                                    <th>Parts Targeted</th>
+                                    <th>Parts Produced</th>
+                                    <th>Run Time</th>
+
+                                    <th>Idle Time</th>
+                                    <th>No Data Time</th>
+                                </tr>
+                            </thead>
+                            <tbody *ngFor="let show_right of report_table?.table ;let i= index">
+                                <tr>
+                                    <td>{{i+1}}</td>
+                                    <td>{{show_right?.machine_name}}</td>
+                                    <td>---</td>
+                                    <td>{{show_right?.part_count}}</td>
+                                    <td>{{show_right?.run_time}}</td>
+                                    <td>{{show_right?.idle_time}}</td>
+                                    <td>{{show_right?.disconnect}}</td>
+                                </tr>
+                                
+                            </tbody>
+                        </table>
+                     
+                    </div>
+                    <div *ngIf="second?.length==0" class="no_data_found">
+                        <h4>No Data found</h4>
+                      </div>
+                </mat-card>
+                <div *ngIf="myLoader1" class="spinner">
+                    <img src="assets/images/spinner.gif">
+                  </div>
+            </div>
+
+
+        </div>
+
+    </div>
+
+</section> -->
+
+
+
+ <section class="page">
+    <div class="section_top_padding">
+        <div class="page_title_sec">
+            <h2>Compare Chart</h2>
+        </div>
+        <div class="compare_page">
+            <div class="compare_side left_side">
+                <div *ngIf="myLoader" class="spinner">
+                    <img src="assets/images/spinner.gif">
+                </div>
+                <form [formGroup]="login" (ngSubmit)="logintest('true')" class="compare_form filter_sec" action="">
+                    <div class="filter_fields">
+
+                        
+                        <div class="filter_field date_picker" color="primary">
+
+                            <!-- <ejs-daterangepicker placeholder='Select a range' 
+                                (click)="daterangepicker.open()" formControlName="date">
+                                <e-presets>
+                                    <e-preset label="This Week" [start]='weekStart' [end]='weekEnd'></e-preset>
+                                    <e-preset label="This Month" [start]='monthStart' [end]='monthEnd'>
+                                    </e-preset>
+                                    <e-preset label="Last Month" [start]='lastStart' [end]='lastEnd'></e-preset>
+                                    <e-preset label="Last Year" [start]='yearStart' [end]='yearEnd'></e-preset>
+                                </e-presets>
+                            </ejs-daterangepicker> -->
+
+                            <mat-form-field>
+                                <input matInput
+                                       placeholder="Choose a date"
+                                       [satDatepicker]="picker2" 
+                                       formControlName="date"  [max]="maxDate" (dateInput)="addEvent('input', $event)" (dateChange)="addEvent('change', $event)">
+                                <sat-datepicker #picker2 [rangeMode]="true">
+                                </sat-datepicker>
+                                <sat-datepicker-toggle matSuffix [for]="picker2"></sat-datepicker-toggle>
+                            </mat-form-field>
+                        </div> 
+                        <div class="filter_field">
+                            <mat-form-field appearance="outline">
+                                <mat-select placeholder="Select Module" matNativeControl required
+                                    formControlName="line" (selectionChange)="getsplit($event.value)">
+                                    <mat-option value="all" *ngIf="rolename === 'Admin'">All</mat-option>
+                                    <mat-option *ngFor="let mod of module_response" [value]="mod">
+                                      {{mod}}
+                                  </mat-option>
+    
+                                </mat-select>
+                            </mat-form-field>
+                        </div>
+
+                         <div class="filter_field">
+                            <mat-form-field appearance="outline">
+                                <mat-select placeholder="Select Machine" matNativeControl required
+                                    formControlName="machine_name" (selectionChange)="getm($event.value)">
+                                    <mat-option value="all">All</mat-option>
+    
+                                    <mat-option *ngFor="let Machine of mac_response" [value]="Machine">
+                                        {{Machine}}
+                                    </mat-option>
+                                </mat-select>
+                            </mat-form-field>
+                    </div>
+                        <div class="filter_field sml-input">
+
+                            <mat-form-field appearance="outline">
+                                <mat-select placeholder="Shift" matNativeControl required formControlName="shift_num" (selectionChange)="getshift($event.value)">
+                                    <mat-option value="all">All</mat-option>
+
+                                    <mat-option *ngFor="let shift of shift_response" [value]="shift.shift_no">
+                                    {{shift.shift_no}}
+                                  </mat-option>
+                                </mat-select>
+                              </mat-form-field>
+                        </div>
+
+                        <div class="filter_field">
+                            <mat-form-field appearance="outline">
+                                <mat-select placeholder="Shiftwise" matNativeControl required
+                                    formControlName="type" (selectionChange)="gettype($event.value)">
+                                    <mat-option value="Shiftwise">Shiftwise</mat-option>
+                                    <mat-option value="Operatorwise">Operatorwise</mat-option>
+    
+                                  
+                                </mat-select>
+                            </mat-form-field>
+                        </div>
+                        <div class="filter_field"  *ngIf="types === 'Operatorwise' ">
+                            <mat-form-field appearance="outline">
+                                <mat-select placeholder="Select Operator" matNativeControl required
+                                    formControlName="operator" >
+                                    <mat-option *ngFor="let op of op_response" [value]="op">
+                                      {{op}}
+                                  </mat-option>
+                                  
+                                </mat-select>
+                            </mat-form-field>
+                            <!-- <p *ngIf="op_response.length==0">No Operators Found</p> -->
+                            <div *ngIf="op_response.length==0" class="no_data_found">
+                                <h2>No Operators found</h2>
+                              </div>
+                        </div>
+
+                        <button type="submit" color="primary" mat-raised-button>Go</button>
+
+                    </div>
+                </form>
+
+                <div class="chart_sec">
+                    <div class="ulitization_chart">
+                        <circle-progress radius="65" outerStrokeColor="#78542C" innerStrokeColor="#1E2634"
+                            animation="true" animationDuration="300"  percent={{utili1}}
+                            >
+                        </circle-progress>
+                        <div class="chart_text">
+                            <h3><span class="value">
+                                {{utili1}}
+
+                            </span> %</h3>
+                            <p>Utilization</p>
+                        </div>
+                    </div>
+                    <ul class="sep_cht">
+                        <li>
+                            <circle-progress radius="70" outerStrokeColor="#04C884" innerStrokeColor="#1E2634"
+                                animation="true" animationDuration="300" percent={{utili1}}>
+                            </circle-progress>
+                            <p>Operate</p>
+                            <div class="chart_text">
+                                <h3><span class="value">{{utili1}}</span> %</h3>
+                            </div>
+                        </li>
+                        <li>
+                            <circle-progress radius="70" outerStrokeColor="#FFAD00" innerStrokeColor="#1E2634"
+                                animation="true" animationDuration="300" percent={{utili2}}>
+                            </circle-progress>
+                            <p>Idle</p>
+                            <div class="chart_text">
+                                <h3><span class="value">{{utili2}}</span> %</h3>
+                            </div>
+                        </li>
+
+                        <li>
+                            <circle-progress radius="70" outerStrokeColor="#919191" innerStrokeColor="#1E2634"
+                                animation="true" animationDuration="300" percent={{utili3}} >
+                            </circle-progress>
+                            <p>Disconnect</p>
+                            <div class="chart_text">
+                                <h3><span class="value">{{utili3}}</span> %</h3>
+                            </div>
+                        </li>
+                    </ul>
+
+                </div>
+
+                <div class="card_sec table-responsive">
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th>#</th>
+                                <th>Machine Name</th>
+                                <th>Shift Num</th>
+                                <th>Parts Produced</th>
+                                <th>Operator Name</th>
+                                <th>Operator Id</th>
+                                <th>Utilization(%)</th>
+                                <th>Run Time</th>
+                                <th>Idle Time</th>
+                                <th>No Data Time</th>
+                            </tr>
+                        </thead>
+                        <tbody *ngFor="let show_table of get_report?.table ;let i= index" >
+                            <tr>
+                                <td>{{i+1}}</td>
+                                <td>{{show_table?.machine_name}}</td>
+                                <td>{{show_table?.shift_num}}</td>
+                                <td>{{show_table?.part_count}}</td>
+                                <!-- <td>{{show_table?.operator_name}}</td> -->
+                                <td>
+                                    <span *ngIf="show_table?.operator_name.length === 0">No Operator Name</span>
+                                    <span *ngIf="show_table?.operator_name.length != 0"> {{show_table?.operator_name}} </span> 
+                                    
+                                   </td>
+
+                                <td>
+                                    <span *ngIf="show_table?.op_id.length === 0">No Operator Id</span>
+                                    <span *ngIf="show_table?.op_id.length != 0">  {{show_table?.op_id}} </span> 
+                                    <!-- {{show_table?.op_id}} -->
+                                
+                                </td>
+                                <td>{{show_table?.utilisation}}</td>
+                                <td>{{show_table?.run_time}}</td>
+                                <td>{{show_table?.idle_time}}</td>
+                                <td>{{show_table?.disconnect}}</td>
+                            </tr> 
+                            
+                        </tbody>
+                    </table>
+                    <div *ngIf="first?.length==0" class="no_data_found">
+                        <h4>No Data found</h4>
+                      </div>
+                </div>
+             
+            </div>
+            <div class="compare_side right_side">
+                <div *ngIf="myLoader1" class="spinner">
+                    <img src="assets/images/spinner.gif">
+                </div>
+                <form [formGroup]="test" (ngSubmit)="testfunction('true')" class="compare_form filter_sec" action="">
+                    <div class="filter_fields">
+
+
+                        <div class="filter_field date_picker" color="primary">
+
+                            
+                            <mat-form-field>
+                                <input matInput
+                                       placeholder="Choose a date"
+                                       [satDatepicker]="picker3"
+                                       formControlName="date" (dateInput)="addEvent1('input', $event)" (dateChange)="addEvent1('change', $event)">
+                                <sat-datepicker #picker3 [rangeMode]="true">
+                                </sat-datepicker>
+                                <sat-datepicker-toggle matSuffix [for]="picker3"></sat-datepicker-toggle>
+                            </mat-form-field>
+                        </div>
+                        <div class="filter_field">
+                            <mat-form-field appearance="outline">
+                                <mat-select placeholder="Select Module" matNativeControl required
+                                    formControlName="line" (selectionChange)="getmodule($event.value)">
+                                    <mat-option value="all" *ngIf="rolename1 === 'Admin'">All</mat-option>
+                                    <mat-option *ngFor="let modd of response_module" [value]="modd">
+                                      {{modd}}
+                                  </mat-option>
+    
+                                </mat-select>
+                            </mat-form-field>
+                        </div>
+
+                       
+                        <div class="filter_field">
+                            <mat-form-field appearance="outline">
+                                <mat-select placeholder="Select Machine" matNativeControl required
+                                    formControlName="machine_name" (selectionChange)="getmm($event.value)">
+                                    <mat-option value="all">All</mat-option>
+    
+                                    <mat-option *ngFor="let MachinE of response_mac" [value]="MachinE">
+                                        {{MachinE}}
+                                    </mat-option>
+                                </mat-select>
+                            </mat-form-field>
+                    </div>
+                        <div class="filter_field sml-input">
+
+                            <mat-form-field appearance="outline">
+                                <mat-select placeholder="Shift" matNativeControl required formControlName="shift_num" (selectionChange)="shiftget($event.value)">
+                                    <mat-option value="all">All</mat-option>
+
+                                    <mat-option *ngFor="let b of select_shift" [value]="b.shift_no">
+                                    {{b.shift_no}}
+                                  </mat-option>
+                                </mat-select>
+                              </mat-form-field>
+                        </div>
+
+
+                        
+                        <div class="filter_field">
+                            <mat-form-field appearance="outline">
+                                <mat-select placeholder="Shiftwise" matNativeControl required
+                                    formControlName="type" (selectionChange)="gettyping($event.value)">
+                                    <mat-option value="Shiftwise">Shiftwise</mat-option>
+                                    <mat-option value="Operatorwise">Operatorwise</mat-option>
+    
+                                  
+                                </mat-select>
+                            </mat-form-field>
+                        </div>
+
+                        <div class="filter_field"  *ngIf="typess === 'Operatorwise' ">
+                            <mat-form-field appearance="outline">
+                                <mat-select placeholder="Select Operator" matNativeControl required
+                                    formControlName="operator" >
+                                    <mat-option *ngFor="let ope of ope_response" [value]="ope">
+                                      {{ope}}
+                                  </mat-option>
+                                  
+                                </mat-select>
+                            </mat-form-field>
+                            <div *ngIf="ope_response.length==0" class="no_data_found">
+                                <h2>No Operators found</h2>
+                              </div>
+                            <!-- <p *ngIf="op_response.length==0">No Operators Found</p> -->
+                            <!-- <div *ngIf="ope_response.length==0" class="no_data_found">
+                              <h2>No Operators found</h2>
+                            </div> -->
+                        </div>
+
+                       
+                        <button  type="submit" color="primary" mat-raised-button>Go</button>
+
+                    </div>
+                </form>
+                <div class="chart_sec">
+                    <div class="ulitization_chart">
+                        <circle-progress radius="65" outerStrokeColor="#78542C" innerStrokeColor="#1E2634"
+                            animation="true" animationDuration="300" percent={{secrun}}
+                            >
+                        </circle-progress>
+                        <div class="chart_text">
+                            <h3><span class="value">
+                                {{secrun}}
+                            </span> %</h3>
+                            <p>Utilization</p>
+                        </div>
+                    </div>
+                    <ul class="sep_cht">
+                        <li>
+                            <circle-progress radius="70" outerStrokeColor="#04C884" innerStrokeColor="#1E2634"
+                                animation="true" animationDuration="300"  percent={{secrun}}>
+                            </circle-progress>
+                            <p>Operate</p>
+                            <div class="chart_text">
+                                <h3><span class="value">{{secrun}}</span> %</h3>
+                            </div>
+                        </li>
+                        <li>
+                            <circle-progress radius="70" outerStrokeColor="#FFAD00" innerStrokeColor="#1E2634"
+                                animation="true" animationDuration="300" percent={{secidle}}>
+                            </circle-progress>
+                            <p>Idle</p>
+                            <div class="chart_text">
+                                <h3><span class="value">{{secidle}}</span> %</h3>
+                            </div>
+                        </li>
+
+                        <li>
+                            <circle-progress radius="70" outerStrokeColor="#919191" innerStrokeColor="#1E2634"
+                                animation="true" animationDuration="300" percent={{secdis}}>
+                            </circle-progress>
+                            <p>Disconnect</p>
+                            <div class="chart_text">
+                                <h3><span class="value">{{secdis}}</span> %</h3>
+                            </div>
+                        </li>
+                    </ul>
+
+                </div>
+
+                <div class="card_sec table-responsive">
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th>#</th>
+                                <th>Machine Name</th>
+                                <th>Shift Num</th>
+                                <th>Parts Produced</th>
+                                <th>Operator Name</th>
+                                <th>Operator Id</th>
+                                <th>Utilization(%)</th>
+                                <th>Run Time</th>
+                                <th>Idle Time</th>
+                                <th>No Data Time</th>
+                            </tr>
+                        </thead>
+                        <tbody *ngFor="let show_right of report_table?.table ;let i= index">
+                            <tr>
+                                <td>{{i+1}}</td>
+                                <td>{{show_right?.machine_name}}</td>
+                                <td>{{show_right?.shift_num}}</td>
+                                 <td>{{show_right?.part_count}}</td>
+                                 <!-- <td>{{show_right?.operator_name}}</td> -->
+
+                                 <td>
+                                    <span *ngIf="show_right?.operator_name.length === 0">No Operator Name</span>
+                                    <span *ngIf="show_right?.operator_name.length != 0"> {{show_right?.operator_name}} </span> 
+                                    
+                                   </td>
+                                 <!-- <td>{{show_right?.op_id}}</td> -->
+
+
+                                 <td>
+                                    <span *ngIf="show_right?.op_id.length === 0">No Operator Id</span>
+                                    <span *ngIf="show_right?.op_id.length != 0"> {{show_right?.op_id}} </span> 
+                                    
+                                   </td>
+                                 <td>{{show_right?.utilisation}}</td>
+                                 <td>{{show_right?.run_time}}</td>
+                                <td>{{show_right?.idle_time}}</td>
+                                <td>{{show_right?.disconnect}}</td>
+
+                            </tr>
+                            
+                        </tbody>
+                    </table>
+                  
+                <div *ngIf="second?.length==0" class="no_data_found">
+                    <h4>No Data found</h4>
+                  </div>
+                </div>
+              
+            </div>
+        </div>
+    </div>
+   
+
+</section> 
+
+
+
+
+
+
+
+
+
+
+

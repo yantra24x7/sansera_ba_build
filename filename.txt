@@ -1,0 +1,641 @@
+[1mdiff --git a/src/app/Components/idle-reason/idle-reason.component.html b/src/app/Components/idle-reason/idle-reason.component.html[m
+[1mindex 4870067..e69de29 100755[m
+[1m--- a/src/app/Components/idle-reason/idle-reason.component.html[m
+[1m+++ b/src/app/Components/idle-reason/idle-reason.component.html[m
+[36m@@ -1,138 +0,0 @@[m
+[31m-<section class="page">[m
+[31m-[m
+[31m-    <div class="container_fluid pt-3">[m
+[31m-          <div class="page_title_sec">[m
+[31m-            <!-- <h2 class="sub_title">[m
+[31m-                    <mat-icon class="v-align-middle display">laptop</mat-icon>[m
+[31m-                    <span class="v-align-middle">Report</span>[m
+[31m-                </h2> -->[m
+[31m-[m
+[31m-        </div>[m
+[31m-        <div class="filter_sec mt-10">[m
+[31m-                <form [formGroup]="login" (ngSubmit)="logintest('true')">[m
+[31m-            <div class="filter_fields">[m
+[31m-                     <div class="filter_field">[m
+[31m-                    <!--have commmented out conditions feel free to use them again *ngIf="type == 'ShiftWise'" -->[m
+[31m-                    <mat-form-field appearance="outline">[m
+[31m-                        <mat-select placeholder="Select Machine" matNativeControl required formControlName="machine_name">[m
+[31m-                            <mat-option value="all">All</mat-option>[m
+[31m-[m
+[31m-                            <mat-option *ngFor="let machine of machine_response" [value]="machine">[m
+[31m-                            {{machine}}[m
+[31m-                          </mat-option>[m
+[31m-                        </mat-select>[m
+[31m-                      </mat-form-field>[m
+[31m-                </div>[m
+[31m-                <div class="filter_field">[m
+[31m-                    <!--have commmented out conditions feel free to use them again *ngIf="type == 'ShiftWise'" -->[m
+[31m-                    <mat-form-field appearance="outline">[m
+[31m-                        <mat-select placeholder="Select Shift" matNativeControl required formControlName="shift_num">[m
+[31m-                            <mat-option value="all">All</mat-option>[m
+[31m-[m
+[31m-                            <mat-option *ngFor="let shift of shift_response" [value]="shift.shift_no">[m
+[31m-                            {{shift.shift_no}}[m
+[31m-                          </mat-option>[m
+[31m-                        </mat-select>[m
+[31m-                      </mat-form-field>[m
+[31m-                </div>[m
+[31m-                <div class="filter_field date_picker" color="primary">[m
+[31m-                    <!-- <label>Select Date</label> -->[m
+[31m-                    <!-- <ejs-daterangepicker id='daterangepicker' placeholder='Select a range' [startDate]='start' [endDate]='end'></ejs-daterangepicker> -->[m
+[31m-                    <ejs-daterangepicker placeholder='Select a range' formControlName="date"[m
+[31m-                        (click)="daterangepicker.open()">[m
+[31m-                        <e-presets>[m
+[31m-                            <e-preset label="This Week" [start]='weekStart' [end]='weekEnd'></e-preset>[m
+[31m-                            <e-preset label="This Month" [start]='monthStart' [end]='monthEnd'></e-preset>[m
+[31m-                            <e-preset label="Last Month" [start]='lastStart' [end]='lastEnd'></e-preset>[m
+[31m-                            <e-preset label="Last Year" [start]='yearStart' [end]='yearEnd'></e-preset>[m
+[31m-                        </e-presets>[m
+[31m-                    </ejs-daterangepicker>[m
+[31m-                </div>[m
+[31m-[m
+[31m-                <button [disabled]="login.invalid" type="submit" color="primary" mat-raised-button>Submit</button>[m
+[31m-            </div>[m
+[31m-                [m
+[31m-            </form>[m
+[31m-[m
+[31m-         [m
+[31m-        </div>[m
+[31m-        <mat-card class="card_sec">[m
+[31m-            <div class="table_wrapper">[m
+[31m-                <table class="table">[m
+[31m-                    <thead>[m
+[31m-                        <tr >[m
+[31m-                            <th rowspan="2">S.no</th>[m
+[31m-                            <th rowspan="2">Date</th>[m
+[31m-[m
+[31m-                            <th rowspan="2">Shift</th>[m
+[31m-                            <th rowspan="2">Machine Name</th>[m
+[31m-                            <!-- <th colspan="2">Operator Details</th> -->[m
+[31m-                            <th colspan="11">Production Details</th>[m
+[31m-                            <!-- <th colspan="4">Machine Details</th> -->[m
+[31m-                        </tr>[m
+[31m-                        <tr>[m
+[31m-                            <!-- <th>NAME</th>[m
+[31m-                            <th>ID</th> -->[m
+[31m-                            <th>Program No</th>[m
+[31m-                            <th>Product Result accumulative</th>[m
+[31m-                            <!-- <th>Work Order No</th> -->[m
+[31m-                            <!-- <th>Operation No</th> -->[m
+[31m-                            <th>Product Name</th>[m
+[31m-                            <th>Product Result</th>[m
+[31m-                            <th>Accept Count</th>[m
+[31m-                            <th>Reject Count</th>[m
+[31m-                            <th>Start Time</th>[m
+[31m-                            <th>End Time</th>[m
+[31m-                            <!-- <th>Spindle Load</th> -->[m
+[31m-[m
+[31m-                            <!-- <th>Feed Rate</th> -->[m
+[31m-                            <!-- <th>Utilization</th> -->[m
+[31m-[m
+[31m-                            <!-- <th class="green">Run Time in (min)</th> -->[m
+[31m-                            <!-- <th class="yellow">Setup Idle in (min)</th> -->[m
+[31m-                            <!-- <th>Alarm time in min</th> -->[m
+[31m-                            <!-- <th class="grey">Non Utilized Time</th> -->[m
+[31m-[m
+[31m-                        </tr>[m
+[31m-                    </thead>[m
+[31m-                    <tbody *ngFor="let show_report of get_report; let i = index">[m
+[31m-                        <tr >[m
+[31m-                        <td>{{i+1}}</td>[m
+[31m-                        <td>{{show_report?.date}}</td>[m
+[31m-                        <td>{{show_report?.shift_num}}</td>[m
+[31m-                        [m
+[31m-                        <td>{{show_report?.machine_name}}</td>[m
+[31m-                        <!-- <td>---</td>[m
+[31m-                        <td>---</td> -->[m
+[31m-                        <td>{{show_report?.program_number || '---'}}</td>[m
+[31m-                        <td>{{show_report?.productresult_accumulate || '---'}}</td>[m
+[31m-                        <!-- <td>---</td> -->[m
+[31m-                        <!-- <td>---</td> -->[m
+[31m-                        <td>{{show_report?.productname}}</td>[m
+[31m-                        <td>{{show_report?.productresult}}</td>[m
+[31m-                        <td>---</td>[m
+[31m-                        <td>---</td>[m
+[31m-                        <td>{{show_report?.part_start_time || 'dd-mm-yyyy'}}</td>[m
+[31m-                        <td>{{show_report?.part_end_time || 'dd-mm-yyyy'}}</td>[m
+[31m-                        <!-- <td>---</td> -->[m
+[31m-                        <!-- <td>---</td> -->[m
+[31m-                        <!-- <td>{{show_report?.utilisation}}</td> -->[m
+[31m-                        <!-- <td>{{show_report?.run_time}}[m
+[31m-                            <button color="primary" (click)="openDialog()" mat-button>More Info</button>[m
+[31m-                        </td> -->[m
+[31m-                        <!-- <td>{{show_report?.idle_time}}</td> -->[m
+[31m-                        <!-- <td>8</td> -->[m
+[31m-                        <!-- <td>{{show_report?.disconnect}}</td> -->[m
+[31m-                    </tr>[m
+[31m-                    </tbody>[m
+[31m-                </table>[m
+[31m-            </div>[m
+[31m-[m
+[31m-        </mat-card>[m
+[31m-    </div>[m
+[31m-    <div *ngIf="myLoader" class="spinner">[m
+[31m-        <img src="assets/images/spinner.gif">[m
+[31m-      </div>[m
+[31m-[m
+[31m-[m
+[31m-</section>[m
+\ No newline at end of file[m
+[1mdiff --git a/src/app/Components/idle-reason/idle-reason.component.scss b/src/app/Components/idle-reason/idle-reason.component.scss[m
+[1mindex cb9a250..e69de29 100755[m
+[1m--- a/src/app/Components/idle-reason/idle-reason.component.scss[m
+[1m+++ b/src/app/Components/idle-reason/idle-reason.component.scss[m
+[36m@@ -1,7 +0,0 @@[m
+[31m-.table_wrapper {[m
+[31m-    // height: calc(100vh - 640px);[m
+[31m-    overflow-y: scroll;[m
+[31m-    overflow-x: scroll;[m
+[31m-    /* overflow: scroll; */[m
+[31m-    margin-top: 20px;[m
+[31m-}[m
+\ No newline at end of file[m
+[1mdiff --git a/src/app/Components/idle-reason/idle-reason.component.ts b/src/app/Components/idle-reason/idle-reason.component.ts[m
+[1mindex 77d2513..e69de29 100755[m
+[1m--- a/src/app/Components/idle-reason/idle-reason.component.ts[m
+[1m+++ b/src/app/Components/idle-reason/idle-reason.component.ts[m
+[36m@@ -1,93 +0,0 @@[m
+[31m-import { Component, OnInit } from '@angular/core';[m
+[31m-import { NavbarService } from '../../Nav/navbar.service';[m
+[31m-import { IdleReasonService } from '../../Service/app/idle-reason.service';[m
+[31m-import { FormGroup, FormBuilder } from '@angular/forms';[m
+[31m-import { DatePipe } from '@angular/common';[m
+[31m-[m
+[31m-@Component({[m
+[31m-  selector: 'app-idle-reason',[m
+[31m-  templateUrl: './idle-reason.component.html',[m
+[31m-  styleUrls: ['./idle-reason.component.scss'][m
+[31m-})[m
+[31m-export class IdleReasonComponent implements OnInit {[m
+[31m-  public today: Date = new Date(new Date().toDateString());[m
+[31m-  public weekStart: Date = new Date(new Date(new Date().setDate(new Date().getDate() - (new Date().getDay() + 7) % 7)).toDateString());[m
+[31m-  public weekEnd: Date = new Date(new Date(new Date().setDate(new Date(new Date().setDate((new Date().getDate()[m
+[31m-    - (new Date().getDay() + 7) % 7))).getDate() + 6)).toDateString())[m
+[31m-    ;[m
+[31m-  public monthStart: Date = new Date(new Date(new Date().setDate(1)).toDateString());[m
+[31m-  public monthEnd: Date = this.today;[m
+[31m-  public lastStart: Date = new Date(new Date(new Date(new Date().setMonth(new Date().getMonth() - 1)).setDate(1)).toDateString());[m
+[31m-  public lastEnd: Date = this.today;[m
+[31m-  public yearStart: Date = new Date(new Date(new Date().setDate(new Date().getDate() - 365)).toDateString());[m
+[31m-  public yearEnd: Date = this.today;[m
+[31m-  public currentYear: number = this.today.getFullYear();[m
+[31m-  public currentMonth: number = this.today.getMonth();[m
+[31m-  public maxDate: Object = new Date();[m
+[31m-  public minDate: Object = new Date(new Date().setMonth(new Date().getMonth() - 1));[m
+[31m-  machine_response: any;[m
+[31m-  shift_response: any;[m
+[31m-  login: FormGroup;[m
+[31m-  get_report: any;[m
+[31m-  first_loading: any;[m
+[31m-  daterangepicker:any;[m
+[31m-[m
+[31m-  status: string;[m
+[31m-myLoader = false;[m
+[31m-[m
+[31m-  new_date: string;[m
+[31m-  new_date1: any;[m
+[31m-  constructor(private nav:NavbarService,private service:IdleReasonService,private fb:FormBuilder  ) { [m
+[31m-    this.nav.show()[m
+[31m-  }[m
+[31m-    ngOnInit() {[m
+[31m-      this.login = this.fb.group({[m
+[31m-        machine_name: [""],[m
+[31m-        shift_num: [""],[m
+[31m-        date: [""],[m
+[31m-      })[m
+[31m-      this.service.getmachines().subscribe(res => {[m
+[31m-        this.machine_response = res;[m
+[31m-        this.login.patchValue({[m
+[31m-          machine_name: this.machine_response[0],[m
+[31m-        })[m
+[31m-        this.service.getshift().subscribe(res => {[m
+[31m-          this.shift_response = res;[m
+[31m-          this.login.patchValue({[m
+[31m-            shift_num: this.shift_response[0].shift_no,[m
+[31m-          })[m
+[31m-          this.service.first_page_loading().subscribe(res => {[m
+[31m-            this.first_loading = res;[m
+[31m-            this.login.patchValue({[m
+[31m-              date : [this.first_loading['from_date'],this.first_loading['to_date']][m
+[31m-            })[m
+[31m-            // this.minDate = this.first_loading['from_date'][m
+[31m-            // this.maxDate = this.first_loading['to_date'][m
+[31m-            this.logintest('true');[m
+[31m-          })[m
+[31m-        })[m
+[31m-      })[m
+[31m-  }[m
+[31m-  logintest(s) {[m
+[31m-    this.status = s;[m
+[31m-    this.myLoader = true;[m
+[31m-[m
+[31m-    // this.maxDate = this.datepipe.transform(this.maxDate);[m
+[31m-    console.log(this.minDate)[m
+[31m-    console.log(this.login.value)[m
+[31m-    if (this.status == 'true') {[m
+[31m-      this.new_date = new DatePipe('en-US').transform(this.login.value.date[0], 'MM/dd/yyyy');[m
+[31m-      this.new_date1 = new DatePipe('en-US').transform(this.login.value.date[1], 'MM/dd/yyyy');[m
+[31m-      let register = {[m
+[31m-        "machine_name": this.login.value.machine_name,[m
+[31m-        "shift_num": this.login.value.shift_num,[m
+[31m-        "date": this.new_date + '-' + this.new_date1[m
+[31m-      }[m
+[31m-[m
+[31m-      this.service.overall_report(register).subscribe(res => {[m
+[31m-        this.myLoader = false;[m
+[31m-        this.get_report = res;[m
+[31m-      })[m
+[31m-    }[m
+[31m-  }[m
+[31m-}[m
+[1mdiff --git a/src/app/Components/idle-reason/idle-reason.module.ts b/src/app/Components/idle-reason/idle-reason.module.ts[m
+[1mindex 14a6ea6..e69de29 100755[m
+[1m--- a/src/app/Components/idle-reason/idle-reason.module.ts[m
+[1m+++ b/src/app/Components/idle-reason/idle-reason.module.ts[m
+[36m@@ -1,19 +0,0 @@[m
+[31m-import { NgModule } from '@angular/core';[m
+[31m-import { CommonModule } from '@angular/common';[m
+[31m-import { SharedModule } from '../shared/shared.module';[m
+[31m-import { Routes, RouterModule } from '@angular/router';[m
+[31m-import { IdleReasonComponent } from './idle-reason.component';[m
+[31m-import { DatePipe } from '@angular/common';[m
+[31m-[m
+[31m-const routes: Routes = [{ path: '', component: IdleReasonComponent }];[m
+[31m-[m
+[31m-@NgModule({[m
+[31m-  declarations: [IdleReasonComponent],[m
+[31m-  imports: [RouterModule.forChild(routes),[m
+[31m-    CommonModule,SharedModule,[m
+[31m-  ],[m
+[31m-  providers: [[m
+[31m-    DatePipe[m
+[31m-  ][m
+[31m-})[m
+[31m-export class IdleReasonModule { }[m
+[1mdiff --git a/src/app/Components/trendchart/trendchart.component.html b/src/app/Components/trendchart/trendchart.component.html[m
+[1mindex 06cfa76..e69de29 100755[m
+[1m--- a/src/app/Components/trendchart/trendchart.component.html[m
+[1m+++ b/src/app/Components/trendchart/trendchart.component.html[m
+[36m@@ -1,187 +0,0 @@[m
+[31m-<section class="page">[m
+[31m-[m
+[31m-    <div class="container_fluid pt-3">[m
+[31m-        <div class="page_title_sec">[m
+[31m-            <!-- <h2 class="sub_title">[m
+[31m-                    <mat-icon class="v-align-middle display">laptop</mat-icon>[m
+[31m-                    <span class="v-align-middle">Report</span>[m
+[31m-                </h2> -->[m
+[31m-[m
+[31m-        </div>[m
+[31m-        <div class="filter_sec mt-10">[m
+[31m-            <form [formGroup]="test" (ngSubmit)="testfunc('true')">[m
+[31m-             <div class="filter_fields">[m
+[31m-                <div class="filter_field">[m
+[31m-                    <!--have commmented out conditions feel free to use them again *ngIf="type == 'ShiftWise'" -->[m
+[31m-                    <mat-form-field appearance="outline">[m
+[31m-                        [m
+[31m-                        <mat-select placeholder="Select Machine" matNativeControl required formControlName="machine_name">[m
+[31m-                            <mat-option value="all">All</mat-option>[m
+[31m-[m
+[31m-                            <mat-option *ngFor="let machine of machine_response" [value]="machine">[m
+[31m-                            {{machine}}[m
+[31m-                          </mat-option>[m
+[31m-                        </mat-select>[m
+[31m-                      </mat-form-field>[m
+[31m-                </div>[m
+[31m-                <div class="filter_field">[m
+[31m-                    <mat-form-field appearance="outline">[m
+[31m-                        <mat-select placeholder="Select Shift" matNativeControl required formControlName="shift_num">[m
+[31m-                            <mat-option value="all">All</mat-option>[m
+[31m-[m
+[31m-                            <mat-option *ngFor="let shift of shift_response" [value]="shift.shift_no">[m
+[31m-[m
+[31m-                            {{shift.shift_no}}[m
+[31m-                          </mat-option>[m
+[31m-                        </mat-select>[m
+[31m-                      </mat-form-field>[m
+[31m-                </div>[m
+[31m-                <!-- <div class="filter_field">[m
+[31m-                    <mat-form-field appearance="outline" placeholder="Select Shift">[m
+[31m-                        <mat-select required>[m
+[31m-                            <mat-option value="">Select Machine</mat-option>[m
+[31m-                            <mat-option value="All">All</mat-option>[m
+[31m-                            <mat-option value="">Lorem Ipsum</mat-option>[m
+[31m-                            <mat-option value="">Lorem Ipsum</mat-option>[m
+[31m-                            <mat-option value="">Lorem Ipsum</mat-option>[m
+[31m-                        </mat-select>[m
+[31m-                    </mat-form-field>[m
+[31m-                </div> -->[m
+[31m-                <!-- <div class="filter_field">[m
+[31m-                    <mat-form-field appearance="outline" placeholder="Select Shift">[m
+[31m-                        <mat-select required>[m
+[31m-                            <mat-option value="">Select Machine</mat-option>[m
+[31m-                            <mat-option value="All">All</mat-option>[m
+[31m-                            <mat-option value="">Lorem Ipsum</mat-option>[m
+[31m-                            <mat-option value="">Lorem Ipsum</mat-option>[m
+[31m-                            <mat-option value="">Lorem Ipsum</mat-option>[m
+[31m-                        </mat-select>[m
+[31m-                    </mat-form-field>[m
+[31m-                </div> -->[m
+[31m-                <!-- <div class="filter_field">[m
+[31m-                    <mat-form-field appearance="outline" placeholder="Select Shift">[m
+[31m-                        <mat-select required>[m
+[31m-                            <mat-option value="">Select Machine</mat-option>[m
+[31m-                            <mat-option value="All">All</mat-option>[m
+[31m-                            <mat-option value="">Lorem Ipsum</mat-option>[m
+[31m-                            <mat-option value="">Lorem Ipsum</mat-option>[m
+[31m-                            <mat-option value="">Lorem Ipsum</mat-option>[m
+[31m-                        </mat-select>[m
+[31m-                    </mat-form-field>[m
+[31m-                </div> -->[m
+[31m-                <div class="filter_field date_picker" color="primary">[m
+[31m-                    <!-- <label>Select Date</label> -->[m
+[31m-                    <!-- <ejs-daterangepicker id='daterangepicker' placeholder='Select a range' [startDate]='start' [endDate]='end'></ejs-daterangepicker> -->[m
+[31m-                    <ejs-daterangepicker placeholder='Select a range' formControlName="date"[m
+[31m-                        (click)="ejs-daterangepicker.open()" >[m
+[31m-                        <e-presets>[m
+[31m-                            <e-preset label="This Week" [start]='weekStart' [end]='weekEnd'></e-preset>[m
+[31m-                            <e-preset label="This Month" [start]='monthStart' [end]='monthEnd'></e-preset>[m
+[31m-                            <e-preset label="Last Month" [start]='lastStart' [end]='lastEnd'></e-preset>[m
+[31m-                            <e-preset label="Last Year" [start]='yearStart' [end]='yearEnd'></e-preset>[m
+[31m-                        </e-presets>[m
+[31m-                    </ejs-daterangepicker>[m
+[31m-                </div>[m
+[31m-                <button color="primary" mat-raised-button> Filter</button>[m
+[31m-            </div>[m
+[31m-        </form>[m
+[31m-    [m
+[31m-            <div class="filter_fields">[m
+[31m-                <label>Show Only :</label>[m
+[31m-                <mat-checkbox color="primary">Running</mat-checkbox>[m
+[31m-                <mat-checkbox color="primary">Idle</mat-checkbox>[m
+[31m-                <mat-checkbox color="primary">No-Data</mat-checkbox>[m
+[31m-            </div>[m
+[31m-[m
+[31m-            <div class="table_export">[m
+[31m-                <!-- <button color="primary" mat-raised-button> Export</button> -->[m
+[31m-                <!-- <a href="" class="export_btn">[m
+[31m-                        <i class="material-icons">[m
+[31m-                            file_copy[m
+[31m-                        </i>[m
+[31m-                        Export[m
+[31m-                    </a> -->[m
+[31m-            </div>[m
+[31m-        </div>[m
+[31m-        <mat-card class="card_sec">[m
+[31m-            <mat-tab-group animationDuration="0ms">[m
+[31m-                <!-- <mat-tab label="Show Chart">[m
+[31m-[m
+[31m-[m
+[31m-                    <div id="container"></div>[m
+[31m-[m
+[31m-[m
+[31m-                </mat-tab> -->[m
+[31m-                <mat-tab label="Show Report">[m
+[31m-                    <table class="table">[m
+[31m-                        <thead>[m
+[31m-                            <tr>[m
+[31m-                                <th rowspan="2">S.no</th>[m
+[31m-                                <th rowspan="2">Date</th>[m
+[31m-                                <th rowspan="2">Shift</th>[m
+[31m-                                <th rowspan="2">Machine Name</th>[m
+[31m-                                <th colspan="2">Operator Details</th>[m
+[31m-                                <th colspan="11">Production Details</th>[m
+[31m-                                <th colspan="4">Machine Details</th>[m
+[31m-                            </tr>[m
+[31m-                            <tr>[m
+[31m-                                <th>NAME</th>[m
+[31m-                                <th>ID</th>[m
+[31m-                                <th>Part name</th>[m
+[31m-                                <th>Part No</th>[m
+[31m-                                <th>Work Order No</th>[m
+[31m-                                <th>Operation No</th>[m
+[31m-                                <th>Qty Produced</th>[m
+[31m-                                <th>Qty Rejected</th>[m
+[31m-                                <th>Cycle time</th>[m
+[31m-                                <th>Cutting Time</th>[m
+[31m-                                <th>Spindle Speed</th>[m
+[31m-                                <th>Spindle Load</th>[m
+[31m-                                <th>Feed Rate</th>[m
+[31m-                                <th>Utilization</th>[m
+[31m-                                <th class="green">Run Time in (min)</th>[m
+[31m-                                <th class="yellow">Setup Idle in (min)</th>[m
+[31m-                                <!-- <th>Alarm time in min</th> -->[m
+[31m-                                <th class="grey">Non Utilized Time</th>[m
+[31m-[m
+[31m-                            </tr>[m
+[31m-                        </thead>[m
+[31m-                        <tbody *ngFor="let show_report of get_report; let i = index">[m
+[31m-                            <td>{{i+1}}</td>[m
+[31m-                            <td>{{show_report?.date}}</td>[m
+[31m-                            <td>{{show_report?.shift_num}}</td>[m
+[31m-                            <td>{{show_report?.machine_name}}</td>[m
+[31m-                            <td>---</td>[m
+[31m-                            <td>---</td>[m
+[31m-                            <td>{{show_report?.part_name}}</td>[m
+[31m-                            <td>---</td>[m
+[31m-                            <td>---</td>[m
+[31m-                            <td>---</td>[m
+[31m-                            <td>{{show_report?.part_count}}</td>[m
+[31m-                            <td>---</td>[m
+[31m-                            <td>---</td>[m
+[31m-                            <td>---</td>[m
+[31m-                            <td>---</td>[m
+[31m-                            <td>---</td>[m
+[31m-                            <td>---</td>[m
+[31m-                            <td>{{show_report?.utilisation}}</td>[m
+[31m-                            <td>{{show_report?.run_time}}[m
+[31m-                                <!-- <button color="primary" mat-button>More Info</button> -->[m
+[31m-                            </td>[m
+[31m-                            <td>{{show_report?.idle_time}}</td>[m
+[31m-                            <!-- <td>8</td> -->[m
+[31m-                    <td>{{show_report?.disconnect}}</td>[m
+[31m-                        </tbody>[m
+[31m-                    </table>[m
+[31m-                </mat-tab>[m
+[31m-            </mat-tab-group>[m
+[31m-[m
+[31m-[m
+[31m-[m
+[31m-        </mat-card>[m
+[31m-    </div>[m
+[31m-    <div *ngIf="myLoader" class="spinner">[m
+[31m-        <img src="assets/images/spinner.gif">[m
+[31m-      </div>[m
+[31m-[m
+[31m-</section>[m
+\ No newline at end of file[m
+[1mdiff --git a/src/app/Components/user-management/user-management.component.html b/src/app/Components/user-management/user-management.component.html[m
+[1mindex d04de29..be7b1dc 100755[m
+[1m--- a/src/app/Components/user-management/user-management.component.html[m
+[1m+++ b/src/app/Components/user-management/user-management.component.html[m
+[36m@@ -4,7 +4,7 @@[m
+       <div class="page_title_sec">[m
+         <h2 class="sub_title">[m
+           <mat-icon class="v-align-middle display">alarm</mat-icon>[m
+[31m-          <span class="v-align-middle">User Registration</span>[m
+[32m+[m[32m          <span class="v-align-middle">User New Registration</span>[m
+         </h2>[m
+         <div class="add_new">[m
+           <mat-icon class="circle" (click)="user()">add</mat-icon>[m
+[1mdiff --git a/src/app/app-routing.module.ts b/src/app/app-routing.module.ts[m
+[1mindex d33c8ff..e69de29 100755[m
+[1m--- a/src/app/app-routing.module.ts[m
+[1m+++ b/src/app/app-routing.module.ts[m
+[36m@@ -1,57 +0,0 @@[m
+[31m-import { NgModule } from '@angular/core';[m
+[31m-import { Routes, RouterModule } from '@angular/router';[m
+[31m-import { AuthGuard} from '../app/Service/core/authentication/auth.guard';[m
+[31m-[m
+[31m-const routes: Routes = [[m
+[31m-  { path: '', loadChildren: () => import('./Components/login/login.module').then(m => m.LoginModule) },[m
+[31m-  { path: 'register', loadChildren: () => import('./Components/register/register.module').then(m => m.RegisterModule),},[m
+[31m- [m
+[31m-  [m
+[31m-  // { path: 'backup', loadChildren: () => import('./Components/backup/backup.module').then(m => m.BackupModule) },[m
+[31m-  // { path: 'clogin', loadChildren: () => import('./Components/clogin/clogin.module').then(m => m.CloginModule) },[m
+[31m-  { path: 'sidebar', loadChildren: () => import('./Nav/sidebar/sidebar.module').then(m => m.SidebarModule) },[m
+[31m-  // { path: 'reason', loadChildren: () => import('./Components/reason/reason.module').then(m => m.ReasonModule) },[m
+[31m-  { path: 'alarm', loadChildren: () => import('./Components/alarm/alarm.module').then(m => m.AlarmModule) },[m
+[31m-  // { path: 'alert', loadChildren: () => import('./Components/alert/alert.module').then(m => m.AlertModule) },[m
+[31m-  // { path: 'connectionlog', loadChildren: () => import('./Components/connectionlog/connectionlog.module').then(m => m.ConnectionlogModule) },[m
+[31m-  // { path: 'notification', loadChildren: () => import('./Components/notification/notification.module').then(m => m.NotificationModule) },[m
+[31m-  { path: 'dashboard', loadChildren: () => import('./Components/dashboard/dashboard.module').then(m => m.DashboardModule), },[m
+[31m-  // { path: 'hmi', loadChildren: () => import('./Components/hmi/hmi.module').then(m => m.HmiModule) },[m
+[31m-  // { path: 'alarmreport', loadChildren: () => import('./Components/alarm-history-report/alarm-history-report.module').then(m => m.AlarmHistoryReportModule) },[m
+[31m-  { path: 'report', loadChildren: () => import('./Components/report/report.module').then(m => m.ReportModule) },[m
+[31m-  // { path: 'cyclechart', loadChildren: () => import('./Components/cycle-time-chart/cycle-time-chart.module').then(m => m.CycleTimeChartModule) },[m
+[31m-  // { path: 'cyclestart', loadChildren: () => import('./Components/cycle-time-start-to-start/cycle-time-start-to-start.module').then(m => m.CycleTimeStartToStartModule) },[m
+[31m-  // { path: 'allshiftchart', loadChildren: () => import('./Components/all-shift-chart/all-shift-chart.module').then(m => m.AllShiftChartModule) },[m
+[31m-  // { path: 'cyclestop', loadChildren: () => import('./Components/cycle-time-stop-to-start/cycle-time-stop-to-start.module').then(m => m.CycleTimeStopToStartModule) },[m
+[31m-  //  { path: 'codecompare', loadChildren: () => import('./Components/codecompare/codecompare.module').then(m => m.CodecompareModule) },[m
+[31m-  //  { path: 'code-editor', loadChildren: () => import('./Components/code-editor/code-editor.module').then(m => m.CodeEditorModule) },[m
+[31m-  { path: 'machine_registration', loadChildren: () => import('./Components/machine-registration/machine-registration.module').then(m => m.MachineRegistrationModule) },[m
+[31m-  // { path: 'oee', loadChildren: () => import('./Components/oee/oee.module').then(m => m.OeeModule) },[m
+[31m-  { path: 'user_management', loadChildren: () => import('./Components/user-management/user-management.module').then(m => m.UserManagementModule) },[m
+[31m-  { path: 'operator_registration', loadChildren: () => import('./Components/operator-registration/operator-registration.module').then(m => m.OperatorRegistrationModule) },[m
+[31m-  { path: 'shift', loadChildren: () => import('./Components/shift/shift.module').then(m => m.ShiftModule) },[m
+[31m-  // { path: 'operator_allocation', loadChildren: () => import('./Components/operator-allocation/operator-allocation.module').then(m => m.OperatorAllocationModule) },[m
+[31m-  // { path: 'operator_allocation', loadChildren: () => import('./Components/operator-allocation/operator-allocation.module').then(m => m.OperatorAllocationModule) },[m
+[31m-  // { path: 'machine', loadChildren: () => import('./Components/machinenew/machinenew.module').then(m => m.MachinenewModule) },[m
+[31m-  // { path: 'anothercode', loadChildren: () => import('./Components/anothercode/anothercode.module').then(m => m.AnothercodeModule) },[m
+[31m-  { path: 'trendchart', loadChildren: () => import('./Components/trendchart/trendchart.module').then(m => m.TrendchartModule) },[m
+[31m-   { path: 'comparechart', loadChildren: () => import('./Components/comparechart/comparechart.module').then(m => m.ComparechartModule) },[m
+[31m-   { path: 'overallchart', loadChildren: () => import('./Components/overallchart/overallchart.module').then(m => m.OverallchartModule) },[m
+[31m-  { path: 'Tablet', loadChildren: () => import('./Components/machine-lmw/machine-lmw.module').then(m => m.MachineLmwModule) },[m
+[31m-  { path: 'reason_lmw', loadChildren: () => import('./Components/reason-lmw/reason-lmw.module').then(m => m.ReasonLmwModule) },[m
+[31m-  { path: 'oee_dashboard', loadChildren: () => import('./Components/oee-dashboard/oee-dashboard.module').then(m => m.OeeDashboardModule) },[m
+[31m-  { path: 'reflect', loadChildren: () => import('./Components/reflect/reflect.module').then(m => m.ReflectModule) },[m
+[31m-  { path: 'idle_reason', loadChildren: () => import('./Components/idle-reason/idle-reason.module').then(m => m.IdleReasonModule) },[m
+[31m-  { path: 'production', loadChildren: () => import('./Components/production/production.module').then(m => m.ProductionModule) },[m
+[31m-  // { path: 'oee', loadChildren: () => import('./Components/oee/oee.module').then(m => m.OeeModule) },[m
+[31m-  { path: 'report_idle', loadChildren: () => import('./Components/report-idle/report-idle.module').then(m => m.ReportIdleModule) },[m
+[31m-  //  { path: 'oee_lmw', loadChildren: () => import('./Components/oee_lmw/oee_lmw.module').then(m => m.oee_lmwModule) },[m
+[31m-  [m
+[31m-[m
+[31m-];[m
+[31m-[m
+[31m-@NgModule({[m
+[31m-  imports: [RouterModule.forRoot(routes)],[m
+[31m-  exports: [RouterModule][m
+[31m-})[m
+[31m-export class AppRoutingModule { }[m
+\ No newline at end of file[m
+[1mdiff --git a/src/app/app.component.html b/src/app/app.component.html[m
+[1mindex a981dc3..e69de29 100755[m
+[1m--- a/src/app/app.component.html[m
+[1m+++ b/src/app/app.component.html[m
+[36m@@ -1 +0,0 @@[m
+[31m-<app-sidebar></app-sidebar>[m
+\ No newline at end of file[m
+[1mdiff --git a/src/app/app.component.ts b/src/app/app.component.ts[m
+[1mindex 88e602e..e69de29 100755[m
+[1m--- a/src/app/app.component.ts[m
+[1m+++ b/src/app/app.component.ts[m
+[36m@@ -1,14 +0,0 @@[m
+[31m-import { Component } from '@angular/core';[m
+[31m-[m
+[31m-@Component({[m
+[31m-  selector: 'app-root',[m
+[31m-  templateUrl: './app.component.html',[m
+[31m-  styleUrls: ['./app.component.scss'][m
+[31m-})[m
+[31m-export class AppComponent {[m
+[31m-  title = 'Yantra8';[m
+[31m-  ngOnInit() {[m
+[31m-[m
+[31m-[m
+[31m-  }[m
+[31m-}[m
+[1mdiff --git a/src/app/app.module.ts b/src/app/app.module.ts[m
+[1mindex b19336e..e69de29 100755[m
+[1m--- a/src/app/app.module.ts[m
+[1m+++ b/src/app/app.module.ts[m
+[36m@@ -1,44 +0,0 @@[m
+[31m-import { BrowserModule } from '@angular/platform-browser';[m
+[31m-import { NgModule } from '@angular/core';[m
+[31m-[m
+[31m-import { AppRoutingModule } from './app-routing.module';[m
+[31m-import { AppComponent } from './app.component';[m
+[31m-import { SidebarComponent } from './Nav/sidebar/sidebar.component';[m
+[31m-// import { MatToolbarModule } from '@angular/material/toolbar';[m
+[31m-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';[m
+[31m-import { RegisterModule } from './Components/register/register.module';[m
+[31m-import { SharedModule } from './Components/shared/shared.module';[m
+[31m-import { NavbarService } from './Nav/navbar.service';[m
+[31m-[m
+[31m-// import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';[m
+[31m-import { CoreModule } from '../app/Service/core/core.module';[m
+[31m-import { HighchartsChartModule } from 'highcharts-angular';[m
+[31m-[m
+[31m-[m
+[31m-[m
+[31m-import { ChartModule } from 'angular-highcharts';[m
+[31m-// import * as HighchartsMore from 'highcharts/highcharts-more.src'[m
+[31m-[m
+[31m-[m
+[31m-@NgModule({[m
+[31m-  declarations: [[m
+[31m-    AppComponent,[m
+[31m-    SidebarComponent[m
+[31m-  ],[m
+[31m-  imports: [[m
+[31m-    BrowserModule,[m
+[31m-    AppRoutingModule,[m
+[31m-    // HttpClientModule,[m
+[31m-    ChartModule,[m
+[31m-    BrowserAnimationsModule,[m
+[31m-    RegisterModule, SharedModule,[m
+[31m-    // MatToolbarModule,[m
+[31m-    CoreModule,[m
+[31m-    HighchartsChartModule,[m
+[31m-    // HighchartsMore,[m
+[31m-[m
+[31m-  ],[m
+[31m-  providers: [NavbarService],[m
+[31m-  bootstrap: [AppComponent][m
+[31m-})[m
+[31m-export class AppModule { }[m
+[1mdiff --git a/src/main.ts b/src/main.ts[m
+[1mindex 3b2b7d0..e69de29 100755[m
+[1m--- a/src/main.ts[m
+[1m+++ b/src/main.ts[m
+[36m@@ -1,13 +0,0 @@[m
+[31m-import 'hammerjs';[m
+[31m-import { enableProdMode } from '@angular/core';[m
+[31m-import { platformBrowserDynamic } from '@angular/platform-browser-dynamic';[m
+[31m-[m
+[31m-import { AppModule } from './app/app.module';[m
+[31m-import { environment } from './environments/environment';[m
+[31m-[m
+[31m-if (environment.production) {[m
+[31m-  enableProdMode();[m
+[31m-}[m
+[31m-[m
+[31m-platformBrowserDynamic().bootstrapModule(AppModule)[m
+[31m-  .catch(err => console.error(err));[m

@@ -1,0 +1,23 @@
+<h2 mat-dialog-title>Add Reason</h2>
+<div class="close_modal">
+    <mat-icon class="v-align-middle display" mat-dialog-close  matTooltip="Close">close
+    </mat-icon>
+</div>
+<mat-dialog-content class="mat-typography">
+    <form class="form_sec"  autocomplete="off">
+        <div class="row_sec">
+            <mat-form-field appearance="outline">
+                <mat-label>Machine Id</mat-label>
+                <input matInput formControlName="machine_name" type="text" placeholder="Enter machine name">
+            </mat-form-field>
+            <mat-form-field appearance="outline">
+                <mat-label>Reason Name</mat-label>
+                <input matInput formControlName="machine_work" type="text" placeholder="Enter machine work">
+            </mat-form-field>
+        </div>
+    </form>
+</mat-dialog-content>
+<mat-dialog-actions align="end">
+    <button mat-raised-button color="primary"  class="darkgrey"> Create New Reason</button>
+    <button mat-raised-button color="primary"  class="darkgrey"> Submit</button>
+</mat-dialog-actions>

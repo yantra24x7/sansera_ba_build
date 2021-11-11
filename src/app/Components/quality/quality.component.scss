@@ -1,0 +1,168 @@
+.mat-form-field-outline {
+    background: #990000 !important;
+    border-radius: 5px !important;
+}
+
+.mat-form-field-flex {
+    height: 59px !important;
+}
+
+.mat-input-element {
+    height: 40px;
+}
+
+.mat-form-field-wrapper {
+    background: #990000 !important;
+}
+
+::ng-deep .mat-form-field-infix {
+    display: block;
+    position: relative;
+    flex: auto;
+    min-width: 0;
+    width: 330px;
+}
+
+.textlo {
+    color: black !important;
+
+}
+
+.filter_sec .filter_fields {
+    align-items: end !important;
+}
+
+mat-dialog-content.mat-typography.mat-dialog-content {
+    margin: 0 !important;
+}
+
+.spinner {
+    background: #262932;
+    height: 100vh;
+    opacity: 0.9;
+    position: fixed;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    top: 0;
+    left: 0;
+    right: 0;
+    width: auto;
+    z-index: 999;
+}
+
+.spinner img {
+    width: 90px;
+    margin-top: -130px;
+}
+
+.point {
+    cursor: pointer;
+}
+
+.total_parts div {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.quality_ip_page .line_machines_list .line_machine_item .line_mac_box .total_parts {
+    padding: 0px 8px;
+}
+
+.quality_ip_page .line_machines_list .line_machine_item .line_mac_box .total_parts span {
+    font-size: 30px;
+
+    font-weight: 500;
+}
+
+.mt-12 {
+    margin-top: -12px;
+}
+
+.accepted_parts {
+    cursor: pointer;
+}
+
+.as-total_parts {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+}
+
+.font-size-28 {
+    font-size: 28px;
+}
+
+.as-total_parts-1 {
+    display: flex;
+    flex-direction: column;
+    align-items: stretch !important;
+    padding-top: 0.5rem !important;
+}
+
+.as-border-1 {
+    border: 1px solid gray;
+    margin: -3px;
+    justify-content: end;
+    padding: 8px;
+}
+
+.as-p {
+    font-size: 20px !important;
+    white-space: nowrap;
+    padding-right: 20px;
+}
+
+.as-span {
+    font-size: 26px !important;
+    word-break: break-all;
+}
+
+.as-border-2 {
+    border: 1px solid gray;
+    margin: -3px;
+    justify-content: end;
+    padding: 8px;
+    border-top: 0;
+}
+
+.as-border-3 {
+    border: 1px solid gray;
+    margin: -3px;
+    justify-content: end;
+    padding: 8px;
+    border-top: 0;
+    margin-bottom: 6px;
+}
+
+.quality-width{
+    width: 36%;
+}
+
+.q-remarks{
+    font-weight: 400; text-align: left; margin: 5px 0; font-size: 20px;
+}
+.q-remarks-field{
+    border-radius: 5px;background: #1e1c1c;width: 100%;border: 1px solid #666363; height: 50px;
+}
+.q-remarks-input{
+    font-size: 20px; line-height: 5;  margin-top: -11px;
+}
+.q-submit{
+    justify-content: center;    margin-top: 1rem;
+}
+.q-submit-h3{
+    padding: 5px;
+}
+.q-remarks-field input::placeholder {
+    color: white;
+    opacity: 1; /* Firefox */
+  }
+
+  .filter_fields button{
+    margin-bottom: 26px;
+  }
+
+
+  

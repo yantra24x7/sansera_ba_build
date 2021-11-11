@@ -1,0 +1,405 @@
+<div class="tv_screen">
+     <div *ngIf="myLoader" class="spinner">
+    <img src="assets/images/spinner.gif">
+  </div>
+    <!-- <div class="machine_Container">
+        <div *ngFor="let list of oee" [class.idle]="list.status === 'STOP'" [class.running]="list.status === 'OPERATE'" [class.no-data]="list.status === 'DISCONNECT'" class="machine_prod running">
+            <h3>{{list?.machine}}</h3>
+            <div class="circle_progress_wrapper"> 
+               <circle-progress percent={{list?.oee}} radius="65" outerStrokeColor="#1EAD55" innerStrokeColor="#21402D" animation="true" animationDuration="300" *ngIf="list.status === 'OPERATE'"></circle-progress> 
+               <circle-progress percent={{list?.oee}} radius="65" outerStrokeColor="#E8A24A" innerStrokeColor="#21402D" animation="true" animationDuration="300" *ngIf="list.status === 'STOP'"></circle-progress> 
+               <circle-progress percent={{list?.oee}} radius="65" outerStrokeColor="#6D6D6D" innerStrokeColor="#21402D" animation="true" animationDuration="300" *ngIf="list.status === 'DISCONNECT'"></circle-progress> 
+            </div>
+            <div class="add_info" >
+                <div class="info_wrapper">
+                    <h4>{{list?.quality}}%</h4>
+                    <label>Quality</label> 
+                </div>
+                <div class="info_wrapper">
+                    <h4>{{list.perfomance}}%</h4>
+                    <label>Performance</label>
+                </div>
+                <div class="info_wrapper">
+                    <h4>{{list.availability}}%</h4>
+                    <label>Availability</label>
+                </div>
+            </div>
+        </div>
+       </div> -->
+
+
+       <div class="machine_Container">
+        <div class="machine_prod running">
+            <h3>Machine1</h3>
+            <div class="circle_progress_wrapper"> 
+               <circle-progress percent="62" radius="65" outerStrokeColor="#1EAD55" innerStrokeColor="#21402D" animation="true" animationDuration="300"></circle-progress> 
+               <!-- <circle-progress percent="43" radius="65" outerStrokeColor="#E8A24A" innerStrokeColor="#21402D" animation="true" animationDuration="300" *ngIf="list.status === 'STOP'"></circle-progress> 
+               <circle-progress percent="39" radius="65" outerStrokeColor="#6D6D6D" innerStrokeColor="#21402D" animation="true" animationDuration="300" *ngIf="list.status === 'DISCONNECT'"></circle-progress>  -->
+            </div>
+            <div class="add_info" >
+                <div class="info_wrapper">
+                    <h4>67%</h4>
+                    <label>Quality</label> 
+                </div>
+                <div class="info_wrapper">
+                    <h4>54%</h4>
+                    <label>Performance</label>
+                </div>
+                <div class="info_wrapper">
+                    <h4>78%</h4>
+                    <label>Availability</label>
+                </div>
+            </div>
+        </div>
+
+
+        <div class="machine_prod idle">
+            <h3>Machine2</h3>
+            <div class="circle_progress_wrapper"> 
+               <!-- <circle-progress percent="62" radius="65" outerStrokeColor="#1EAD55" innerStrokeColor="#21402D" animation="true" animationDuration="300"></circle-progress>  -->
+               <circle-progress percent="43" radius="65" outerStrokeColor="#E8A24A" innerStrokeColor="#21402D" animation="true" animationDuration="300"></circle-progress> 
+               <!-- <circle-progress percent="39" radius="65" outerStrokeColor="#6D6D6D" innerStrokeColor="#21402D" animation="true" animationDuration="300" *ngIf="list.status === 'DISCONNECT'"></circle-progress>  -->
+            </div>
+            <div class="add_info" >
+                <div class="info_wrapper">
+                    <h4>61%</h4>
+                    <label>Quality</label> 
+                </div>
+                <div class="info_wrapper">
+                    <h4>44%</h4>
+                    <label>Performance</label>
+                </div>
+                <div class="info_wrapper">
+                    <h4>28%</h4>
+                    <label>Availability</label>
+                </div>
+            </div>
+        </div>
+
+
+
+
+        <div class="machine_prod no-data">
+            <h3>Machine2</h3>
+            <div class="circle_progress_wrapper"> 
+               <!-- <circle-progress percent="62" radius="65" outerStrokeColor="#1EAD55" innerStrokeColor="#21402D" animation="true" animationDuration="300"></circle-progress>  -->
+               <!-- <circle-progress percent="43" radius="65" outerStrokeColor="#E8A24A" innerStrokeColor="#21402D" animation="true" animationDuration="300"></circle-progress>  -->
+               <circle-progress percent="39" radius="65" outerStrokeColor="#6D6D6D" innerStrokeColor="#21402D" animation="true" animationDuration="300" ></circle-progress> 
+            </div>
+            <div class="add_info" >
+                <div class="info_wrapper">
+                    <h4>61%</h4>
+                    <label>Quality</label> 
+                </div>
+                <div class="info_wrapper">
+                    <h4>44%</h4>
+                    <label>Performance</label>
+                </div>
+                <div class="info_wrapper">
+                    <h4>28%</h4>
+                    <label>Availability</label>
+                </div>
+            </div>
+        </div>
+
+
+
+        <div class="machine_prod running">
+            <h3>Machine1</h3>
+            <div class="circle_progress_wrapper"> 
+               <circle-progress percent="62" radius="65" outerStrokeColor="#1EAD55" innerStrokeColor="#21402D" animation="true" animationDuration="300"></circle-progress> 
+               <!-- <circle-progress percent="43" radius="65" outerStrokeColor="#E8A24A" innerStrokeColor="#21402D" animation="true" animationDuration="300" *ngIf="list.status === 'STOP'"></circle-progress> 
+               <circle-progress percent="39" radius="65" outerStrokeColor="#6D6D6D" innerStrokeColor="#21402D" animation="true" animationDuration="300" *ngIf="list.status === 'DISCONNECT'"></circle-progress>  -->
+            </div>
+            <div class="add_info" >
+                <div class="info_wrapper">
+                    <h4>67%</h4>
+                    <label>Quality</label> 
+                </div>
+                <div class="info_wrapper">
+                    <h4>54%</h4>
+                    <label>Performance</label>
+                </div>
+                <div class="info_wrapper">
+                    <h4>78%</h4>
+                    <label>Availability</label>
+                </div>
+            </div>
+        </div>
+
+
+        <div class="machine_prod idle">
+            <h3>Machine2</h3>
+            <div class="circle_progress_wrapper"> 
+               <!-- <circle-progress percent="62" radius="65" outerStrokeColor="#1EAD55" innerStrokeColor="#21402D" animation="true" animationDuration="300"></circle-progress>  -->
+               <circle-progress percent="43" radius="65" outerStrokeColor="#E8A24A" innerStrokeColor="#21402D" animation="true" animationDuration="300"></circle-progress> 
+               <!-- <circle-progress percent="39" radius="65" outerStrokeColor="#6D6D6D" innerStrokeColor="#21402D" animation="true" animationDuration="300" *ngIf="list.status === 'DISCONNECT'"></circle-progress>  -->
+            </div>
+            <div class="add_info" >
+                <div class="info_wrapper">
+                    <h4>61%</h4>
+                    <label>Quality</label> 
+                </div>
+                <div class="info_wrapper">
+                    <h4>44%</h4>
+                    <label>Performance</label>
+                </div>
+                <div class="info_wrapper">
+                    <h4>28%</h4>
+                    <label>Availability</label>
+                </div>
+            </div>
+        </div>
+
+
+
+
+        <div class="machine_prod no-data">
+            <h3>Machine2</h3>
+            <div class="circle_progress_wrapper"> 
+               <!-- <circle-progress percent="62" radius="65" outerStrokeColor="#1EAD55" innerStrokeColor="#21402D" animation="true" animationDuration="300"></circle-progress>  -->
+               <!-- <circle-progress percent="43" radius="65" outerStrokeColor="#E8A24A" innerStrokeColor="#21402D" animation="true" animationDuration="300"></circle-progress>  -->
+               <circle-progress percent="39" radius="65" outerStrokeColor="#6D6D6D" innerStrokeColor="#21402D" animation="true" animationDuration="300" ></circle-progress> 
+            </div>
+            <div class="add_info" >
+                <div class="info_wrapper">
+                    <h4>61%</h4>
+                    <label>Quality</label> 
+                </div>
+                <div class="info_wrapper">
+                    <h4>44%</h4>
+                    <label>Performance</label>
+                </div>
+                <div class="info_wrapper">
+                    <h4>28%</h4>
+                    <label>Availability</label>
+                </div>
+            </div>
+        </div>
+
+
+
+        <div class="machine_prod running">
+            <h3>Machine1</h3>
+            <div class="circle_progress_wrapper"> 
+               <circle-progress percent="62" radius="65" outerStrokeColor="#1EAD55" innerStrokeColor="#21402D" animation="true" animationDuration="300"></circle-progress> 
+               <!-- <circle-progress percent="43" radius="65" outerStrokeColor="#E8A24A" innerStrokeColor="#21402D" animation="true" animationDuration="300" *ngIf="list.status === 'STOP'"></circle-progress> 
+               <circle-progress percent="39" radius="65" outerStrokeColor="#6D6D6D" innerStrokeColor="#21402D" animation="true" animationDuration="300" *ngIf="list.status === 'DISCONNECT'"></circle-progress>  -->
+            </div>
+            <div class="add_info" >
+                <div class="info_wrapper">
+                    <h4>67%</h4>
+                    <label>Quality</label> 
+                </div>
+                <div class="info_wrapper">
+                    <h4>54%</h4>
+                    <label>Performance</label>
+                </div>
+                <div class="info_wrapper">
+                    <h4>78%</h4>
+                    <label>Availability</label>
+                </div>
+            </div>
+        </div>
+
+
+        <div class="machine_prod idle">
+            <h3>Machine2</h3>
+            <div class="circle_progress_wrapper"> 
+               <!-- <circle-progress percent="62" radius="65" outerStrokeColor="#1EAD55" innerStrokeColor="#21402D" animation="true" animationDuration="300"></circle-progress>  -->
+               <circle-progress percent="43" radius="65" outerStrokeColor="#E8A24A" innerStrokeColor="#21402D" animation="true" animationDuration="300"></circle-progress> 
+               <!-- <circle-progress percent="39" radius="65" outerStrokeColor="#6D6D6D" innerStrokeColor="#21402D" animation="true" animationDuration="300" *ngIf="list.status === 'DISCONNECT'"></circle-progress>  -->
+            </div>
+            <div class="add_info" >
+                <div class="info_wrapper">
+                    <h4>61%</h4>
+                    <label>Quality</label> 
+                </div>
+                <div class="info_wrapper">
+                    <h4>44%</h4>
+                    <label>Performance</label>
+                </div>
+                <div class="info_wrapper">
+                    <h4>28%</h4>
+                    <label>Availability</label>
+                </div>
+            </div>
+        </div>
+
+
+
+
+        <div class="machine_prod no-data">
+            <h3>Machine2</h3>
+            <div class="circle_progress_wrapper"> 
+               <!-- <circle-progress percent="62" radius="65" outerStrokeColor="#1EAD55" innerStrokeColor="#21402D" animation="true" animationDuration="300"></circle-progress>  -->
+               <!-- <circle-progress percent="43" radius="65" outerStrokeColor="#E8A24A" innerStrokeColor="#21402D" animation="true" animationDuration="300"></circle-progress>  -->
+               <circle-progress percent="39" radius="65" outerStrokeColor="#6D6D6D" innerStrokeColor="#21402D" animation="true" animationDuration="300" ></circle-progress> 
+            </div>
+            <div class="add_info" >
+                <div class="info_wrapper">
+                    <h4>61%</h4>
+                    <label>Quality</label> 
+                </div>
+                <div class="info_wrapper">
+                    <h4>44%</h4>
+                    <label>Performance</label>
+                </div>
+                <div class="info_wrapper">
+                    <h4>28%</h4>
+                    <label>Availability</label>
+                </div>
+            </div>
+        </div>
+
+
+        <div class="machine_prod running">
+            <h3>Machine1</h3>
+            <div class="circle_progress_wrapper"> 
+               <circle-progress percent="62" radius="65" outerStrokeColor="#1EAD55" innerStrokeColor="#21402D" animation="true" animationDuration="300"></circle-progress> 
+               <!-- <circle-progress percent="43" radius="65" outerStrokeColor="#E8A24A" innerStrokeColor="#21402D" animation="true" animationDuration="300" *ngIf="list.status === 'STOP'"></circle-progress> 
+               <circle-progress percent="39" radius="65" outerStrokeColor="#6D6D6D" innerStrokeColor="#21402D" animation="true" animationDuration="300" *ngIf="list.status === 'DISCONNECT'"></circle-progress>  -->
+            </div>
+            <div class="add_info" >
+                <div class="info_wrapper">
+                    <h4>67%</h4>
+                    <label>Quality</label> 
+                </div>
+                <div class="info_wrapper">
+                    <h4>54%</h4>
+                    <label>Performance</label>
+                </div>
+                <div class="info_wrapper">
+                    <h4>78%</h4>
+                    <label>Availability</label>
+                </div>
+            </div>
+        </div>
+
+
+        <div class="machine_prod idle">
+            <h3>Machine2</h3>
+            <div class="circle_progress_wrapper"> 
+               <!-- <circle-progress percent="62" radius="65" outerStrokeColor="#1EAD55" innerStrokeColor="#21402D" animation="true" animationDuration="300"></circle-progress>  -->
+               <circle-progress percent="43" radius="65" outerStrokeColor="#E8A24A" innerStrokeColor="#21402D" animation="true" animationDuration="300"></circle-progress> 
+               <!-- <circle-progress percent="39" radius="65" outerStrokeColor="#6D6D6D" innerStrokeColor="#21402D" animation="true" animationDuration="300" *ngIf="list.status === 'DISCONNECT'"></circle-progress>  -->
+            </div>
+            <div class="add_info" >
+                <div class="info_wrapper">
+                    <h4>61%</h4>
+                    <label>Quality</label> 
+                </div>
+                <div class="info_wrapper">
+                    <h4>44%</h4>
+                    <label>Performance</label>
+                </div>
+                <div class="info_wrapper">
+                    <h4>28%</h4>
+                    <label>Availability</label>
+                </div>
+            </div>
+        </div>
+
+
+
+
+        <div class="machine_prod no-data">
+            <h3>Machine2</h3>
+            <div class="circle_progress_wrapper"> 
+               <!-- <circle-progress percent="62" radius="65" outerStrokeColor="#1EAD55" innerStrokeColor="#21402D" animation="true" animationDuration="300"></circle-progress>  -->
+               <!-- <circle-progress percent="43" radius="65" outerStrokeColor="#E8A24A" innerStrokeColor="#21402D" animation="true" animationDuration="300"></circle-progress>  -->
+               <circle-progress percent="39" radius="65" outerStrokeColor="#6D6D6D" innerStrokeColor="#21402D" animation="true" animationDuration="300" ></circle-progress> 
+            </div>
+            <div class="add_info" >
+                <div class="info_wrapper">
+                    <h4>61%</h4>
+                    <label>Quality</label> 
+                </div>
+                <div class="info_wrapper">
+                    <h4>44%</h4>
+                    <label>Performance</label>
+                </div>
+                <div class="info_wrapper">
+                    <h4>28%</h4>
+                    <label>Availability</label>
+                </div>
+            </div>
+        </div>
+
+
+        <div class="machine_prod running">
+            <h3>Machine1</h3>
+            <div class="circle_progress_wrapper"> 
+               <circle-progress percent="62" radius="65" outerStrokeColor="#1EAD55" innerStrokeColor="#21402D" animation="true" animationDuration="300"></circle-progress> 
+               <!-- <circle-progress percent="43" radius="65" outerStrokeColor="#E8A24A" innerStrokeColor="#21402D" animation="true" animationDuration="300" *ngIf="list.status === 'STOP'"></circle-progress> 
+               <circle-progress percent="39" radius="65" outerStrokeColor="#6D6D6D" innerStrokeColor="#21402D" animation="true" animationDuration="300" *ngIf="list.status === 'DISCONNECT'"></circle-progress>  -->
+            </div>
+            <div class="add_info" >
+                <div class="info_wrapper">
+                    <h4>67%</h4>
+                    <label>Quality</label> 
+                </div>
+                <div class="info_wrapper">
+                    <h4>54%</h4>
+                    <label>Performance</label>
+                </div>
+                <div class="info_wrapper">
+                    <h4>78%</h4>
+                    <label>Availability</label>
+                </div>
+            </div>
+        </div>
+
+
+        <div class="machine_prod idle">
+            <h3>Machine2</h3>
+            <div class="circle_progress_wrapper"> 
+               <!-- <circle-progress percent="62" radius="65" outerStrokeColor="#1EAD55" innerStrokeColor="#21402D" animation="true" animationDuration="300"></circle-progress>  -->
+               <circle-progress percent="43" radius="65" outerStrokeColor="#E8A24A" innerStrokeColor="#21402D" animation="true" animationDuration="300"></circle-progress> 
+               <!-- <circle-progress percent="39" radius="65" outerStrokeColor="#6D6D6D" innerStrokeColor="#21402D" animation="true" animationDuration="300" *ngIf="list.status === 'DISCONNECT'"></circle-progress>  -->
+            </div>
+            <div class="add_info" >
+                <div class="info_wrapper">
+                    <h4>61%</h4>
+                    <label>Quality</label> 
+                </div>
+                <div class="info_wrapper">
+                    <h4>44%</h4>
+                    <label>Performance</label>
+                </div>
+                <div class="info_wrapper">
+                    <h4>28%</h4>
+                    <label>Availability</label>
+                </div>
+            </div>
+        </div>
+
+
+
+
+        <div class="machine_prod no-data">
+            <h3>Machine2</h3>
+            <div class="circle_progress_wrapper"> 
+               <!-- <circle-progress percent="62" radius="65" outerStrokeColor="#1EAD55" innerStrokeColor="#21402D" animation="true" animationDuration="300"></circle-progress>  -->
+               <!-- <circle-progress percent="43" radius="65" outerStrokeColor="#E8A24A" innerStrokeColor="#21402D" animation="true" animationDuration="300"></circle-progress>  -->
+               <circle-progress percent="39" radius="65" outerStrokeColor="#6D6D6D" innerStrokeColor="#21402D" animation="true" animationDuration="300" ></circle-progress> 
+            </div>
+            <div class="add_info" >
+                <div class="info_wrapper">
+                    <h4>61%</h4>
+                    <label>Quality</label> 
+                </div>
+                <div class="info_wrapper">
+                    <h4>44%</h4>
+                    <label>Performance</label>
+                </div>
+                <div class="info_wrapper">
+                    <h4>28%</h4>
+                    <label>Availability</label>
+                </div>
+            </div>
+        </div>
+       </div>
+
+
+    </div>

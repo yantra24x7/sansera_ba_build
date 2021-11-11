@@ -1,0 +1,383 @@
+<section class="page">
+  <div class="row">
+    <div class="col-lg-2 col-md-4 sidenav">
+      <!-- two_machines -->
+      <!-- <div class="machine_list scroll two_machines">
+        <h3>Total Machines (2)</h3>
+        <div *ngFor="let machine1 of list_machine?.first" class="machine" [class.idle]="machine1.status === 'STOP'"
+          [class.running]="machine1.status === 'OPERATE'" [class.no-data]="machine1.status === 'DISCONNECT'">
+          <label>{{machine1.name}}</label>
+            <h2>{{machine1.utlization}}%</h2>
+            <span>Machine Utilized</span>
+        </div>
+      </div> --> 
+
+      <!-- two_more_machines -->
+      <div class="machine_list scroll two_more_machines">
+        <div class="machine_title">
+          <h3>Total Machines:{{count_machine?.total_count}}</h3>
+
+          <button mat-mini-fab (click)="refresh()" matTooltip="Refresh" class="ml-2 refresh_btn">
+            <mat-icon><span class="material-icons">
+                cached
+              </span></mat-icon>
+          </button>
+        </div>
+        <div class="machine disconnect" *ngFor="let machine1 of list_machine?.first"
+          [class.idle]="machine1.status === 'STOP'" [class.running]="machine1.status === 'OPERATE'"
+          [class.no-data]="machine1.status === 'DISCONNECT'">
+          <label>{{machine1.name}}</label>
+          <!-- <span>Reason</span> -->
+          <span>Machine Utilized</span>
+          <h2>{{machine1.utlization}}%</h2>
+          <h3>{{machine1.reason}}</h3>
+
+        </div>
+
+        <!-- <div class="machine idle">
+          <label>Machine 1</label>
+          <span>Utilized</span>
+          <h2>00%</h2>
+        </div>
+        <div class="machine running">
+          <label>Machine 3</label>
+          <span>Utilized</span>
+          <h2>00%</h2>
+        </div>
+        <div class="machine stopped">
+          <label>Machine 4</label>
+          <span>Utilized</span>
+          <h2>00%</h2>
+        </div> -->
+      </div>
+
+      <!-- high_machines -->
+      <!--  <div class="machine_list scroll high_machines">
+        <h3>Total Machines (20)</h3>
+        <div class="machine no-data">
+          <label>Machine 1</label>
+          <h2>00%</h2>
+        </div>
+        <div class="machine no-data">
+          <label>Machine 2</label>
+          <h2>00%</h2>
+        </div>
+        <div class="machine idle">
+          <label>Machine 3</label>
+          <h2>00%</h2>
+        </div>
+        <div class="machine stopped">
+          <label>Machine 4</label>
+          <h2>00%</h2>
+        </div>
+        <div class="machine running">
+          <label>Machine 5</label>
+          <h2>00%</h2>
+        </div>
+        <div class="machine no-data">
+          <label>Machine 6</label>
+          <h2>00%</h2>
+        </div>
+        <div class="machine no-data">
+          <label>Machine 7</label>
+          <h2>00%</h2>
+        </div>
+        <div class="machine idle">
+          <label>Machine 8</label>
+          <h2>00%</h2>
+        </div>
+        <div class="machine stopped">
+          <label>Machine 9</label>
+          <h2>00%</h2>
+        </div>
+        <div class="machine running">
+          <label>Machine 10</label>
+          <h2>00%</h2>
+        </div>
+        <div class="machine no-data">
+          <label>Machine 11</label>
+          <h2>00%</h2>
+        </div>
+        <div class="machine no-data">
+          <label>Machine 12</label>
+          <h2>00%</h2>
+        </div>
+        <div class="machine idle">
+          <label>Machine 13</label>
+          <h2>00%</h2>
+        </div>
+        <div class="machine stopped">
+          <label>Machine 14</label>
+          <h2>00%</h2>
+        </div>
+        <div class="machine running">
+          <label>Machine 15</label>
+          <h2>00%</h2>
+        </div>
+        <div class="machine no-data">
+          <label>Machine 16</label>
+          <h2>00%</h2>
+        </div>
+        <div class="machine no-data">
+          <label>Machine 17</label>
+          <h2>00%</h2>
+        </div>
+        <div class="machine idle">
+          <label>Machine 18</label>
+          <h2>00%</h2>
+        </div>
+        <div class="machine stopped">
+          <label>Machine 19</label>
+          <h2>00%</h2>
+        </div>
+        <div class="machine running">
+          <label>Machine 20</label>
+          <h2>00%</h2>
+        </div>
+        </div>  -->
+    </div>
+    <div class="col-lg-10 col-md-8 content-inner sec_padding">
+      <div class="page_sec_title">
+        <h1>Dashboard</h1>
+
+        <div class="last_update">
+          <span>Last Updated:</span>
+          {{time | date:'dd-MM-yyyy ; h:mm:s a'}}
+        </div>
+        <ul class="list-unstyled">
+
+
+          <li>
+            <b> <span>Date:</span>
+              {{today | date:'dd-MM-yyyy'}}</b>
+          </li>
+          <li>
+            <b><span>Time:</span>
+              {{today | date:'h:mm:ss a'}}</b>
+          </li>
+        </ul>
+      </div>
+      <div class="row inner_sec">
+        <div class="col-lg-6 col-md-12 mb-2">
+          <div class="pie_chart">
+            <!-- <h3 class="figure-title">overall Machine Status</h3> -->
+            <figure class="highcharts-figure_pie">
+              <div id="container"></div>
+            </figure>
+            <ul class="list-unstyled pie_charts_utilizations my-3">
+              <li>
+                <label> Running</label>
+
+                <progress class="progress-bar running" max="100" value={{list_machine?.third[0][1]}}>
+                  <strong>Skill Level: 75%</strong>
+                </progress>
+
+                <span>{{list_machine?.third[0][1]}}%</span>
+              </li>
+              <!-- <li>
+                  <label> Stopped</label>
+                   <div class="progress">
+                    <div class="progress-bar stopped"></div>
+                  </div>
+                  <span>{{list_machine?.third[0][2]}}%</span>
+                </li> -->
+
+
+              <li>
+                <label> Stop</label>
+                <progress class="progress-bar idle" max="100" value={{list_machine?.third[1][1]}}>
+                  <strong>Skill Level: 75%</strong>
+                </progress>
+                <span>{{list_machine?.third[1][1]}}%</span>
+              </li>
+              <li>
+                <label> Disconnect</label>
+                <progress class="progress-bar no-data" max="100" value={{list_machine?.third[2][1]}}>
+                  <strong>Skill Level: 75%</strong>
+                </progress>
+                <span>{{list_machine?.third[2][1]}}%</span>
+              </li>
+
+              <!-- <li>
+                  <label> <img src="../assets/images/running.png">Operate</label>
+                  <span>{{list_machine?.third[0][1]}}%</span>
+                </li> -->
+              <!-- <li>
+                  <img src="../assets/images/stop.png">
+                  <label>Stopped</label>
+                  <span>15%</span>
+                </li> -->
+              <!-- <li>
+                  <label><img src="../assets/images/idle.png">Stop</label>
+                  <span>{{list_machine?.third[1][1]}}%</span>
+                </li>
+                <li>
+                  <label><img src="../assets/images/ic_nodata.png">Disconnect</label>
+                  <span>{{list_machine?.third[2][1]}}%</span>
+                </li> -->
+            </ul>
+
+          </div>
+        </div>
+        <div class="col-lg-6 col-md-12">
+          <div class="stack_chart">
+            <figure class="highcharts-figure_col">
+              <div id="container2"></div>
+            </figure>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="page">
+
+  <div class="section_top_padding">
+    <div class="page_title_sec">
+      <h2>Dashboard - Overall Effiencieny</h2>
+      <div class="shift_details">
+        <div class="shift_view box_sec">
+          <mat-icon class="v-align-middle display">check_circle
+          </mat-icon>
+          <p>Shift</p>
+          <div class="view_box">
+            <span>01</span>
+          </div>
+        </div>
+        <div class="last_update_view box_sec">
+          <mat-icon class="v-align-middle display">query_builder</mat-icon>
+          <p class="time_date">Last Update <br>
+            Time &amp; Date</p>
+
+          <p><span>
+              00:00:00 PM <br>
+            </span>
+            <span>01 JAN 2021</span>
+          </p>
+        </div>
+        <button class="btn btn_link">
+          Update now
+          <mat-icon class="v-align-middle display">cached
+          </mat-icon>
+        </button>
+      </div>
+    </div>
+
+    <div class="dashboard_page_sec">
+      <div class="line_list">
+        <div class="line_item">
+          <div class="line_item_content">
+            <div class="circle_chart">
+              <h3>Line 01</h3>
+              <circle-progress radius="65" outerStrokeColor="#78542C" innerStrokeColor="#1E2634" animation="true"
+                animationDuration="300">
+              </circle-progress>
+              <div class="chart_text">
+                <h3><span class="value">00</span> %</h3>
+                <p>Utilization</p>
+              </div>
+
+              <ul>
+                <li>
+                  <p class="run"><span></span> Run</p>
+                </li>
+                <li>
+                  <p class="idle"><span></span>Idle</p>
+                </li>
+                <li>
+                  <p class="disconnect"><span></span>Disconnect</p>
+                </li>
+              </ul>
+            </div>
+            <div class="machine_status_sec">
+              <h2>Machine Status</h2>
+              <div class="machine_status_list">
+                <div class="machine_status_item active">
+                  <p>01</p>
+                </div>
+                <div class="machine_status_item">
+                  <p>02</p>
+                </div>
+                <div class="machine_status_item idle">
+                  <p>03</p>
+                </div>
+                <div class="machine_status_item idle">
+                  <p>04</p>
+                </div>
+                <div class="machine_status_item idle">
+                  <p>05</p>
+                </div>
+                <div class="machine_status_item run">
+                  <p>06</p>
+                </div>
+                <div class="machine_status_item run">
+                  <p>07</p>
+                </div>
+                <div class="machine_status_item run">
+                  <p>08</p>
+                </div>
+                <div class="machine_status_item run">
+                  <p>09</p>
+                </div>
+                <div class="machine_status_item run">
+                  <p>10</p>
+                </div>
+              </div>
+
+              <div class="line_desc">
+                <h3>SRB -1102</h3>
+                <div class="line_mac_target">
+                  <div class="target_box box_bg">
+                    <span>00</span>
+                    <p>target</p>
+                  </div>
+                  <div class="parts_count_box box_bg">
+                    <span>00</span>
+                    <p>Part Count</p>
+                  </div>
+                </div>
+                <ul class="time_sec">
+                  <li>
+                    <span>00%</span>
+                    <div class="progress">
+                      <div class="progress-bar bg-warning" style="width:35%">
+                        <p class="percent">50%</p>
+                      </div>
+                    </div>
+                    <p>Run Time</p>
+                  </li>
+                  <li>
+                    <span>00%</span>
+                    <div class="progress">
+                      <div class="bar idle" style="width:35%">
+                        <p class="percent">35%</p>
+                      </div>
+                    </div>
+                    <p>Idle Time</p>
+                  </li>
+                  <li>
+                    <span>00%</span>
+                    <div class="progress">
+                      <div class="bar disconnect" style="width:35%">
+                        <p class="percent">20%</p>
+                      </div>
+                    </div>
+                    <p>Discon. Time</p>
+                  </li>
+                </ul>
+              </div>
+            </div>
+
+
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+  <div *ngIf="myLoader" class="spinner">
+    <img src="assets/images/spinner.gif">
+  </div>
+
+</section>

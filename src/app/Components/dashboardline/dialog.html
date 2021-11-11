@@ -1,0 +1,28 @@
+   <div *ngIf="myLoader1" class="spinner">
+        <img src="assets/images/spinner.gif">
+    </div>
+
+    <div class="close_modal">
+        <mat-icon mat-dialog-close  class="v-align-middle display" matTooltip="Close">close
+        </mat-icon>
+    </div>
+<h4>Spindle Count : {{spindlecount}}</h4>
+
+
+<br>
+
+
+<table>
+    <tr>
+        <th>S.NO</th>
+        <th>Start Time</th>
+        <th>End Time</th>
+        <th>Reached Value</th>
+    </tr>
+    <tr *ngFor="let VAPMS of sppivaluedle; let i = index" class="tadbel_data_view">
+        <td>{{i+1}}</td>
+        <td>{{VAPMS[0] | date:'dd-MM-yyyy ; HH:mm:ss'}}</td>
+        <td>{{VAPMS[1] | date:'dd-MM-yyyy ; HH:mm:ss'}}</td>
+        <td>{{VAPMS[2]}}</td>
+    </tr>
+</table>

@@ -1,0 +1,106 @@
+.machine_Container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+}
+
+.no-data {
+  background-color: grey;
+
+//   label {
+//     background-color: #3e3e3e;
+//   }
+}
+
+.idle {
+  background-color: #3e3e3e;
+
+//   label {
+//     background-color: #3e3e3e;
+//   }
+}
+.ille{
+    outerStrokeColor: #3e3e3e
+}
+.stopped {
+  background-color: #3e3e3e;
+
+//   label {
+//     background-color: #3e3e3e;
+//   }
+}
+
+.running {
+  background-color: #3e3e3e;
+
+  label {
+    // background-color: #3e3e3e;
+  }
+}
+.tv_screen {
+    background-color: #202328;
+    padding: 10px;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    .machine_prod {
+        padding: 12px;
+        display: inline-block;
+        width: 260px;
+        background: #2C2F34;
+        border-radius: 12px;
+        margin-right: 0px;
+        margin-bottom: 10px;
+        .circle_progress_wrapper{
+            text-align: center;
+        }
+        h3 {
+            font-size: 20px;
+            text-align: center;
+            margin: 0;
+            color: #fff;
+        }
+        .add_info {
+            display: flex;
+            justify-content: space-around;
+            color: #fff;
+            .info_wrapper{
+                // margin-right:10px;
+                text-align: center;
+            }
+            h4{
+                margin: 0;
+            }
+            label {
+                font-size: 12px;
+                margin: 0;
+            }
+        }
+        &.running{
+            border: 10px solid #1EAD55;
+            h4{
+                color: #1EAD55;
+            }
+        }
+        &.idle{
+            border: 10px solid #E8A24A;
+            h4{
+                color: #E8A24A;
+            }
+        }
+        &.stop{
+            border: 10px solid #ED5550;
+            h4{
+                color: #ED5550;
+            }
+        }
+        &.no-data{
+            border: 10px solid #6D6D6D;
+            h4{
+                color: #6D6D6D;
+            }
+        }
+    }
+   
+}

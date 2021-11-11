@@ -1,0 +1,25 @@
+<h2 mat-dialog-title>Edit Reason</h2>
+<div class="close_modal">
+    <mat-icon class="v-align-middle display" mat-dialog-close (click)="cancel()" matTooltip="Close">close
+    </mat-icon>
+</div>
+<mat-dialog-content class="mat-typography">
+    <form [formGroup]="reasonforum" class="form_sec"  autocomplete="off">
+        <div class="row_sec">
+
+            <mat-form-field appearance="outline">
+                <mat-label>Reason</mat-label>
+                <input matInput formControlName="reason" type="text" placeholder="Enter your reason">
+            </mat-form-field>
+
+            <mat-form-field appearance="outline">
+                <mat-label>Code</mat-label>
+                <input matInput formControlName="code" type="text" (keypress)="keyPress($event)"
+                    placeholder="Enter your Code">
+            </mat-form-field>
+        </div>
+    </form>
+</mat-dialog-content>
+<mat-dialog-actions align="end">
+    <button mat-raised-button color="primary" (click)="submit()" class="filter_btn btn_orange"> Save</button>
+</mat-dialog-actions>

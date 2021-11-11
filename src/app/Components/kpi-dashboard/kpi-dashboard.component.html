@@ -1,0 +1,282 @@
+<section class="page kpi" #scrollBottom id="page_area">
+    <div *ngIf="myLoader" class="spinner">
+        <img src="assets/images/spinner.gif">
+    </div>
+
+    <!-- <div class="frame" (scroll)="scrolled($event)" #scrollframe>
+        <div *ngFor="let item of items" class="item" #item>
+          Item
+        </div>
+      </div> -->
+    <div class="section_top_padding">
+        <div class="container-fluid">
+            <div class="page_title_sec">
+                <h2 class="sub_title">
+                    OEE Dashboard
+                </h2>
+
+
+
+                <div class="d-flex justify-content-end">
+                    <h2 class="sub_title">
+                        Last Update Time & Date
+                    </h2> 
+
+                    <h2 class="sub_title">
+                        {{ltime | date:'h:mm:ss a'  }}<br>
+                        {{ltime | date:'dd-MM-yyyy'}} </h2>
+                </div>
+
+   
+                <!-- <div >
+                            <figure >
+                                <div id="container"></div>
+                                
+                            </figure>
+                        </div> -->
+                <!-- <ul >
+                    <li class="active"> <i class="material-icons">
+                            fiber_manual_record
+                        </i>
+                        <span>Optimal-OEE</span></li>
+                    <li class="idle"> <i class="material-icons">
+                            fiber_manual_record
+                        </i>
+                        <span>Not Reported</span></li>
+                    <li class="stop"> <i class="material-icons">
+                            fiber_manual_record
+                        </i> 
+                        <span>Poor-OEE</span></li>
+                      
+                </ul> -->
+            </div>
+            <!-- <div>Some tags before</div>
+            <owl-carousel-o [options]="customOptions" class="machine_list">
+                <ng-container class="machine_item" *ngFor="let machine of machine_response;let i = index"
+                [class.stop]="machine.status === 'STOP'" [class.active]="machine.status === 'OPERATE'"
+                [class.idle]="machine.status === 'DISCONNECT'">
+            <ng-template carouselSlide><h3>{{machine?.machine}}</h3></ng-template>  
+           </ng-container>
+          </owl-carousel-o>
+          <div>Some tags after</div> -->
+      
+        
+            <div class="machine_list" >
+                <div class="machine_item" *ngFor="let machine of machine_response;let i = index"
+                    [class.stop]="machine.status === 'STOP'" [class.active]="machine.status === 'OPERATE'"
+                    [class.idle]="machine.status === 'DISCONNECT'">
+                    <div class="machine_header">
+                        <div class="machine_title">
+                            <span class="material-icons">
+                                check_circle_outline
+                            </span>
+                            <div class="machine_name pl-2">
+                                <h3>{{machine?.machine}}</h3>
+                                <!-- <p>0006</p> -->
+                            </div>
+                        </div>
+                        <p class="status">
+                            <i class="material-icons">
+                                fiber_manual_record
+                            </i>
+                            <!-- <span>2hrs | 16min</span> -->
+                        </p>
+                    </div>
+                    <div class="machine_body">
+
+                        <div class="progress_bar">
+                            <!-- <circle-progress [percent]="retrieved" [radius]="50" [outerStrokeColor]="'#056B2D'"
+                                [innerStrokeColor]="'#eee'"></circle-progress> -->
+
+                            <circle-progress percent={{machine?.oee}} radius="80" outerStrokeColor="#1EAD55"
+                                innerStrokeColor="#f2f2f2" animation="true" animationDuration="300"
+                                *ngIf="machine?.status === 'OPERATE'"></circle-progress>
+                            <circle-progress percent={{machine?.oee}} radius="80" outerStrokeColor="#F81301"
+                                innerStrokeColor="#f2f2f2" animation="true" animationDuration="300"
+                                *ngIf="machine?.status === 'STOP'"></circle-progress>
+                            <circle-progress percent={{machine?.oee}} radius="80" outerStrokeColor="#6D6D6D"
+                                innerStrokeColor="#f2f2f2" animation="true" animationDuration="300"
+                                *ngIf="machine?.status === 'DISCONNECT'"></circle-progress>
+                        </div>
+                        <ul class="metrics list-unstyle">
+                            <li>
+                                <p>Availability</p>
+                                <span>{{machine?.run}}%</span>
+                            </li>
+                            <li>
+                                <p>Performance</p>
+                                <span>{{machine?.efficiency}}%</span>
+                            </li>
+                            <li>
+                                <p>Quality</p>
+                                <span>{{machine?.quality}}%</span>
+                            </li>
+                        </ul>
+                        <div class="parts_sec d-none">
+                            <p>Parts</p>
+                        </div>
+                        <div class="machine_values">
+                            <p>Actual / Plan : <span>{{machine?.actual}} /{{machine?.tar}}</span></p>
+                        </div>
+
+                        <!-- <div >
+                            <p>Parts per hour</p>
+      
+<div id="partcycle{{i}}">
+
+</div>
+
+
+
+                        </div> -->
+
+                    </div>
+
+                </div>
+
+
+                <!-- <div class="machine_item idle">
+                    <div class="machine_header">
+                        <div class="machine_title">
+                            <span class="material-icons">
+                                check_circle_outline
+                            </span>
+                            <div class="machine_name pl-2">
+                                <h3>Machine XS</h3>
+                                <p>0006</p>
+                            </div>
+                        </div>
+                        <p class="status">
+                            <i class="material-icons">
+                                fiber_manual_record
+                            </i>
+                            <span>2hrs | 16min</span>
+                        </p>
+                    </div>
+                    <div class="machine_body">
+                        <div class="progress_bar">
+                            <circle-progress [percent]="retrieved" [radius]="50" [outerStrokeColor]="'#646262'"
+                                [innerStrokeColor]="'#eee'"></circle-progress>
+                        </div>
+                        <ul class="metrics list-unstyle">
+                            <li>
+                                <p>Availability</p>
+                                <span>80%</span>
+                            </li>
+                            <li>
+                                <p>Performance</p>
+                                <span>80%</span>
+                            </li>
+                            <li>
+                                <p>Quality</p>
+                                <span>80%</span>
+                            </li>
+                        </ul>
+                        <div class="parts_sec">
+                            <p>Parts</p>
+                        </div>
+                        <div class="machine_values">
+                            <p>Actual / Plan : <span>120 / 100</span></p>
+                        </div>
+                        <div class="graph">
+                            <figure class="highcharts-figure">
+                                <div id="container2"></div>
+                            </figure>
+                        </div>
+                        <div class="graph_text">
+                            <p>Parts per hour</p>
+                        </div>
+                    </div>
+                </div> -->
+
+                <!-- <div class="machine_item stop">
+                    <div class="machine_header">
+                        <div class="machine_title">
+                            <span class="material-icons">
+                                check_circle_outline
+                            </span>
+                            <div class="machine_name pl-2">
+                                <h3>Machine XS</h3>
+                                <p>0006</p>
+                            </div>
+                        </div>
+                        <p class="status">
+                            <i class="material-icons">
+                                fiber_manual_record
+                            </i>
+                            <span>2hrs | 16min</span>
+                        </p>
+                    </div>
+                    <div class="machine_body">
+                        <div class="progress_bar">
+                            <circle-progress [percent]="retrieved" [radius]="50" [outerStrokeColor]="'#BA1D11'"
+                                [innerStrokeColor]="'#eee'"></circle-progress>
+                        </div>
+                        <ul class="metrics list-unstyle">
+                            <li>
+                                <p>Availability</p>
+                                <span>80%</span>
+                            </li>
+                            <li>
+                                <p>Performance</p>
+                                <span>80%</span>
+                            </li>
+                            <li>
+                                <p>Quality</p>
+                                <span>80%</span>
+                            </li>
+                        </ul>
+                        <div class="parts_sec">
+                            <p>Parts</p>
+                        </div>
+                        <div class="machine_values">
+                            <p>Actual / Plan : <span>120 / 100</span></p>
+                        </div>
+                        <div class="graph">
+                            <figure class="highcharts-figure">
+                                <div id="container3"></div>
+                            </figure>
+                        </div>
+                        <div class="graph_text">
+                            <p>Parts per hour</p>
+                        </div>
+                    </div>
+                </div> -->
+
+            </div>
+        </div>
+    </div>
+
+    <!-- <div >
+        <figure >
+            <div id="container3"></div>
+            
+        </figure>
+    </div> -->
+    <!-- <div >
+        <figure >
+            <div id="container"></div>
+            
+        </figure>
+    </div> -->
+
+    <div>
+
+        <!-- <div id="partcycle0"></div> -->
+
+
+    </div>
+    <!-- <div *ngIf="myLoader" class="spinner">
+    <img src="assets/images/spinner.gif">
+  </div> -->
+    <!-- <button (click)="renderchart()">Chart Display</button> -->
+</section>
+
+<!-- <button (click)="container.scrollTop =change" class="test123" >👆</button> -->
+
+
+
+<!-- <button (click)="container.scrollTop =change" class="test123" >👆</button> -->
+
+
+

@@ -1,0 +1,98 @@
+<section class="login_page">
+  <main>
+    <div class="container-fluid">
+      <div class="row">
+        <div class="col-sm-6 px-0 d-none d-sm-block">
+          <img src="assets/images/bg-new.jpg" alt="login image" class="login-img">
+        </div>
+        <div class="col-sm-6 login-section-wrapper">
+          <div class="brand-wrapper">
+            <img src="assets/images/yantra2.png" class="brand-img">
+          </div>
+          <div class="login-wrapper my-auto">
+            <h1 class="login-title">Log in</h1>
+            <form [formGroup]="login" (ngSubmit)="logintest(login.value)" autocomplete="off" class="login_form">
+              <mat-form-field class="form">
+                <mat-label>User Name</mat-label>
+                <input matInput formControlName="email" placeholder="Email" type="email"
+                  pattern="[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[a-z]{2,3}$"
+                  ng-reflect-pattern="[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[a" required>
+                <mat-error *ngIf="login.controls['email'].errors?.required">Please enter your username
+                </mat-error>
+                <mat-error *ngIf="login.controls['email'].hasError('pattern')"> Enter valid email address</mat-error>
+
+
+              </mat-form-field>
+              <mat-form-field class="form">
+                <mat-label>Password</mat-label>
+                <input matInput formControlName="password" placeholder="Password" [type]=" hide ? 'password' : 'text'"
+                  required>
+                <mat-icon class="eye" matSuffix (click)="hide = !hide">{{hide ? 'visibility_off' : 'visibility'}}
+                </mat-icon>
+                <mat-error *ngIf="login.controls['password'].errors?.required">Please enter your password
+                </mat-error>
+              </mat-form-field>
+              <div class="form-btn">
+                <button mat-raised-button class="Submit" color="primary">Login</button>
+              </div>
+            </form>
+            <a (click)="openDialog()">Forgot Password?</a>
+
+            
+                  
+          <!-- <p class="help_msg"  >
+            <a [routerLink]="['/register']" class="sign_link"  *ngIf="signup === false">Signup</a></p>  -->
+              <p class="help_msg" *ngIf="Signup === false">Do you have an account?
+                <a [routerLink]="['/register']" class="sign_link">Signup</a></p>
+            <!-- <p class="help_msg">Do you have an account?
+              <a [routerLink]="['/register']" class="sign_link">Signup</a>
+            </p> -->
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </main>
+</section>
+
+
+
+<!-- <div class="login_sec">
+    <mat-card class="form_inner">
+      <mat-card-content>
+        <div class="brand_logo">
+          <img src="assets/images/logo.jpg">
+        </div>
+        <p class="mb_space"> Sign in continue with Yantra24x7</p>
+
+        <form [formGroup]="login" (ngSubmit)="logintest(login.value)" autocomplete="off" class="login_form">
+          <mat-form-field class="form">
+            <mat-label>User Name</mat-label>
+            <input matInput formControlName="email" placeholder="Email" type="email"
+            pattern="[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[a-z]{2,3}$" ng-reflect-pattern="[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[a"
+              required>
+              <mat-error *ngIf="login.controls['email'].errors?.required">Please enter your username
+                </mat-error>
+          </mat-form-field>
+          <mat-form-field class="form">
+            <mat-label>Password</mat-label>
+            <input matInput formControlName="password" placeholder="Password" [type]=" hide ? 'password' : 'text'"
+              required>
+            <mat-icon class="eye" matSuffix (click)="hide = !hide">{{hide ? 'visibility_off' : 'visibility'}}
+            </mat-icon>
+            <mat-error *ngIf="login.controls['password'].errors?.required">Please enter your password
+              </mat-error>
+          </mat-form-field>
+          <div class="form-btn">
+            <button mat-raised-button class="Submit" color="primary">Login</button>
+          </div>
+        </form>
+        <a (click)="openDialog()">Forgot Password?</a>
+        <mat-card-footer>
+          <p class="help_msg"  *ngIf="signup === false" >Do you have an account?
+            <a [routerLink]="['/register']" class="sign_link">Signup</a></p>
+        </mat-card-footer>
+      </mat-card-content>
+    </mat-card>
+  </div>
+</section> -->

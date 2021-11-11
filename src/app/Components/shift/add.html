@@ -1,0 +1,89 @@
+
+<h2 mat-dialog-title>Shift Registration</h2>
+<div class="close_modal">
+    <mat-icon mat-dialog-close  class="v-align-middle display" matTooltip="Close">close
+    </mat-icon>
+</div>
+<div class="mat-typography">
+    <div class="filter_sec">
+        <form [formGroup]="shiftForm" (ngSubmit)="submit()" class="form_sec shift_form"  autocomplete="off">
+            <div class="form_sec_fields">
+            <div class="form_field time_field_bg">
+                <!-- <mat-form-field appearance="outline"> -->
+                <mat-label>Shift Start Time</mat-label>
+                <!-- <input matInput formControlName="start_time" type="text"> -->
+                <!-- <ngx-timepicker-field formControlName="start_time" [controlOnly]="true"></ngx-timepicker-field> -->
+                <ngb-timepicker formControlName="start_time" [meridian]="meridian" [seconds]="seconds"></ngb-timepicker>
+                <!-- </mat-form-field> -->
+            </div>
+            <div class="form_field time_field_bg">
+                <!-- <mat-form-field appearance="outline"> -->
+                <mat-label>Shift End Time </mat-label>
+                <!-- <input matInput formControlName="end_time" type="text"> -->
+                <!-- <ngx-timepicker-field formControlName="end_time" [controlOnly]="true"></ngx-timepicker-field> -->
+                <ngb-timepicker formControlName="end_time" [meridian]="meridian" [seconds]="seconds"></ngb-timepicker>
+                <!-- </mat-form-field> -->
+            </div>
+            <div class="form_field time_field_bg">
+                <!-- <mat-form-field appearance="outline"> -->
+                <mat-label>Break Time</mat-label>
+                <!-- <input matInput formControlName="break_time" type="time"> -->
+                <ngb-timepicker formControlName="break_time" [seconds]="seconds"></ngb-timepicker>
+                <!-- <mat-error *ngIf="shiftForm.controls['break_time'].errors?.required">Break Time is Required
+                    </mat-error> -->
+                <!-- </mat-form-field> -->
+            </div>
+
+            <div class="form_field">
+                <mat-form-field appearance="outline">
+                    <mat-select placeholder="Select Line" matNativeControl required
+                        formControlName="module">
+                        <mat-option value="GENERAL">GENERAL</mat-option>
+                        <mat-option *ngFor="let mod of module_response" [value]="mod">
+                          {{mod}}
+                      </mat-option>
+
+                    </mat-select>
+                </mat-form-field>
+            </div>
+
+            <div class="form_field">
+                <mat-form-field appearance="outline">
+                    <mat-label>Shift Number</mat-label>
+                    <input matInput formControlName="shift_no" type="number" min="1">
+                    <mat-error *ngIf="shiftForm.controls['shift_no'].errors?.required" placeholder="0">Shift Number is
+                        Required
+                    </mat-error>
+                </mat-form-field>
+            </div>
+            <div class="form_field">
+                <mat-form-field appearance="outline">
+                    <mat-label>Start Day</mat-label>
+                    <mat-select formControlName="start_day" (selectionChange)="end_day_validation($event.value)">
+                        <mat-option disabled value="">Select Start Day</mat-option>
+                        <mat-option value="1">Day 1</mat-option>
+                        <mat-option value="2">Day 2</mat-option>
+                    </mat-select>
+                    <mat-error *ngIf="shiftForm.controls['start_day'].errors?.required">Start Day is Required
+                    </mat-error>
+                </mat-form-field>
+            </div>
+            <div class="form_field">
+                <mat-form-field appearance="outline">
+                    <mat-label>End Day</mat-label>
+                    <mat-select formControlName="end_day">
+                        <mat-option disabled value="">Select End Day</mat-option>
+                        <mat-option *ngFor="let end of end_day" value={{end.value}}>{{end.name}}</mat-option>
+                        <!-- <mat-option value="2">Day 2</mat-option> -->
+                    </mat-select>
+                    <mat-error *ngIf="shiftForm.controls['end_day'].errors?.required">End Day is Required
+                    </mat-error>
+                </mat-form-field>
+            </div>
+        </div>
+            <div class="form-button text-right" align="end">
+                <button mat-raised-button type="submit" class="filter_btn btn_orange"> Save</button>
+            </div>
+        </form>
+    </div>
+</div>

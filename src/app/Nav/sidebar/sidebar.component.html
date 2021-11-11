@@ -1,0 +1,543 @@
+<mat-toolbar class="header" *ngIf="nav.visible">
+  <div class="container-fluid">
+    <div class="header_area">
+      <!-- <button type="button" aria-label="Toggle sidenav" mat-icon-button (click)="drawer.toggle()"
+        *ngIf="isHandset$ | async">
+        <mat-icon aria-label="Side nav toggle icon">menu</mat-icon>
+      </button> -->
+      <div class="company_name">
+        <!-- <button  type="button" aria-label="Toggle sidenav" mat-icon-button
+          (click)="drawer.toggle()">
+          <mat-icon aria-label="Side nav toggle icon">menu</mat-icon>
+        </button> -->
+        <div class="as-toggle-btn"  (click)="toggleSidebar()" id="sidebarCollapse">
+          <mat-icon aria-label="Side nav toggle icon">menu</mat-icon>
+        </div>
+        <h1 class="d-none d-sm-none d-lg-block"> {{tenant_name}}</h1>
+        
+  
+        <h1 class="d-lg-none d-sm-block">{{tenant_name}}</h1><br>
+
+
+        <h1 class="d-none d-sm-none d-lg-block" *ngIf="rolename === 'Supervisor' || rolename === 'QA'">{{modu_name}} Module</h1>
+
+        <!-- <input id="color_pick" type="color" value="#ff0000" (change)="pickRedInt()"> -->
+     
+        
+        <!-- <input type="color" [(ngModel)]="primaryColor" > <br>
+        <button (click)="changeTheme(primaryColor)">Save</button>-->
+        <!-- <div class="block primary-background">Primary</div>    -->
+      </div>
+      <a href="javascript:;" class="sidenav_logo1 d-lg-none1 d-sm-block1 d-none">
+        <img src="../../../assets/images/rabwinnewlogtest.png">
+      </a>
+      <a class="logout">
+        <div class="dropdown">
+         
+          <div class="user_account">
+            
+            <div class="text-right">
+              <p>Welcome {{rolename}}</p>
+
+            </div>
+            <mat-icon class="v-align-middle display as-display">person_outline</mat-icon>
+
+            <!-- <mat-icon class="v-align-middle display as-display">settings</mat-icon> -->
+    
+          </div>
+         
+        </div>
+        <span class="material-icons" (click)="close()">
+          power_settings_new
+        </span>
+      </a>
+
+    </div>
+  </div>
+</mat-toolbar>
+
+
+<div class="sidenav sss"  id="sidebar" *ngIf="nav.visible" >
+  
+  <div class="sidenav_view" *ngIf="rolename === 'QA'">
+    <a href="javascript:;" class="sidenav_logo">
+      <img src="../../../assets/images/rabwinnewlogtest.png">
+    </a>
+    <ul class="sidenav_links ">
+      <!-- <li (click)=shift() routerLinkActive="active-link">
+        <a href="javascript:;">
+          <mat-icon class="v-align-middle display">dashboard
+          </mat-icon>
+          <span>Dashboard</span>
+        </a>
+      </li> -->
+      <li [routerLink]="['/quality']" (click)="shifting()" routerLinkActive="active-link">
+        <a href="javascript:;">
+          <mat-icon class="v-align-middle display">timelapse
+          </mat-icon>
+          <span>Quality Entry</span>
+        </a>
+      </li>
+    </ul>
+    </div>
+    <div *ngIf="rolename === 'Admin'" class="sidenav_view"> 
+      <a href="javascript:;" class="sidenav_logo">
+        <img src="../../../assets/images/Sansera-Logo.png">
+      </a>
+
+      <ul class="sidenav_links">
+        <!-- <li (click)="shift()" routerLinkActive="active-link">
+          <a href="javascript:;">
+            <mat-icon class="v-align-middle display">dashboard
+            </mat-icon>
+            <span>Dashboard</span>
+          </a>
+        </li> -->
+
+
+        <!-- <li [routerLink]="['/andon-dashboard']" (click)="shift()" routerLinkActive="active-link">
+          <a href="javascript:;">
+            <mat-icon class="v-align-middle display">dashboard
+            </mat-icon>
+            <span>Andon Dashboard</span>
+          </a>
+        </li> -->
+
+
+        <li [routerLink]="['/rabwin_dashboard']"  (click)="shift()" routerLinkActive="active-link">
+          <a href="javascript:;">
+            <mat-icon class="v-align-middle display">dashboard
+            </mat-icon>
+            <span>Andon Dashboard</span>
+          </a>
+        </li>
+<!-- 
+        <li [routerLink]="['/kpi-dashboard']"  (click)="oeeclick()" routerLinkActive="active-link">
+          <a href="javascript:;">
+            <mat-icon class="v-align-middle display">dashboard
+            </mat-icon>
+            <span>OEE</span>
+          </a>
+        </li> -->
+
+
+
+        
+        <li [routerLink]="['/idle_reason']" (click)="shifting()" routerLinkActive="active-link">
+          <a href="javascript:;">
+            <mat-icon class="v-align-middle display">assignment
+            </mat-icon>
+            <span>OEE Report</span>
+          </a>
+        </li>
+
+        <li [routerLink]="['/efficiency']" (click)="shifting()" routerLinkActive="active-link">
+          <a href="javascript:;">
+            <mat-icon class="v-align-middle display">timelapse
+            </mat-icon>
+            <span>Efficiency Report</span>
+          </a>                       
+        </li>
+
+        
+        <li [routerLink]="['/report']" (click)="shifting()" routerLinkActive="active-link">
+          <a href="javascript:;">
+            <mat-icon class="v-align-middle display">file_copy
+            </mat-icon>
+            <span>General Report</span>
+          </a>
+        </li>
+
+        
+        <li [routerLink]="['/report_idle']" (click)="shifting()" routerLinkActive="active-link">
+          <a href="javascript:;">
+            <mat-icon class="v-align-middle display">data_usage
+            </mat-icon>
+            <span>Idle Reason Report</span>
+          </a>
+        </li>
+
+
+        <li [routerLink]="['/comparechart']" (click)="shifting()" routerLinkActive="active-link">
+          <a href="javascript:;">
+            <mat-icon class="v-align-middle display">compare
+            </mat-icon>
+            <span>Compare chart</span>
+          </a>
+        </li>
+
+        
+        <!-- <li [routerLink]="['/cycle']"  (click)="shifting()" routerLinkActive="active-link">
+          <a href="javascript:;">
+            <mat-icon class="v-align-middle display">donut_small
+            </mat-icon>
+            <span>Cycle Time chart</span>
+          </a>
+        </li> -->
+
+        <!-- <li [routerLink]="['/tv']"  routerLinkActive="active-link">
+          <a href="javascript:;">
+            <mat-icon class="v-align-middle display">dashboard
+            </mat-icon>
+            <span>TV Screen</span>
+          </a>
+        </li> -->
+
+        <li [routerLink]="['/alarm']" (click)="shifting()" routerLinkActive="active-link">
+          <a href="javascript:;">
+            <mat-icon class="v-align-middle display">notifications
+            </mat-icon>
+            <span>Alarms</span>
+          </a>
+        </li>
+
+
+
+
+        <!-- <li [routerLink]="['/eff_report']" routerLinkActive="active-link">
+          <a href="javascript:;">
+            <mat-icon class="v-align-middle display">compare
+            </mat-icon>
+            <span>Efficiency Report</span>
+          </a>
+        </li> -->
+
+
+
+       
+
+      
+
+
+        
+
+
+
+
+        <li [routerLink]="['/quality']" (click)="shifting()" routerLinkActive="active-link">
+          <a href="javascript:;">
+            <mat-icon class="v-align-middle display">timelapse
+            </mat-icon>
+            <span>Quality Entry</span>
+          </a>
+        </li>
+
+
+        <li [routerLink]="['/machine_registration']" (click)="shifting()" routerLinkActive="active-link">
+          <a href="javascript:;">
+            <mat-icon class="v-align-middle display">widgets
+            </mat-icon>
+            <span>Machine</span>
+          </a>
+        </li>
+
+
+        <li [routerLink]="['/shift']" (click)="shifting()" routerLinkActive="active-link">
+          <a href="javascript:;">
+            <mat-icon class="v-align-middle display">insert_invitation
+            </mat-icon>
+            <span>Shift</span>
+          </a>
+        </li>
+
+
+        <li [routerLink]="['/user_management']" (click)="shifting()" routerLinkActive="active-link">
+          <a href="javascript:;">
+            <mat-icon class="v-align-middle display">person
+            </mat-icon>
+            <span>User</span>
+          </a>
+        </li>
+        <li [routerLink]="['/component']" routerLinkActive="active-link">
+          <a href="javascript:;">
+            <mat-icon class="v-align-middle display">markunread_mailbox
+            </mat-icon>
+            <span>Component</span>
+          </a>
+        </li>
+
+
+        <li [routerLink]="['/operator_registration']" (click)="shifting()" routerLinkActive="active-link">
+          <a href="javascript:;">
+            <mat-icon class="v-align-middle display">account_circle
+            </mat-icon>
+            <span>Operator</span>
+          </a>
+        </li>
+
+
+        <li [routerLink]="['/reason_lmw']" (click)="shifting()" routerLinkActive="active-link">
+          <a href="javascript:;">
+            <mat-icon class="v-align-middle display">list
+            </mat-icon>
+            <span>Reason</span>
+          </a>
+        </li>
+      </ul>
+    </div>
+
+    <div *ngIf="rolename === 'Supervisor'" class="sidenav_view">
+      <a href="javascript:;" class="sidenav_logo">
+        <img src="../../../assets/images/rabwinnewlogtest.png">
+      </a>
+
+      <ul class="sidenav_links">
+        <!-- <li (click)=shift() routerLinkActive="active-link">
+          <a href="javascript:;">
+            <mat-icon class="v-align-middle display">dashboard
+            </mat-icon>
+            <span>Dashboard</span>
+          </a>
+        </li> -->
+
+
+        <li [routerLink]="['/rabwin_dashboard']" (click)="shift()" routerLinkActive="active-link">
+          <a href="javascript:;">
+            <mat-icon class="v-align-middle display">dashboard
+            </mat-icon>
+            <span>Andon Dashboard</span>
+          </a> 
+        </li>
+
+
+        <li [routerLink]="['/kpi-dashboard']"  (click)="oeeclick()"
+
+        routerLinkActive="active-link">
+          <a href="javascript:;">
+            <mat-icon class="v-align-middle display">dashboard
+            </mat-icon>
+            <span>OEE</span>
+          </a>
+        </li>
+
+
+
+        <li [routerLink]="['/idle_reason']" (click)="shifting()" routerLinkActive="active-link">
+          <a href="javascript:;">
+            <mat-icon class="v-align-middle display">assignment
+            </mat-icon>
+            <span>OEE Report</span>
+          </a>
+        </li>
+
+
+        <li [routerLink]="['/efficiency']" (click)="shifting()" routerLinkActive="active-link">
+          <a href="javascript:;">
+            <mat-icon class="v-align-middle display">timelapse
+            </mat-icon>
+            <span>Efficiency Report</span>
+          </a>                       
+        </li>
+
+        <li [routerLink]="['/report']" (click)="shifting()" routerLinkActive="active-link">
+          <a href="javascript:;">
+            <mat-icon class="v-align-middle display">file_copy
+            </mat-icon>
+            <span>General Report</span>
+          </a>
+        </li>
+
+
+        <li [routerLink]="['/report_idle']" (click)="shifting()" routerLinkActive="active-link">
+          <a href="javascript:;">
+            <mat-icon class="v-align-middle display">data_usage
+            </mat-icon>
+            <span>Idle Reason Report</span>
+          </a>
+        </li>
+
+        
+        <li [routerLink]="['/comparechart']" (click)="shifting()" routerLinkActive="active-link">
+          <a href="javascript:;">
+            <mat-icon class="v-align-middle display">compare
+            </mat-icon>
+            <span>Compare chart</span>
+          </a>
+        </li>
+
+
+        
+        <li [routerLink]="['/cycle']"  (click)="shifting()" routerLinkActive="active-link">
+          <a href="javascript:;">
+            <mat-icon class="v-align-middle display">donut_small
+            </mat-icon>
+            <span>Cycle Time chart</span>
+          </a>
+        </li>
+        
+        <li [routerLink]="['/alarm']" (click)="shifting()" routerLinkActive="active-link">
+          <a href="javascript:;">
+            <mat-icon class="v-align-middle display">notifications
+            </mat-icon>
+            <span>Alarms</span>
+          </a>
+        </li>
+
+      
+
+        <li [routerLink]="['/operator_registration']" (click)="shifting()" routerLinkActive="active-link">
+          <a href="javascript:;">
+            <mat-icon class="v-align-middle display">account_circle
+            </mat-icon>
+            <span>Operator</span>
+          </a>
+        </li>
+
+
+        <li [routerLink]="['/reason_lmw']" (click)="shifting()" routerLinkActive="active-link">
+          <a href="javascript:;">
+            <mat-icon class="v-align-middle display">list
+            </mat-icon>
+            <span>Reason</span>
+          </a>
+        </li>
+      
+        <!-- <li [routerLink]="['/idle_reason']" routerLinkActive="active-link">
+          <a href="javascript:;">
+            <mat-icon class="v-align-middle display">assignment
+            </mat-icon>
+            <span>Production Report</span>
+          </a>
+        </li> -->
+       
+
+       
+
+
+    
+
+
+<!-- 
+        <li [routerLink]="['/quality']" routerLinkActive="active-link">
+          <a href="javascript:;">
+            <mat-icon class="v-align-middle display">timelapse
+            </mat-icon>
+            <span>Quality</span>
+          </a>
+        </li> -->
+
+
+        <!-- <li [routerLink]="['/machine_registration']" routerLinkActive="active-link">
+          <a href="javascript:;">
+            <mat-icon class="v-align-middle display">widgets
+            </mat-icon>
+            <span>Machine</span>
+          </a>
+        </li> -->
+
+
+        <!-- <li [routerLink]="['/shift']" routerLinkActive="active-link">
+          <a href="javascript:;">
+            <mat-icon class="v-align-middle display">insert_invitation
+            </mat-icon>
+            <span>Shift</span>
+          </a>
+        </li> -->
+<!-- 
+
+        <li [routerLink]="['/user_management']" routerLinkActive="active-link">
+          <a href="javascript:;">
+            <mat-icon class="v-align-middle display">person
+            </mat-icon>
+            <span>User</span>
+          </a>
+        </li> -->
+        <!-- <li [routerLink]="['/component']" routerLinkActive="active-link">
+          <a href="javascript:;">
+            <mat-icon class="v-align-middle display">markunread_mailbox
+            </mat-icon>
+            <span>Component</span>
+          </a>
+        </li> -->
+
+<!-- 
+        <li [routerLink]="['/operator_registration']" routerLinkActive="active-link">
+          <a href="javascript:;">
+            <mat-icon class="v-align-middle display">account_circle
+            </mat-icon>
+            <span>Operator</span>
+          </a>
+        </li> -->
+
+
+        <!-- <li [routerLink]="['/reason_lmw']" routerLinkActive="active-link">
+          <a href="javascript:;">
+            <mat-icon class="v-align-middle display">list
+            </mat-icon>
+            <span>Reason</span>
+          </a>
+        </li> -->
+      </ul>
+
+      <!-- <button mat-icon-button matTooltip="Dashboard" routerLinkActive="active-link" matTooltipPosition="right"
+        (click)=shift()>
+        <i class="material-icons">
+          apps
+        </i>
+      </button>
+
+      <button mat-icon-button matTooltip="Line Wise Dashboard" routerLinkActive="active-link" matTooltipPosition="right"
+        [routerLink]="['/andon-dashboard']">
+        <i class="material-icons">
+          <mat-icon>A</mat-icon>
+        </i>
+      </button>
+
+      <button mat-icon-button matTooltip="Alarm" routerLinkActive="active-link" matTooltipPosition="right"
+        [routerLink]="['/alarm']">
+        <i class="material-icons">
+          notifications
+        </i>
+      </button>
+
+
+
+      <button mat-icon-button matTooltip="Report" routerLinkActive="active-link" matTooltipPosition="right"
+        [routerLink]="['/report']">
+        <i class="material-icons">
+          assignment
+        </i>
+      </button>
+
+      <button mat-icon-button matTooltip="Compare Chart" routerLinkActive="active-link" matTooltipPosition="right"
+        [routerLink]="['/comparechart']">
+        <i class="material-icons">
+          compare
+        </i>
+      </button>
+
+      <button mat-icon-button matTooltip="Production Report " routerLinkActive="active-link" matTooltipPosition="right"
+        [routerLink]="['/idle_reason']">
+        <i class="material-icons">
+          assignment
+
+
+        </i>
+      </button>
+
+
+      <button mat-icon-button matTooltip="Idle Reason Report" routerLinkActive="active-link" matTooltipPosition="right"
+        [routerLink]="['/report_idle']">
+        <i class="material-icons">
+          data_usage
+        </i>
+      </button> -->
+
+    </div>
+  </div>
+  <div class="as-content">
+    <router-outlet></router-outlet>
+  </div>
+
+
+
+<footer class="main-footer ng-scope" *ngIf="nav.visible">
+  <div class="container-fluid">
+    <p>Powered by
+      <a target="blank" href="https://www.altiussolution.com" class="external">
+        <img src="/assets/images/favicon.png">Yantra24x7
+      </a>
+    </p>
+  </div>
+</footer>
+<div ng-include="'footer.html'"></div>

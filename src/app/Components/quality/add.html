@@ -1,0 +1,100 @@
+<!-- <h2 mat-dialog-title>Editsd Quality</h2> -->
+<div class="close_modal">
+    <mat-icon class="v-align-middle display" mat-dialog-close  matTooltip="Close">close
+    </mat-icon>
+</div>
+<mat-dialog-content class="mat-typography">
+    <!-- <form class="form_sec"  autocomplete="off">
+        <div class="row_sec">
+            <mat-form-field appearance="outline">
+                <mat-label>Machine name</mat-label>
+                <input matInput formControlName="machine_name" type="text" placeholder="Enter machine name">
+            </mat-form-field>
+
+            <mat-form-field appearance="outline">
+                <mat-label>Machine work</mat-label>
+                <input matInput formControlName="machine_work" type="text" placeholder="Enter machine work">
+            </mat-form-field>
+        </div>
+    </form> -->
+    <mat-card class="card_sec"> 
+
+    <div class="table_wrapper">
+
+    <table class="table report_table">
+        <thead>
+            <tr></tr>
+            <tr class="sticky">
+                <th>S.no</th>
+
+                <th>Machine Name</th>
+                <th>Mode</th>
+                <th>Component ID</th>
+                <th>Component Start Time</th>
+                <th>Component End Time</th>
+                <th>Target</th>
+                <th>Actual</th>
+                <th>NCQ</th>
+                <th>Accept</th>
+                <th>Reject</th>
+                <th>Rework</th>
+                <th>Actions</th>
+               
+              
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let show_report of get_report; let i = index">
+
+              
+                <td>{{i+1}}</td>
+                <td>{{g_report?.machine_name || '---'}}</td>
+                <td>{{show_report?.mode || '---'}}</td>
+                <td>{{show_report?.card_no || '---'}}</td>
+                <td>{{show_report?.rout_start | date:'yyyy-MM-dd ; HH:mm:ss'}}</td>
+                <td>{{show_report?.rout_end | date:'yyyy-MM-dd ; HH:mm:ss'}}</td>
+                <td >{{show_report?.tar}}</td>
+                <td >{{show_report?.actual}}</td> 
+                <td >{{show_report?.rejection}}</td> 
+
+                <td>{{show_report?.accept}}
+
+                    <input  placeholder="Enter Accept" class="textlo" *ngIf="enableEdit && enableEditIndex == i" [formControl]="accept" required  (keypress)="keyPress($event)">
+                </td>
+                   
+                <td>{{show_report?.rejection1 }}
+                   
+                    <input  placeholder="Enter Rejection" class="textlo" *ngIf="enableEdit && enableEditIndex == i" [formControl]="rejection" required  (keypress)="keyPress($event)"></td>
+              
+                <td>{{show_report?.rework }}
+                   
+                    <input  placeholder="Enter Rework" class="textlo" *ngIf="enableEdit && enableEditIndex == i" [formControl]="rework"  (keypress)="keyPress($event)" required>
+
+                </td>
+                <!-- <td>
+
+                  
+                    <input  placeholder="Enter Reason" class="textlo" *ngIf="enableEdit && enableEditIndex == i" [formControl]="reason" required>
+
+                </td> -->
+                
+            <td *ngIf="show_report?.mode === 'Production'" class ="point">
+                <p  *ngIf="show_report?.accept > 0" (click)="toggleShow(i,show_report)">Edit</p>
+                <p *ngIf="show_report?.accept == 0" (click)="edit1()">Edit</p>
+
+                <p  *ngIf="show_report?.accept > 0" (click)="save(show_report,i+1)">Save</p>
+                <p  *ngIf="show_report?.accept == 0" (click)="savep()">Save</p>
+
+            </td>
+            </tr>
+
+
+            
+        </tbody>
+    </table>
+    </div>
+    </mat-card>
+</mat-dialog-content>
+<div *ngIf="myLoader1" class="spinner">
+    <img src="assets/images/spinner.gif">
+</div>

@@ -1,0 +1,553 @@
+   // graph styles
+   ::ng-deep rect.highcharts-background {
+    opacity: .3;
+} 
+.carousel-caption{
+    background-color: #11d525;
+}
+.frame {
+    height: 95%;
+        position: absolute;
+    width: 100%;
+    top: 0;
+    margin-top: 10px;
+    background-color: gray;
+    overflow: scroll;
+  }
+  
+//   .item {
+//     padding: 120px 50px;
+//     margin: 20px;
+//     background-color: white;
+//   }
+.owl-carousel .owl-item {
+    min-height: 1px;
+    float: left;
+    -webkit-backface-visibility: hidden;
+    -webkit-touch-callout: none;
+    color: yellowgreen;
+}
+.owl-item.ng-tns-c11-20.active.ng-trigger.ng-trigger-autoHeight.ng-star-inserted {
+    color: violet;
+}
+button.test123 {
+    position: fixed;
+    bottom: 40px;
+    right: 5px;
+    font-size: 20px;
+    text-align: center;
+    border-radius: 5px;
+    outline: none;
+    z-index: 1;
+  }
+::ng-deep circle-progress{
+    tspan {
+        font-weight: 600;
+        fill: #3F3F3F;
+    }
+}
+::ng-deep .highcharts-yaxis-labels{
+        text{
+        fill: #fff!important;
+        }
+    }  
+
+::ng-deep .highcharts-yaxis-grid {
+    .highcharts-grid-line {
+        stroke: #d5d5d5;
+    }
+}
+h2.sub_title {
+    width: 35%;
+}
+#page_area {
+    &.page{
+        background-color: #fafafa;
+        .page_title_sec {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            border-bottom: 1px solid #DEDEDE;
+            margin-bottom: 15px;
+            .sub_title {
+                font-size: 18px;
+                font-weight: 600;
+                color: #1A1F3D;
+                margin-bottom: 15px;
+            }
+            .machine_identifier{
+                list-style: none;
+                display: flex;
+                li{
+                    display: flex;
+                    align-items: center;
+                    margin-left: 5px;
+                    &::after {
+                        content: "|";
+                        padding-left: 5px;
+                        color: #aeaeae;
+                    }
+                    &:last-child{
+                        &::after {
+                           display: none;
+                        }  
+                    }
+                    i{
+                        font-size: 16px;
+                        padding-right: 4px;
+                    }
+                    span{
+                        font-size: 12px;
+                        text-transform: capitalize;
+                    }
+                    &.active{
+                        i{
+                            color: #11d525;
+                        }
+                    }
+                    &.idle{
+                        i{
+                            color: #646262;
+                        }
+                    }
+                    &.stop{
+                        i{
+                            color: #BA1D11;
+                        }
+                    }
+                }
+            }
+        }
+        // @media (max-width:1024px){
+   
+        //     .machine_list .machine_item{
+        //             // width: 24%;
+        //             width: 18.5% !important;
+        //         }
+           
+        // }
+        .machine_list{
+            display: flex;
+            flex-wrap: wrap;
+            .machine_item{
+                // width: 24%;
+                width: 19%;
+                margin: 0px 10px 20px 0;
+                .machine_header{
+                    display: flex;
+                    align-items: flex-end;
+                    padding: 10px 5px;
+                    justify-content: space-between;
+                    .machine_title{
+                        display: flex;  
+                        .machine_name{
+                            h3 {
+                                font-size: 14px;
+                                text-transform: uppercase;
+                                margin-bottom: 0;
+                            }
+                            p{
+                                font-size: 12px;
+                                margin: 0;
+                            }
+                        }
+                    }
+                    .status{
+                        margin: 0;
+                        display: flex;
+                        align-items: center;
+                        i{
+                            color: #34E31A;
+                            font-size: 16px;
+                            padding-right: 4px;
+                        }
+                        span{
+                            font-size: 12px;
+                        }
+                    }
+                }
+                .machine_body{
+                    .progress_bar{
+                        display: flex;
+                        justify-content: center;
+                        padding-top: 0px;
+                    }
+                    .metrics{
+                        list-style: none;
+                        display: flex;
+                        align-items: center;
+                        justify-content: space-between;
+                        padding: 15px;
+                        li{
+                            p{
+                                margin: 0;
+                                font-size: 10px;
+                                text-transform: uppercase;
+                            }
+                            span{
+                                font-size: 14px;
+                                font-weight: 600;
+                            }
+                        }
+                    }
+                    .parts_sec{
+                        text-align: center;
+                        p{
+                            margin: 0;
+                            font-size: 14px;
+                            text-transform: uppercase;
+                            font-weight: 600;    
+                        }
+                    }
+                    .machine_values{
+                        p{
+                            font-size: 12px;
+                            text-align: center;
+                            padding: 5px 0;
+                            margin: 0;
+                            span{
+                                font-weight: 700;
+                            }
+                        }
+                    }
+                    .graph{
+                        figure.highcharts-figure {
+                            margin: 0;
+                    }
+                    }
+                    .graph_text{
+                        font-size: 12px;
+                        text-align: center;
+                        padding: 5px 0;
+                        p{
+                            margin: 0;
+                        }
+                    }
+                }
+            &.active{
+                border: 1px solid #16A500;
+                .machine_header{
+                    color: #fff;
+                    background: #16A500;
+                    .status{
+                        i{
+                            color: #34E31A;
+                        }
+                    }
+                }
+                .machine_body{
+                    background: #16a5002e;
+                    .parts_sec{
+                        background: #16a5004f;
+                        color: #fff;
+                        p{
+                            color: #056B2D;
+                        }
+                    }
+                    .machine_values{
+                        p{
+                            background: #16A500;
+                            color: #fff;
+                            border-bottom: 1px solid #056B2D;
+                          
+                        }
+                    }
+                    .graph{
+
+                    }
+                    .graph_text{
+                        background: #16A500;
+                        color: #fff;
+                    }
+                }
+            }
+       
+            &.idle{
+                border: 1px solid #888888;
+                .machine_header{
+                    color: #fff;
+                    background: #888888;
+                    .status{
+                        i{
+                            color: #646262;
+                        }
+                    }
+                }
+                .machine_body{
+                    background: #8888883b;
+                    .parts_sec{
+                        background: #88888885;
+                        color: #fff;
+                      
+                    }
+                    .machine_values{
+                        p{
+                            background: #888888;
+                            color: #fff;
+                            border-bottom: 1px solid #646262;
+                        }
+                    }
+                    .graph{
+                        height: 120px;
+                        min-height: 120px;
+                    }
+                    .graph_text{
+                        background: #888888;
+                        color: #fff;
+                    }
+                }
+            }
+         
+            &.stop{
+                border: 1px solid #F81301;
+                .machine_header{
+                    color: #fff;
+                    background: #F81301;
+                    .status{
+                        i{
+                            color: #BA1D11;
+                        }
+                    }
+                }
+                .machine_body{
+                    // background: #f8130159;
+                    background: #daa5a159;
+                    .parts_sec{
+                        background: #f81301ab;
+                        color: #fff;
+                      
+                    }
+                    .machine_values{
+                        p{
+                            background: #F81301;
+                            color: #fff;
+                            border-bottom: 1px solid #BA1D11;
+                        }
+                    }
+                    .graph{
+
+                    }
+                    .graph_text{
+                        background: #F81301;
+                        color: #fff;
+                    }
+                }
+            }
+            }
+        }
+    }
+}
+
+
+// Responsive style
+@media only screen and (min-width: 834px) and (max-width: 1112px)  {
+    #page_area.page .machine_list .machine_item {
+        width: 31%;
+        margin: 0px 6px 14px 6px;
+    }
+   
+    }
+    
+    
+    @media only screen and (min-width: 834px) and (max-width: 1112px)  and (orientation: landscape){
+        #page_area.page .machine_list .machine_item {
+            width: 22%;
+            margin: 0px 11px 17px 12px;
+        }
+    }
+    @media only screen and (min-width: 768px) and (max-width: 1024px) and (orientation: landscape){
+       
+    #page_area.page .machine_list .machine_item {
+        margin: 0px 11px 17px 12px;
+    }
+    }
+@media only screen and (max-width:768px){
+    #page_area {
+        &.page{
+    .machine_list {
+        .machine_item {
+            width: 31%;
+            margin: 0px 10px 20px 0;
+                    }
+                }
+            }
+        }
+  
+}
+
+@media only screen and (max-width:600px){
+#page_area {
+    &.page{
+        .page_title_sec {
+            .machine_identifier{
+                margin-bottom: 10px;
+                li{
+                    span{
+                        font-size: 10px;
+                    }
+                }
+            }
+        }
+        .machine_list {
+            .machine_item {
+                width: 100%;
+                margin: 0px 0px 20px 0;
+            }
+        }
+    }
+}
+}
+
+@media only screen and (min-device-width: 320px) 
+               and (max-device-width: 768px) 
+               and (orientation: landscape) {
+                #page_area {
+                    &.page{
+                .machine_list {
+                    .machine_item {
+                        width: 48%;
+                        margin: 0px 10px 20px 0;
+                                }
+                            }
+                        }
+                    }
+                ng-deep.highcharts-container {
+                    width: 100%!important;
+                }
+}
+
+.highcharts-figure, .highcharts-data-table table {
+    min-width: 310px; 
+    max-width: 800px;
+    margin: 1em auto;
+}
+
+#container {
+    height: 400px;
+}
+
+.highcharts-data-table table {
+    font-family: Verdana, sans-serif;
+    border-collapse: collapse;
+    border: 1px solid #EBEBEB;
+    margin: 10px auto;
+    text-align: center;
+    width: 100%;
+    max-width: 500px;
+}
+.highcharts-data-table caption {
+    padding: 1em 0;
+    font-size: 1.2em;
+    color: #555;
+}
+.highcharts-data-table th {
+    font-weight: 600;
+    padding: 0.5em;
+}
+.highcharts-data-table td, .highcharts-data-table th, .highcharts-data-table caption {
+    padding: 0.5em;
+}
+.highcharts-data-table thead tr, .highcharts-data-table tr:nth-child(even) {
+    background: #f8f8f8;
+}
+.highcharts-data-table tr:hover {
+    background: #f1f7ff;
+} 
+
+
+#page_area.page .machine_list .machine_item.stop .machine_body .metrics{
+    color:#F81301;
+    font-weight: 500;
+}
+#page_area.page .machine_list .machine_item.active .machine_body .metrics{
+        color: #16a500;
+    font-weight: 500;
+}
+#page_area.page .machine_list .machine_item.idle .machine_body .metrics{
+        color: #646262;
+    font-weight: 500;
+}
+#page_area.page .machine_list .machine_item.stop .machine_body .metrics{
+    color:#F81301;
+    font-weight: 600;
+}
+#page_area.page .machine_list .machine_item.active .machine_body .metrics{
+        color: #16a500;
+    font-weight: 600;
+}
+#page_area.page .machine_list .machine_item.idle .machine_body .metrics{
+        color: #646262;
+    font-weight: 600;
+}
+
+@media only screen and (min-width: 1920px)   {
+    #page_area.page .machine_list .machine_item .machine_body .metrics li p
+    {
+        font-size: 36px ;
+    }
+    
+    #page_area.page .machine_list .machine_item .machine_body .metrics li span{
+         font-size: 50px ;
+    }
+   .activemenu #page_area.page .machine_list .machine_item .machine_header .machine_title .machine_name h3
+    {
+        font-size: 67px ;
+    }
+    #page_area.page .machine_list .machine_item .machine_header .machine_title .machine_name h3
+    {
+        font-size: 65px ;
+    }
+    #page_area.page .machine_list .machine_item .machine_body .machine_values p
+    {
+        font-size: 50px;
+        padding: 0;
+        font-weight: 500;
+    }
+    #page_area.page .machine_list .machine_item .machine_body .parts_sec p{
+        font-size: 50px ;
+    }
+    
+    #page_area.page .machine_list .machine_item {
+        width: 32%;
+        // margin: 0px 7px 20px 7px;
+        margin:0px 11px 20px 11px;
+    }
+    ::ng-deep circle-progress tspan:nth-child(1) {
+        font-size: 54px;
+    }
+    ::ng-deep circle-progress tspan:nth-child(2) {
+        font-size: 50px;
+    }
+    ::ng-deep circle-progress tspan:nth-child(3) {
+        font-size: 47px;
+    }
+    .machine_item .machine_header .machine_title .material-icons{
+        font-size: 66px;
+        margin-top: 6px;
+}
+#page_area.page .machine_list .machine_item .machine_header .status i {
+    font-size: 40px;
+}
+#page_area.page .page_title_sec .sub_title {
+    font-size: 25px;
+}
+#page_area.page .machine_list .machine_item .machine_header {
+   
+    align-items: center;
+}
+#page_area.page .machine_list .machine_item .machine_body .progress_bar {
+    
+    padding-top: 20px;
+}
+#page_area.page .machine_list .machine_item .machine_body .metrics {
+  
+    padding: 5px 15px 15px 15px;
+}
+#page_area.page .machine_list .machine_item .machine_body .metrics li p {
+  
+    margin-block-end: -.5em;
+}
+#page_area.page .machine_list .machine_item .machine_header .status {
+    margin: 0 -7px;
+}
+}

@@ -1,0 +1,109 @@
+.example-container {
+    height: 390px;
+    overflow: auto;
+}
+
+table {
+    width: 100%;
+}
+
+::ng-deep .highcharts-figure-pie {
+    margin: 0;
+    padding: 15px 0;
+    // height: 200px;
+    width: 32vh;
+    margin: 0 auto auto auto;
+}
+
+::ng-deep .highcharts-figure-col {
+
+    // height: 200px;
+    width: 95%;
+
+}
+
+::ng-deep .mat-select-placeholder {
+    color: #fff;
+}
+
+/*style*/
+ul.pie_charts_utilizations {
+    height: 100%;
+    display: flex;
+    flex-flow: column;
+    justify-content: center;
+}
+
+ul.pie_charts_utilizations li {
+    display: -webkit-box;
+    display: flex;
+    -webkit-box-align: center;
+    align-items: center;
+    // width: 300px;
+    padding: 16px;
+    -webkit-box-pack: left;
+    justify-content: space-between;
+    background: #0b0b0b;
+    border-bottom: 2px solid #3e3e3e;
+}
+
+ul.pie_charts_utilizations li:last-child {
+    border-bottom: 0px;
+}
+
+ul.pie_charts_utilizations li img {
+    margin-right: 24px;
+    width: 42px;
+}
+
+ul.pie_charts_utilizations label {
+    font-size: 25px;
+    color: #A8A8A8;
+    // width: 150px;
+    display: flex;
+    align-items: center;
+}
+
+
+ul.pie_charts_utilizations span {
+    font-size: 38px;
+    color: #fff;
+}
+
+.two_row {
+    background: #0b0b0b;
+    border-radius: 5px;
+}
+
+.filter_sec .filter_fields {
+    justify-content: center;
+}
+
+::ng-deep .highcharts-figure {
+    margin: 0;
+    padding: 15px 0;
+    // height: 200px;
+    width: 35vh;
+    margin: 0 auto;
+}
+
+
+@media (max-width: 1440px) {
+    ul.pie_charts_utilizations li {
+        padding: 16px 0;
+    }
+
+    ul.pie_charts_utilizations label {
+        font-size: 18px;
+        display: flex;
+
+    }
+    ul.pie_charts_utilizations li img{
+        margin-right: 10px;
+        width: 32px;
+    }
+    
+    ul.pie_charts_utilizations span {
+        font-size: 20px!important;
+    }
+}

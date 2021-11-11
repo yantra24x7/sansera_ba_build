@@ -1,0 +1,201 @@
+<section class="tablet_page">
+  <div class="page_title_sec">
+    <h2>Production</h2>
+  </div>
+  <div class="page">
+    <div class="machine_detail_Page">
+      <div class="running">
+        <div class="header_machine">
+          <form [formGroup]="login" (ngSubmit)="logintest('true')">
+            <div class="rhs_wrapper">
+              <button [routerLink]="['/Tablet']" class="back" mat-flat-button color="primary"><span
+                  class="material-icons">
+                  <mat-icon>keyboard_arrow_left</mat-icon>
+                </span></button>
+              <!-- 
+             <div class="machine_name_list">
+                     <mat-form-field appearance="outline">
+                        <mat-select placeholder="Select Machine" matNativeControl required formControlName="machine">
+                            <mat-option value="all">All</mat-option>
+                            <mat-option *ngFor="let machine of machine_response" [value]="machine.machine_name">
+                            {{machine.machine_name}}
+                          </mat-option>
+                        </mat-select>
+                      </mat-form-field>
+             </div>   -->
+
+              <h2>Machine</h2>
+              <!-- <h2>{{marvel}}</h2> -->
+
+            </div>
+            <div class="lhs_wrapper">
+              <mat-form-field appearance="fill" floatLabel="never">
+                <mat-select placeholder="Select Shift" matNativeControl required formControlName="shift_num">
+                  <mat-option value="undefined">Select Shift</mat-option>
+
+
+                  <mat-option *ngFor="let shift of shift_response" [value]="shift.shift_no">
+                    {{shift.shift_no}}
+                  </mat-option>
+                </mat-select>
+              </mat-form-field>
+              <mat-form-field appearance="fill" floatLabel="never">
+                <!-- <mat-label>Choose a date</mat-label> -->
+                <input placeholder="Choose a date" matInput [matDatepicker]="picker" formControlName="date"
+                  (click)="picker.open()">
+                <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                <mat-datepicker #picker startView="year" [startAt]="startDate"></mat-datepicker>
+              </mat-form-field>
+              <mat-form-field appearance="fill" floatLabel="never">
+                <mat-select placeholder="Select Category" matNativeControl required formControlName="status">
+                  <mat-option value="nil">Select Category</mat-option>
+
+                  <!-- <mat-option value="false">Not Verified</mat-option>
+                       <mat-option value="true">Verified</mat-option> -->
+                  <mat-option value="1">Accepted</mat-option>
+                  <mat-option value="2">Rejected</mat-option>
+                </mat-select>
+              </mat-form-field>
+
+              <button type="submit" color="primary" mat-raised-button>Submit</button>
+            </div>
+
+          </form>
+        </div>
+        <div class="machine_Container" *ngIf="last && !get_report">
+          <div class="machine_prod table table-responsive">
+            <table class="table_machine">
+              <thead>
+                <tr>
+                  <th>#</th>
+                  <th>Part Start Time</th>
+                  <th>Part End Time</th>
+                  <th>Program Number</th>
+                  <th>Part Count</th>
+                  <th>Production Result</th>
+                  <th>Actions</th>
+                </tr>
+              </thead>
+              <tbody>
+
+                <tr *ngFor="let show_report of last; let i = index">
+                  <td>{{i+1}}</td>
+                  <td>{{show_report?.updatedate | date:'dd-MM-yyyy ; HH:mm:ss'}}</td>
+                  <td>{{show_report?.enddate | date:'dd-MM-yyyy ; HH:mm:ss'}}</td>
+                  <td>{{show_report?.program_number || '---'}}</td>
+                  <td>{{show_report?.productresult_accumulate || '---'}}</td>
+                  <td>{{show_report?.productresult || '---'}}</td>
+                  <!--   <td (click)="accept_count(show_report?._id?.$oid)">Accept</td>
+                        <td (click)="reject_count(show_report?._id?.$oid)">Reject</td> -->
+                  <td>
+                    <button mat-flat-button color="primary" *ngIf="!show_report.is_verified"
+                      (click)="acceptt_count(show_report?._id?.$oid)"><span class="material-icons">
+                        check
+                      </span></button>
+                    <button mat-flat-button color="accent" *ngIf="!show_report.is_verified"
+                      (click)="rejectt_count(show_report?._id?.$oid)"><span class="material-icons">
+                        close
+                      </span></button>
+
+                    <button mat-flat-button color="primary" *ngIf="show_report.is_verified"
+                      (click)="edit_count(show_report?._id?.$oid,show_report?.is_verified,show_report?.accept_count,show_report?.reject_count)"><span
+                        *ngIf="show_report.accept_count === 1" class="flatbuttons">
+                        Reject
+                      </span>
+                      <span *ngIf="show_report.accept_count === 2" class="flatbutton">
+                        Accept</span>
+
+                    </button>
+                  </td>
+                </tr>
+
+
+
+
+              </tbody>
+            </table>
+
+
+
+          </div>
+          <div *ngIf="last.length==0" class="no_data_found">
+            <h2>No data found</h2>
+          </div>
+          <mat-paginator [length]="total_count" [pageSize]="10" (page)="pageEvent($event)" [pageSizeOptions]="[10]"
+            showFirstLastButtons></mat-paginator>
+
+        </div>
+
+        <div class="machine_Container" *ngIf="get_report">
+          <div class="machine_prod table">
+            <table class="table_machine">
+              <thead>
+                <tr>
+                  <th>#</th>
+                  <th>Part Start Time</th>
+                  <th>Part End Time</th>
+                  <th>Program Number</th>
+                  <th>Part Count</th>
+                  <th>Production Result</th>
+                  <th>Actions</th>
+                </tr>
+              </thead>
+              <tbody>
+
+                <tr *ngFor="let show_report of get_report; let i = index">
+                  <td>{{i+1}}</td>
+                  <td>{{show_report?.updatedate | date:'dd-MM-yyyy ; HH:mm:ss'}}</td>
+                  <td>{{show_report?.enddate | date:'dd-MM-yyyy ; HH:mm:ss'}}</td>
+                  <td>{{show_report?.program_number || '---'}}</td>
+                  <td>{{show_report?.productresult_accumulate || '---'}}</td>
+                  <td>{{show_report?.productresult || '---'}}</td>
+                  <!--   <td (click)="accept_count(show_report?._id?.$oid)">Accept</td>
+                    <td (click)="reject_count(show_report?._id?.$oid)">Reject</td> -->
+                  <td>
+                    <button mat-flat-button color="primary" *ngIf="!show_report.is_verified"
+                      (click)="accept_count(show_report?._id?.$oid)"><span class="material-icons">
+                        check
+                      </span></button>
+                    <button mat-flat-button color="accent" *ngIf="!show_report.is_verified"
+                      (click)="reject_count(show_report?._id?.$oid)"><span class="material-icons">
+                        close
+                      </span></button>
+
+                    <button mat-flat-button color="primary" *ngIf="show_report.is_verified"
+                      (click)="edit_count(show_report?._id?.$oid,show_report?.is_verified,show_report?.accept_count,show_report?.reject_count)"><span
+                        *ngIf="show_report.accept_count === 1" class="flatbuttons">
+                        Reject
+                      </span>
+                      <span *ngIf="show_report.accept_count === 2" class="flatbutton">
+                        Accept</span>
+
+                    </button>
+                  </td>
+                </tr>
+
+
+
+
+              </tbody>
+            </table>
+
+
+
+          </div>
+          <div *ngIf="get_report.length==0" class="no_data_found">
+            <h2>No data found</h2>
+          </div>
+          <mat-paginator [length]="total_count" [pageSize]="10" (page)="pageEvents($event)" [pageSizeOptions]="[10]"
+            showFirstLastButtons></mat-paginator>
+
+        </div>
+      </div>
+    </div>
+  </div>
+  <footer class="footer_align">
+    <img src="../../../assets/images/yantra1.png">
+  </footer>
+  <div *ngIf="myLoader" class="spinner">
+    <img src="assets/images/spinner.gif">
+  </div>
+</section>

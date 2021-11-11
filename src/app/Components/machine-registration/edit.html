@@ -1,0 +1,39 @@
+<h2 mat-dialog-title>Edit Line</h2>
+<div class="close_modal">
+    <mat-icon mat-dialog-close (click)="cancel()" class="v-align-middle display" matTooltip="Close">close
+    </mat-icon>
+</div>
+<mat-dialog-content class="mat-typography">
+    <form [formGroup]="reasonforum" class="form_sec"  autocomplete="off">
+        <div class="row_sec">
+
+            <mat-form-field appearance="outline">
+                <mat-label>Machine Name</mat-label>
+                <input matInput formControlName="machine" type="text" readonly>
+            </mat-form-field>
+
+            <mat-form-field appearance="outline">
+                <mat-label>IP</mat-label>
+                <input matInput formControlName="ip" type="text" (keypress)="keyPress($event)"
+                    placeholder="Enter your IP" readonly>
+            </mat-form-field>
+
+            <mat-form-field appearance="outline">
+                <mat-label>LINE</mat-label>
+                <mat-select formControlName="line">
+                    <mat-option disabled value="">Select Line</mat-option>
+                    <mat-option value="PUMP">PUMP</mat-option>
+                    <mat-option value="VALVE">VALVE</mat-option>
+                    <mat-option value="ELECTRICAL">ELECTRICAL</mat-option>
+                    <mat-option value="AUTOMOBILE">AUTOMOBILE</mat-option>
+
+                </mat-select>
+                <mat-error *ngIf="reasonforum.controls['line'].errors?.required">Line is Required
+                </mat-error>
+            </mat-form-field>
+        </div>
+    </form>
+</mat-dialog-content>
+<mat-dialog-actions align="end">
+    <button mat-raised-button color="primary" (click)="submit()" class="filter_btn btn_orange"> Save</button>
+</mat-dialog-actions>
