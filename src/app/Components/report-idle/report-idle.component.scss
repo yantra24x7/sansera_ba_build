@@ -6,6 +6,43 @@
     color: aqua;
 }
 
+mat-card.card_sec.mat-card {
+    height: 65vh;
+    // overflow-y: scroll;
+}
 
+// new
 
+.table_wrapper {
+    overflow-y: auto;
+    height: 65vh;
+  }
+  
+  .table_wrapper table {
+    border-collapse: collapse;
+    width: 100%;
+    white-space: nowrap;
+  }
+  
+  .table_wrapper th,
+  .table_wrapper td {
+    padding: 8px 16px;
+  }
+  
+  .table_wrapper th {
+    position: sticky;
+    top: 0;
+    // background: #eee;
+  }
+  h5.table-heading {
+    margin: 10px auto !important;
+    text-align: center;
+    color: #ddd;
+    font-weight: 400;
+    opacity: 70%;
+    font-size: 18px;
+}
 
+.select-all{
+  margin: 5px 17px;
+}

@@ -631,4 +631,41 @@ white-space: nowrap;
   font-size: 31px;
 }
 }
+
+//new
+.fo-center {
+  width: 100%;
+  text-align: center;
+  position: absolute;
+  margin-top: 20px;
+}
+
+.fo-center h4 {
+font-size: 20px;
+font-weight: 400;
+opacity: 70%;
+}
+.table_wrapper {
+  overflow-y: auto;
+  height: 65vh;
+}
+
+.table_wrapper table {
+  border-collapse: collapse;
+  width: 100%;
+}
+
+.table_wrapper th,
+.table_wrapper td {
+  padding: 8px 16px;
+}
+
+.table_wrapper th {
+  position: sticky;
+  top: 0;
+  // background: #eee;
+}
+.table_wrapper table thead tr th {
+  background: #0e121b;
+}
  

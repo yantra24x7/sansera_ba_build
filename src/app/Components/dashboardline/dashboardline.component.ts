@@ -46,6 +46,9 @@ export class DashboardlineComponent implements OnInit {
   selectedItem: any;
   machine_tot_length:any;
   classList:any;
+  speedover: any;
+  feedmaxvalue: any;
+  feedover: any;
   constructor(public dialog: MatDialog,private service: DashboardService,private route:ActivatedRoute,private nav: NavbarService, private fb: FormBuilder,) {
     this.nav.show();
     this.lname = this.route.snapshot.queryParamMap.get('line_name');
@@ -99,6 +102,9 @@ export class DashboardlineComponent implements OnInit {
 
         this.servo_load = res.servo_load[0]
         this.sp_mac_value = res.sp_max_val;
+        this.speedover=res.sp_log_over_res.count
+        this.feedmaxvalue=res.feed_max_val
+        this.feedover=res.feed_log_over_res.count
         this.servo_load1 = res.servo_load[1]
         this.servo_load2 = res.servo_load[2]
         this.servo_load3 = res.servo_load[3]
@@ -370,14 +376,25 @@ export class DashboardlineComponent implements OnInit {
 
     })
   }
+  openDialogs(value): void {
+    const dialogRef = this.dialog.open(Dialogs, {
+      width: '7500px',
+      height: '580px',
+      
+      data: { machine:value}
+    }); 
+
+    dialogRef.afterClosed().subscribe(result => {
+    });
+  }
   onClick(item) {
     this.selectedItem = item;
   }
-  openDialog(line,mac): void {
+  openDialog(line,mac,val): void {
     const dialogRef = this.dialog.open(Dialog, {
       width: '7500px',
       height: '580px',
-      data: { line: line, mac: mac }
+      data: { line: line, mac: mac,type:val}
 
     }); 
 
@@ -663,6 +680,9 @@ export class DashboardlineComponent implements OnInit {
         this.spi_count = res.sp_log_over_res.count;
         console.log(this.spi_count);
         this.sp_mac_value = res.sp_max_val;
+        this.speedover=res.sp_log_over_res.count
+        this.feedmaxvalue=res.feed_max_val
+        this.feedover=res.feed_log_over_res.count
         this.spid_check_line = res.line;
         this.spid_check_machine = res.machine;
         console.log(this.spid_check_line,this.spid_check_machine)
@@ -822,22 +842,40 @@ export class Dialog {
 
   sppivaluedle:any;
   spindlecount:any;
-  sppivalue:any;
+  sppivalue:any=[];
+  feedcount: any=[];
+  feedvalue: any=[];
   constructor(public dialogRef: MatDialogRef<Dialog>, @Inject(MAT_DIALOG_DATA) public data: any, private service: DashboardService, private fb: FormBuilder) {
     this.value = data;
     console.log(this.value);
     this.myLoader1 = true;
-   this.service.pie(this.value.line,this.value.mac).pipe(untilDestroyed(this)).subscribe(res=>{
-     console.log(res);
-     this.myLoader1 = false;
-
-     this.spindlecount = res.sp_log_over_res.count;
-     this.sppivalue = res.sp_log_over_res;
-     this.sppivaluedle = res.sp_log_over_res.value;
-
-     console.log(this.sppivalue);
-
-    })
+    this.sppivaluedle=[]
+  
+    if(this.value.type=="spindle"){
+      this.service.pie(this.value.line,this.value.mac).pipe(untilDestroyed(this)).subscribe(res=>{
+        console.log(res);
+        this.myLoader1 = false;
+   
+        this.spindlecount = res.sp_log_over_res.count;
+        this.sppivalue = res.sp_log_over_res;
+        this.sppivaluedle = res.sp_log_over_res.value;
+   
+        console.log(this.sppivalue);
+   
+       })
+    }else{
+      this.service.pie(this.value.line,this.value.mac).pipe(untilDestroyed(this)).subscribe(res=>{
+        console.log(res);
+        this.myLoader1 = false;
+   
+        this.feedcount = res.feed_log_over_res.count;
+        // this.sppivalue = res.sp_log_over_res;
+        this.sppivaluedle = res.feed_log_over_res.value;
+   
+        console.log(this.feedvalue);
+   
+       })
+    }
 
 
   }
@@ -851,7 +889,63 @@ export class Dialog {
   ngOnDestroy() { }
 
 
+
 }
+
+
+@Component({
+  selector: 'dialog-page',
+  templateUrl: 'dialogs.html',
+  styleUrls: ['./dashboardline.component.scss']
+
+})
+export class Dialogs {
+  myLoader1 = false;
+  value: any=[];
+  sppivaluedle: any=[];
+  datas: any=[];
+
+  constructor(public dialogRef: MatDialogRef<Dialog>, @Inject(MAT_DIALOG_DATA) public data: any, private service: DashboardService){
+    this.value=data
+    this.service.reason(this.value.machine).pipe(untilDestroyed(this)).subscribe(res=>{
+      console.log(res);
+      this.sppivaluedle=res
+      this.datas=[];
+      for(let i=0;i<this.sppivaluedle.length;i++){
+       this.datas.push(this.toHoursMinutesSeconds(this.sppivaluedle[i].total))
+      }
+    })
+
+
+  }
+  ngOnInit(){
+  
+    // http://3.7.120.8:3000//api/v1/current_idle_reasons?machine=VALVE-C52
+  }
+  toHoursMinutesSeconds = totalSeconds => {
+    const hours = Math.floor(totalSeconds / 3600);
+    const minutes = Math.floor((totalSeconds % 3600) / 60);
+    const seconds = totalSeconds % 60;
+    // let result = `${minutes
+    //   .toString()
+    //   .padStart(1, '0')}:${seconds.toString().padStart(2, '0')}`;
+    // if (!!hours) {
+    let result = `${hours.toString()}:${minutes
+      .toString()
+      .padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
+    // }
+    return result;
+  };
+  ngOnDestroy(){
+
+  }
+}
+
+
+
+
+
+
 
 
 

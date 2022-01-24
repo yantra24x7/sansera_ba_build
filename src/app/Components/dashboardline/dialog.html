@@ -1,28 +1,38 @@
-   <div *ngIf="myLoader1" class="spinner">
-        <img src="assets/images/spinner.gif">
-    </div>
+<div *ngIf="myLoader1" class="spinner">
+    <img src="assets/images/spinner.gif">
+</div>
 
-    <div class="close_modal">
-        <mat-icon mat-dialog-close  class="v-align-middle display" matTooltip="Close">close
-        </mat-icon>
-    </div>
-<h4>Spindle Count : {{spindlecount}}</h4>
+<div class="close_modal">
+    <mat-icon mat-dialog-close  class="v-align-middle display" matTooltip="Close">close
+    </mat-icon>
+</div>
+<h4 *ngIf="this.value.type=='spindle'">Spindle Load Over Travel Count : {{spindlecount}}</h4>
+<h4  *ngIf="this.value.type=='feed'">Feed Rate Over Travel Count : {{feedcount}}</h4>
 
 
 <br>
 
-
+<div class="table_wrapper">
 <table>
-    <tr>
-        <th>S.NO</th>
-        <th>Start Time</th>
-        <th>End Time</th>
-        <th>Reached Value</th>
-    </tr>
-    <tr *ngFor="let VAPMS of sppivaluedle; let i = index" class="tadbel_data_view">
-        <td>{{i+1}}</td>
-        <td>{{VAPMS[0] | date:'dd-MM-yyyy ; HH:mm:ss'}}</td>
-        <td>{{VAPMS[1] | date:'dd-MM-yyyy ; HH:mm:ss'}}</td>
-        <td>{{VAPMS[2]}}</td>
-    </tr>
+<thead>
+<tr>
+    <th>S.NO</th>
+    <th>Start Time</th>
+    <th>End Time</th>
+    <th>Reached Value</th>
+</tr>
+</thead>
+<tbody>
+<tr   *ngFor="let VAPMS of sppivaluedle; let i = index" class="tadbel_data_view">
+    <td>{{i+1}}</td>
+    <td>{{VAPMS[0] | date:'dd-MM-yyyy ; HH:mm:ss a'}}</td>
+    <td>{{VAPMS[1] | date:'dd-MM-yyyy ; HH:mm:ss a'}}</td>
+    <td>{{VAPMS[2]}}</td>
+</tr>  
+</tbody>
+<div class="fo-center" *ngIf="sppivaluedle.length==0" >
+<h4 >No Data Found</h4>
+</div>
+
 </table>
+</div>

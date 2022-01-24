@@ -101,7 +101,7 @@ export class SidebarComponent implements OnInit {
 
       }
       else{
-        this.route.navigateByUrl('/rabwin_dashboard');
+        this.route.navigateByUrl('/new_dashboard');
         if(window.innerWidth  < 600){
           this.toggleSidebar();
         }

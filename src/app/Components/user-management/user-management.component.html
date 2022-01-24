@@ -10,6 +10,7 @@
       </div>
       <mat-card class="card_sec">
         <mat-card-content class="table_responsive">
+          <div class="example-container">
           <table mat-table [dataSource]="dataSource" class="mat-elevation-z0">
             <!-- Position Column -->
             <ng-container matColumnDef="first_name">
@@ -56,10 +57,10 @@
             </ng-container>
 
 
-            <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+            <tr mat-header-row *matHeaderRowDef="displayedColumns; sticky: true !important"></tr>
             <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
           </table>
-         
+         </div>
         </mat-card-content>
         <mat-paginator [length]="total_count" [pageSize]="page_size" [pageSizeOptions]="pageSizeOptions"
         (page)="pageEvent($event)">

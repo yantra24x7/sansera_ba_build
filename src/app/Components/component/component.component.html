@@ -10,6 +10,7 @@
         </div>
         <mat-card class="card_sec">
           <mat-card-content class="table_responsive">
+            <div class="example-container">
             <table mat-table [dataSource]="dataSource" class="mat-elevation-z0">
   
 
@@ -64,9 +65,10 @@
                 </td>
               </ng-container>
   
-              <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+              <tr mat-header-row *matHeaderRowDef="displayedColumns; sticky: true !important"></tr>
               <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
             </table>
+            </div>
           </mat-card-content>
         </mat-card>
 

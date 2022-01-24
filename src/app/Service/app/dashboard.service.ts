@@ -40,6 +40,9 @@ export class DashboardService {
   pie(line,name):Observable<any>{
     return this.http.get('live_machine_detail?line=' + line + '&&machine=' + name )
   }
+  reason(name):Observable<any>{
+    return this.http.get('current_idle_reasons?machine='+name)
+  }
 }
 
 

@@ -24,32 +24,59 @@
 
                             </mat-select>
                         </mat-form-field>
+                       
                     </div>
                 <div class="filter_field">
                         <!--have commmented out conditions feel free to use them again *ngIf="type == 'ShiftWise'" -->
-                        <mat-form-field appearance="outline">
+                        <!-- <mat-form-field appearance="outline">
                             <mat-select placeholder="Select Machine" matNativeControl required
-                                formControlName="machine_name">
+                                formControlName="machine_name"> -->
                                 <!-- <mat-option value="all">All</mat-option> -->
 
-                                <mat-option *ngFor="let machine of mac_response" [value]="machine">
+                                <!-- <mat-option *ngFor="let machine of mac_response" [value]="machine">
                                     {{machine}}
                                 </mat-option>
                             </mat-select>
-                        </mat-form-field>
+                        </mat-form-field> -->
+
+                        <mat-form-field>
+                          
+                            <mat-select placeholder="machine_name" formControlName="machine_name"  [(value)]="selectedMachines" multiple >
+                                <!-- <button color="primary" mat-raised-button (click)="events2('1')">All</button>   <button color="primary" mat-raised-button (click)="events2('2')">Clear All</button> -->
+                                <div class="select-all">
+                                    <mat-checkbox [(ngModel)]="allSelected"
+                                                    [ngModelOptions]="{standalone: true}"
+                                                    (change)="toggleAllSelection()">All</mat-checkbox>
+                                </div>
+                                <mat-option *ngFor="let machine of mac_response" [value]="machine">{{machine}}</mat-option>
+                            </mat-select>
+                          </mat-form-field>
                     </div>
                     <div class="filter_field">
                         <!--have commmented out conditions feel free to use them again *ngIf="type == 'ShiftWise'" -->
-                        <mat-form-field appearance="outline">
+                        <!-- <mat-form-field appearance="outline">
                             <mat-select placeholder="Select Shift" matNativeControl required
-                                formControlName="shift_num">
+                                formControlName="shift_num"> -->
                                 <!-- <mat-option value="all">All</mat-option> -->
 
-                                <mat-option *ngFor="let shift of shift_response" [value]="shift.shift_no">
+                                <!-- <mat-option *ngFor="let shift of shift_response" [value]="shift.shift_no">
                                     {{shift.shift_no}}
                                 </mat-option>
                             </mat-select>
-                        </mat-form-field>
+                        </mat-form-field> -->
+
+                        <mat-form-field>
+
+                            <mat-select placeholder="shift_num" formControlName="shift_num"  [(value)]="selectedShifts" multiple >
+                                <!-- <button color="primary" mat-raised-button (click)="events1('1')">All</button>   <button color="primary" mat-raised-button (click)="events1('2')">Clear All</button> -->
+                                <div class="select-all">
+                                    <mat-checkbox [(ngModel)]="allSelecteds"
+                                                    [ngModelOptions]="{standalone: true}"
+                                                    (change)="toggleAllSelections()">All</mat-checkbox>
+                                </div>
+                                <mat-option *ngFor="let shift of shift_response" [value]="shift.shift_no">{{shift.shift_no}}</mat-option>
+                            </mat-select>
+                          </mat-form-field>
                     </div>
                     <div class="filter_field date_picker" color="primary">
                       
@@ -61,11 +88,18 @@
                             <mat-datepicker #picker startView="year" [startAt]="startDate"></mat-datepicker>
                           </mat-form-field> -->
  
-                          <mat-form-field>
+                          <!-- <mat-form-field>
                             <mat-label>Date</mat-label>
                             <input matInput [matDatepicker]="picker" formControlName="date" (dateInput)="addEvent('input', $event)" [max]="maxDate" (dateChange)="addEvent('change', $event)">
                             <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
                             <mat-datepicker #picker startView="year" [startAt]="startDate"></mat-datepicker>
+                          </mat-form-field> -->
+                          <mat-form-field class="date_select" (click)="picker.open()">
+                            <input matInput placeholder="Choose a date" class="date_select" formControlName="date"
+                              [satDatepicker]="picker" [max]="maxDate" [min]="minDate" (dateInput)="addEvent('input', $event)" (dateChange)="addEvent('change', $event)">
+                            <sat-datepicker-toggle matSuffix [for]="picker"></sat-datepicker-toggle>
+                            <sat-datepicker #picker [rangeMode]="true">
+                            </sat-datepicker>
                           </mat-form-field>
                     </div>
 
@@ -85,19 +119,27 @@
         </div>
         
         <mat-card class="card_sec"  *ngIf="reportList">
+            <h5 class="table-heading">Idle Reason Report</h5>
             <div class="table_wrapper">
+                
                 <table class="table">
                     <thead>
+                        
                         <tr>
                             <th rowspan="2">S.no</th>
                             <th rowspan="2">Date</th>
 
                             <th rowspan="2">Shift</th>
                             <th rowspan="2">Machine Name</th>
+                            <th>Reason</th>
+                            <th>Start Time</th>
+                            
+                            <th>End Time</th>
+                            <th>Duration</th>
                             <!-- <th rowspan="2">Time</th> -->
-                            <th colspan="11">Idle Reason Report</th>
+                            
                         </tr>
-                        <tr>
+                        <!-- <tr>
                          
                             <th>Reason</th>
                             <th>Start Time</th>
@@ -105,21 +147,22 @@
                             <th>End Time</th>
                             <th>Duration</th>
                            
-                        </tr>
+                        </tr> -->
                     </thead>
                     <tbody *ngFor="let show_report of get_report; let i = index" >
-                        <tr *ngIf="no_data?.length > 0">
-                            <td>{{i+1}}</td>
-                            <td>{{g_report?.date || '---'}}</td>
-                            <td>{{g_report?.shift_no || '---'}}</td>
+                        <tr *ngFor="let show_reports of show_report.data; let j = index">
+                            <td>{{array[i][j]}}</td>
+                            <td>{{show_report?.date || '---'}}</td>
+                            <td>{{show_report?.shift_no || '---'}}</td>
 
-                            <td>{{g_report?.machine_name || '---'}}</td>
+                            
+                            <td>{{show_report?.machine_name || '---'}}</td>
                              <!-- <td>{{g_report?.time || '---'}}</td> -->
-                            <td>{{show_report?.idle_reason }}</td>
-                            <td>{{show_report?.idle_start | date:'yyyy-MM-dd ; HH:mm:ss'}}</td>
+                            <td>{{show_reports?.idle_reason }}</td>
+                            <td>{{show_reports?.idle_start | date:'yyyy-MM-dd ; HH:mm:ss'}}</td>
                          
-                            <td>{{show_report?.idle_end | date:'yyyy-MM-dd ; HH:mm:ss'}}</td>
-                            <td>{{data[i]}}</td>
+                            <td>{{show_reports?.idle_end | date:'yyyy-MM-dd ; HH:mm:ss'}}</td>
+                            <td>{{data[i][j]}}</td>
                         </tr>
                     </tbody>
                 </table>

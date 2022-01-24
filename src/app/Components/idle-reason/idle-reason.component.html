@@ -139,6 +139,7 @@
     </mat-card> -->
     <mat-card class="card_sec">
       <mat-card-content class="table_responsive">
+        <div class="example-container">
         <table class="row" mat-table  matTableExporter #exporter="matTableExporter" [dataSource]="dataSource" class="mat-elevation-z0">
 
           <ng-container matColumnDef="position">
@@ -207,9 +208,10 @@
 
            
 
-          <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+          <tr mat-header-row *matHeaderRowDef="displayedColumns; sticky: true !important"></tr>
           <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
         </table>
+        </div>
         
          
 
