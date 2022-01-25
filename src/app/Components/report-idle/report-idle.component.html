@@ -169,12 +169,15 @@
                 <div class="duke"> 
                     Duration: {{get_duration}}
                 </div>
+                <div *ngIf="no_data?.length==0" class="no_data_found">
+                    <h4>No Data Found</h4>
+                </div>
             </div>
            
             
-            <div *ngIf="no_data?.length==0" class="no_data_found">
+            <!-- <div *ngIf="no_data?.length==0" class="no_data_found">
                 <h4>No Data Found</h4>
-            </div>
+            </div> -->
          
            
  

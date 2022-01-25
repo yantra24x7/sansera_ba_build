@@ -211,6 +211,9 @@
           <tr mat-header-row *matHeaderRowDef="displayedColumns; sticky: true !important"></tr>
           <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
         </table>
+        <mat-card-content *ngIf="dataSource.filteredData.length==0" class="no_data_found">
+          <h2>No data found</h2>
+        </mat-card-content>
         </div>
         
          
@@ -221,9 +224,7 @@
         </mat-paginator> -->
       </mat-card-content>
 
-      <mat-card-content *ngIf="dataSource.filteredData.length==0" class="no_data_found">
-        <h2>No data found</h2>
-      </mat-card-content>
+
     </mat-card>
     
   </div>
