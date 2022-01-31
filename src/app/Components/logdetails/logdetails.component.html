@@ -1,0 +1,67 @@
+<section class="page">
+    <div class="section_top_padding">
+    <mat-card class="card_sec">
+        <mat-card-content class="table_responsive">
+          <div class="example-container">
+          <table class="row" mat-table  [dataSource]="dataSource" class="mat-elevation-z0">
+  
+            <ng-container matColumnDef="sno">
+                <th mat-header-cell *matHeaderCellDef> # </th>
+                <td mat-cell *matCellDef="let i=index;"> {{i+1}} </td>
+            </ng-container>
+        
+            <ng-container matColumnDef="username">
+              <th mat-header-cell *matHeaderCellDef> Username </th>
+              <td mat-cell *matCellDef="let element"> {{this.id.first_name || '---'}} </td>
+            </ng-container>
+  
+           
+            <ng-container matColumnDef="email">
+              <th mat-header-cell *matHeaderCellDef> Email </th>
+              <td mat-cell *matCellDef="let element"> {{this.id.email|| '---'}} </td>
+            </ng-container>
+  
+  
+      
+            <ng-container matColumnDef="ip">
+              <th mat-header-cell *matHeaderCellDef> IP </th>
+              <td mat-cell *matCellDef="let element"> {{element.ip }} </td>
+            </ng-container>
+  
+            <ng-container matColumnDef="referrer">
+              <th mat-header-cell *matHeaderCellDef> Referrer </th>
+              <td mat-cell *matCellDef="let element"> {{element.referrer}} </td>
+            </ng-container>
+  
+            <ng-container matColumnDef="landingpage">
+              <th mat-header-cell *matHeaderCellDef> Landing Page </th>
+              <td mat-cell *matCellDef="let element"> {{element.landing_page || '---'}} </td>
+            </ng-container>
+            <ng-container matColumnDef="startedate">
+                <th mat-header-cell *matHeaderCellDef> Landing Time </th>
+                <td mat-cell *matCellDef="let element"> {{element.started_at |   date:'dd-MM-yyyy ; HH:mm:ss'}} </td>
+              </ng-container>
+              <ng-container matColumnDef="devicetype">
+                <th mat-header-cell *matHeaderCellDef> Device Type </th>
+                <td mat-cell *matCellDef="let element"> {{element.device_type || '---'}} </td>
+              </ng-container>
+  
+            <tr mat-header-row *matHeaderRowDef="displayedColumns; sticky: true !important"></tr>
+            <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+          </table>
+          <mat-card-content *ngIf="dataSource.filteredData.length==0" class="no_data_found">
+            <h2>No Logs found</h2>
+          </mat-card-content>
+        </div>
+        </mat-card-content>
+        <mat-paginator [length]="total_count" [pageSize]="page_size" [pageSizeOptions]="pageSizeOptions"
+        (page)="pageEvent($event)">
+      </mat-paginator>
+  
+      </mat-card>
+    </div>
+    <div *ngIf="myLoader" class="spinner">
+      <img src="assets/images/spinner.gif">
+  </div>
+  
+  </section>

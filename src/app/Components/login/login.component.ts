@@ -79,35 +79,38 @@ export class LoginComponent implements OnInit {
 
 
       let data = res.role;
-      if (res === false) {
+      if (res ===false) {
         Swal.fire('The Username or Password is incorrect')
       } else {
-        this.service.machine_count().pipe(untilDestroyed(this)).subscribe(res => {
-          this.count_machine = res;
-          localStorage.setItem('disable', res.shift_data);
+        this.service.machine_count().pipe(untilDestroyed(this)).subscribe(ress => {
+          this.count_machine = ress;
+          localStorage.setItem('disable', ress.shift_data);
 
-          if (res.shift_data === true && data === 'Admin') {
+          if (ress.shift_data === true && data === 'Admin') {
             // Swal.fire("Welcome admin")
             this.router.navigateByUrl('/new_dashboard');
 
           }
-          else if (res.shift_data === false && data === 'Admin') {
+          else if (ress.shift_data === false && data === 'Admin') {
             Swal.fire("Register Shift")
             this.router.navigateByUrl('/shift');
           }
-          else if (res.shift_data === true && data === 'Supervisor') {
+          else if (ress.shift_data === true && data === 'Supervisor') {
             // Swal.fire("Welcome Supervisor")
             this.router.navigateByUrl('/new_dashboard');
           }
-          else if (res.shift_data === false && data === 'Supervisor') {
+          else if (ress.shift_data === false && data === 'Supervisor') {
             Swal.fire("Please Contact Yantra 24x7")
           }
-          else if (res.shift_data === true && data === 'QA') {
+          else if (ress.shift_data === true && data === 'QA') {
             // Swal.fire("welcome QA")
             this.router.navigateByUrl('/quality');
           }
-          else if (res.shift_data === false && data === 'QA') {
+          else if (ress.shift_data === false && data === 'QA') {
             Swal.fire("Please Contact Yantra 24x7")
+          }else if(ress.shift_data === true && data === "Yantra_Admin"){
+            localStorage.setItem("tokens",res.access_token)
+            this.router.navigateByUrl('/loghistory');
           }
         })
       }

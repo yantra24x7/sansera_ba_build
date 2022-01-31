@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
-import { AuthGuard} from '../app/Service/core/authentication/auth.guard';
-    
+// import { AuthGuard} from '../app/Service/core/authentication/auth.guard';
+import { AuthGuard} from '../app/Service/core/authentication/auths.guard';
    
 const routes: Routes = [
   
@@ -46,7 +46,8 @@ const routes: Routes = [
 { path: 'newdash', loadChildren: () => import('./Components/newdash/newdash.module').then(m => m.NewdashModule) },
   
 // { path: 'cycle', loadChildren: () => import('./Components/cycle/cycle.module').then(m => m.CycleModule) },
-  
+{path:'loghistory',loadChildren: ()=>import('./Components/loghistory/loghistory.module').then(m=>m.LoghistoryModule),canActivate: [AuthGuard]},
+{path:'logactivity',loadChildren: ()=>import('./Components/logdetails/logdetails.module').then(m=>m.LogdetailModule),canActivate: [AuthGuard]},
     
 ]
     

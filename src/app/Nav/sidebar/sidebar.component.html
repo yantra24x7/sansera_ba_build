@@ -275,7 +275,21 @@
         </li>
       </ul>
     </div>
-
+    <div *ngIf="rolename === 'Yantra_Admin'" class="sidenav_view">
+      <a href="javascript:;" class="sidenav_logo">
+        <img src="../../../assets/images/rabwinnewlogtest.png">
+      </a>
+    
+      <ul class="sidenav_links">
+      <li [routerLink]="['/loghistory']" (click)="shifting()" routerLinkActive="active-link">
+        <a href="javascript:;">
+          <mat-icon class="v-align-middle display">list
+          </mat-icon>
+          <span>Log Activity</span>
+        </a>
+      </li>
+      </ul>
+      </div>
     <div *ngIf="rolename === 'Supervisor'" class="sidenav_view">
       <a href="javascript:;" class="sidenav_logo">
         <img src="../../../assets/images/rabwinnewlogtest.png">
