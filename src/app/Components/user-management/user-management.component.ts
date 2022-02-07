@@ -41,6 +41,15 @@ export class UserManagementComponent implements OnInit {
 
     this.userService.user_get(this.pageNo).pipe(untilDestroyed(this)).subscribe(res => {
       this.users = res.user_list;
+       
+    for( var i = 0; i < this.users.length; i++){ 
+    
+      if ( this.users[i].role === 'Yantra_Admin') { 
+  
+        this.users.splice(i, 1); 
+      }
+  
+  }
       this.dataSource = new MatTableDataSource(this.users)
       this.total_count =res.user_count;
 
@@ -53,7 +62,14 @@ export class UserManagementComponent implements OnInit {
     this.userService.user_get(this.pageNo).pipe(untilDestroyed(this)).subscribe( res => {
       this.myLoader = false;
       this.users = res.user_list;
-
+      for( var i = 0; i < this.users.length; i++){ 
+    
+        if ( this.users[i].role === 'Yantra_Admin') { 
+    
+          this.users.splice(i, 1); 
+        }
+    
+    }
       this.dataSource = new MatTableDataSource(this.users)
       this.total_count =res.user_count;
 
