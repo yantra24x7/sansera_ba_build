@@ -49,6 +49,7 @@ export class DashboardlineComponent implements OnInit {
   speedover: any;
   feedmaxvalue: any;
   feedover: any;
+  machines: any;
   constructor(public dialog: MatDialog,private service: DashboardService,private route:ActivatedRoute,private nav: NavbarService, private fb: FormBuilder,) {
     this.nav.show();
     this.lname = this.route.snapshot.queryParamMap.get('line_name');
@@ -76,6 +77,7 @@ export class DashboardlineComponent implements OnInit {
           
     this.fline = res[0].line;
     this.fname = res[0].machine;
+    this.machines=this.fname
     this.selectedItem = res[0].machine;
     console.log(this.selectedItem);
     this.utlization = res[0].run;
@@ -672,7 +674,7 @@ export class DashboardlineComponent implements OnInit {
   valvo(fline,fname,utlization,run_time,stop,disconnect,reason)
   {     
          this.myLoader = true;
-
+         this.machines=fname
          this.service.pie(fline,fname).pipe(untilDestroyed(this)).subscribe(res=>{
         this.myLoader = false;
 

@@ -14,29 +14,29 @@
         <div class="dashboardline_page">
             <div class="dashboardline_list left_side side_sec">
                 <div class="inner_card" [ngClass]="classList" *ngFor="let val of alname">
-                    <div class="dashboardline_item active" 
+                    <div class="dashboardline_item active" (click)="onClick(val)" (click)="valvo(val?.line,val?.machine,val?.run,val?.run_time,val?.stop,val?.disconnect,val?.reason)"
                         [ngClass]="{ 'as-selected': val == selectedItem }" *ngIf="val.status === 'DISCONNECT'">
-                        <div>
-                            <h3 (click)="onClick(val)" (click)="valvo(val?.line,val?.machine,val?.run,val?.run_time,val?.stop,val?.disconnect,val?.reason)">{{val?.machine}}</h3>
-                            <p (click)="onClick(val)" (click)="openDialogs(val?.machine)" (click)="valvo(val?.line,val?.machine,val?.run,val?.run_time,val?.stop,val?.disconnect,val?.reason)">Machine Disconnect</p>
+                        <div >
+                            <h3 >{{val?.machine}}</h3>
+                            <p >Machine Disconnect</p>
                         </div>
                         <span>{{val?.run}}%</span>
                     </div>
 
-                    <div class="dashboardline_item run" 
+                    <div class="dashboardline_item run" (click)="onClick(val)" (click)="valvo(val?.line,val?.machine,val?.run,val?.run_time,val?.stop,val?.disconnect,val?.reason)"
                         [ngClass]="{ 'as-selected': val == selectedItem }" *ngIf="val.status === 'OPERATE'">
-                        <div>
-                            <h3 (click)="onClick(val)" (click)="valvo(val?.line,val?.machine,val?.run,val?.run_time,val?.stop,val?.disconnect,val?.reason)">{{val?.machine}}</h3>
-                            <p (click)="onClick(val)" (click)="openDialogs(val?.machine)" (click)="valvo(val?.line,val?.machine,val?.run,val?.run_time,val?.stop,val?.disconnect,val?.reason)">Machine Running</p>
+                        <div >
+                            <h3 >{{val?.machine}}</h3>
+                            <p >Machine Running</p>
                         </div>
                         <span>{{val?.run}}%</span>
                     </div>
 
-                    <div class="dashboardline_item idle" 
+                    <div class="dashboardline_item idle" (click)="onClick(val)" (click)="valvo(val?.line,val?.machine,val?.run,val?.run_time,val?.stop,val?.disconnect,val?.reason)"
                         [ngClass]="{ 'as-selected': val == selectedItem }" *ngIf="val.status === 'STOP'">
-                        <div>
-                            <h3 (click)="onClick(val)" (click)="valvo(val?.line,val?.machine,val?.run,val?.run_time,val?.stop,val?.disconnect,val?.reason)">{{val?.machine}}</h3>
-                            <p (click)="onClick(val)" (click)="openDialogs(val?.machine)" (click)="valvo(val?.line,val?.machine,val?.run,val?.run_time,val?.stop,val?.disconnect,val?.reason)">{{val?.reason}}</p>
+                        <div >
+                            <h3 >{{val?.machine}}</h3>
+                            <p >{{val?.reason}}</p>
                         </div>
                         <span>{{val?.run}}%</span>
                     </div>
@@ -96,12 +96,12 @@
                                     <p>Run Time</p>
                                 </li>
                                 <li>
-                                    <span>{{operator?.stop}}%</span>
+                                    <span (click)="openDialogs(machines)" >{{operator?.stop}}%</span>
                                     <div class="progress">
 
                                         <!-- <progress class="bar idle" max="100" value={{operator?.stop}}>
                                           </progress> -->
-                                        <progress class="bar idle" max="100" value={{operator?.stop}}>
+                                        <progress (click)="openDialogs(machines)" class="bar idle" max="100" value={{operator?.stop}}>
                                         </progress>
                                     </div>
                                     <p>Idle Time</p>
