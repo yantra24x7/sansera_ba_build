@@ -24,7 +24,7 @@ declare var gtag;
 
 })
 export class ReportComponent implements OnInit {
-  displayedColumns: string[] = ['position', 'date', 'line', 'machine_name','shift_num','time','operator','operator_id','op_no','root_card','target','actual','ncq','accept','reject','rework','efficiency','utilisation','run_time','idle_time','alarm_time','disconnect','duration'];
+  displayedColumns: string[] = ['position', 'date', 'line', 'machine_name','shift_num','time','operator','operator_id','op_no','root_card','target','actual','accept','reject','rework','efficiency','utilisation','run_time','idle_time','alarm_time','disconnect','duration'];
   dataSource = new MatTableDataSource();
   // animal: string;
 

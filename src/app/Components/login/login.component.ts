@@ -102,13 +102,14 @@ export class LoginComponent implements OnInit {
           else if (ress.shift_data === false && data === 'Supervisor') {
             Swal.fire("Please Contact Yantra 24x7")
           }
-          else if (ress.shift_data === true && data === 'QA') {
-            // Swal.fire("welcome QA")
-            this.router.navigateByUrl('/quality');
-          }
-          else if (ress.shift_data === false && data === 'QA') {
-            Swal.fire("Please Contact Yantra 24x7")
-          }else if(ress.shift_data === true && data === "Yantra_Admin"){
+          // else if (ress.shift_data === true && data === 'QA') {
+           
+          //   this.router.navigateByUrl('/quality');
+          // }
+          // else if (ress.shift_data === false && data === 'QA') {
+          //   Swal.fire("Please Contact Yantra 24x7")
+          // }
+          else if(ress.shift_data === true && data === "Yantra_Admin"){
             localStorage.setItem("tokens",res.access_token)
             this.router.navigateByUrl('/loghistory');
           }
