@@ -398,7 +398,7 @@
                                 <th>Machine Name</th>
                                 <th>Shift Num</th>
                                 <th>Parts Produced</th>
-                                <th>Operator Name</th>
+			
                                 <th>Operator Id</th>
                                 <th>Utilization(%)</th>
                                 <th>Run Time</th>
@@ -413,11 +413,7 @@
                                 <td>{{show_table?.shift_num}}</td>
                                 <td>{{show_table?.part_count}}</td>
                                 <!-- <td>{{show_table?.operator_name}}</td> -->
-                                <td>
-                                    <span *ngIf="show_table?.operator_name.length === 0">No Operator Name</span>
-                                    <span *ngIf="show_table?.operator_name.length != 0"> {{show_table?.operator_name}} </span> 
-                                    
-                                   </td>
+                             
 
                                 <td>
                                     <span *ngIf="show_table?.op_id.length === 0">No Operator Id</span>
