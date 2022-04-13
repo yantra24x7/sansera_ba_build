@@ -9,6 +9,7 @@ const routes: Routes = [
 { path: 'register', loadChildren: () => import('./Components/register/register.module').then(m => m.RegisterModule) },
 { path: 'sidebar', loadChildren: () => import('./Nav/sidebar/sidebar.module').then(m => m.SidebarModule) },
 { path: 'alarm', loadChildren: () => import('./Components/alarm/alarm.module').then(m => m.AlarmModule) },
+{ path: 'alarmreport', loadChildren: () => import('./Components/alarmreports/alarmreport.module').then(m => m.AlarmReportModule) }, 
 { path: 'dashboard', loadChildren: () => import('./Components/dashboard/dashboard.module').then(m => m.DashboardModule), },
 { path: 'report', loadChildren: () => import('./Components/report/report.module').then(m => m.ReportModule) },  { path: 'machine_registration', loadChildren: () => import('./Components/machine-registration/machine-registration.module').then(m => m.MachineRegistrationModule) },
 { path: 'user_management', loadChildren: () => import('./Components/user-management/user-management.module').then(m => m.UserManagementModule) },
@@ -48,7 +49,7 @@ const routes: Routes = [
 // { path: 'cycle', loadChildren: () => import('./Components/cycle/cycle.module').then(m => m.CycleModule) },
 {path:'loghistory',loadChildren: ()=>import('./Components/loghistory/loghistory.module').then(m=>m.LoghistoryModule),canActivate: [AuthGuard]},
 {path:'logactivity',loadChildren: ()=>import('./Components/logdetails/logdetails.module').then(m=>m.LogdetailModule),canActivate: [AuthGuard]},
-    
+
 ]
     
 @NgModule({

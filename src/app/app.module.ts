@@ -15,11 +15,13 @@
     import { ChartModule } from 'angular-highcharts';
 import { ServiceWorkerModule } from '@angular/service-worker';
 import { environment } from '../environments/environment';
+
     
     @NgModule({
      declarations: [
       AppComponent,
-        SidebarComponent
+        SidebarComponent,
+        
   ],
      imports: [
        BrowserModule,
