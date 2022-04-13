@@ -9,14 +9,16 @@
         <div class="machines_collections">
             <div class="machine_prod" *ngFor="let machine of machine_list; let i = index">
                 <ul class="user_action">
-			  <li class="ml-1" >
+			  <li class="ml-1" *ngIf="machine.status=='OPERATE'">
                         <a href="javascript:;">
-				<span class="{{machine.status=='OPERATE'?'dot':'dots'}}"></span>
-			   
-
+                            <span class="dot"></span>
                         </a>
                        </li>
-                     
+                       <li class="ml-1" *ngIf="machine.status=='DISCONNECT'">
+                        <a href="javascript:;">
+                            <span class="dotS"></span>
+                        </a>
+                       </li>
                     <li class="ml-1">
                         <a href="javascript:;" (click)="setting_viewnew(machine)" *ngIf="machine.tag_result1 == true">
                             <mat-icon class="v-align-middle display" matTooltip="Edit Spindle and Servo Load Axis">edit                            </mat-icon>
