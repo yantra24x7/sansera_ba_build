@@ -67,6 +67,9 @@ put_rreport(data: any):Observable<any> {
   overall_report_op(register):Observable<any>{
     return this.http.get('overall_report?machine_name=' + register.machine_name +'&&module='+ register.module +'&&shift_num=' +register.shift_num +'&&from_date='+ register.date + '&&select_type=' + register.type + '&&operator_id=' + register.operator)
   }
+  alarmoverall_report(register):Observable<any>{
+    return this.http.post('alarm_reports',register)
+  }
 
 }
 

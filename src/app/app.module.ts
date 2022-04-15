@@ -32,6 +32,7 @@ import { environment } from '../environments/environment';
        CoreModule,
        HighchartsChartModule,
        CountUpModule,
+  
        ServiceWorkerModule.register('ngsw-worker.js', { enabled: environment.production })      
     
  ],
