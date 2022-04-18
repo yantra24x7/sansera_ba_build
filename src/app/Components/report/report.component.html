@@ -263,7 +263,7 @@
                     <th mat-header-cell *matHeaderCellDef>Component Name</th>
                     <td mat-cell *matCellDef="let element"> 
                       
-                      <span *ngIf="element.prod_name === 'null'">No Component Name</span>
+                      <span *ngIf="element.prod_name ==null">No Component Name</span>
                       <span *ngIf="element.prod_name != 'null'">{{element.prod_name}}</span>
 
                       <!-- {{element.operator_id || '---'}}  -->
