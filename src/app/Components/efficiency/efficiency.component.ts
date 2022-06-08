@@ -55,6 +55,9 @@ export class EfficiencyComponent implements OnInit {
   new_date1: any;
   g_report:any;
   rolename:any;
+  count: any;
+  array: any=[];
+  array1: any=[];
   constructor(private datepipe: DatePipe, private nav: NavbarService, private service: ReportService, private fb: FormBuilder, private exportService: ExportService) {
     this.nav.show()
   }
@@ -161,46 +164,84 @@ export class EfficiencyComponent implements OnInit {
       }
   this.service.overallll_report(register).subscribe(res => {
     this.myLoader = false;
-    this.g_report = res[0];
-    this.opera = res[0].operator;
-    this.get_report = res[0].route_card_report;
+    this.g_report = res;
+    // this.opera = res[0].operator;
+    // this.get_report = res[0].route_card_report;
      if(this.g_report.length==0){
       Swal.fire('Exporting!, No Data Found')
     }else{
-    for(var i=0;i<this.get_report.length;i++){
-      Swal.fire('Download Successfully')
+     
 
-      this.export_excel.push({
-         "S.No": i+1,
-         "Date": this.g_report.date || '---',
-         "Shift": this.g_report.shift_num || '---',
+      for(let i=0;i<this.g_report.length;i++){
+        for(let j=0;j<this.g_report[i].route_card_report.length;j++){
+     this.export_excel.push({
+         "S.No": this.array[i][j],
+         "Date": this.g_report[i].date || '---',
+         "Shift": this.g_report[i].shift_num || '---',
 
-         "Line":this.get_report[i].line || '---',
-         "Machine Name":this.g_report.machine_name || '---',
+         "Line":this.g_report[i].route_card_report[j].line || '---',
+         "Machine Name":this.g_report[i].machine_name || '---',
 
-         "Operator Name":this.g_report.operator[0] || 'No Operator Name',
-         "Operator Id":this.g_report.operator_id[0] || 'No Operator Id',
-         "Operation Number":this.g_report.opeation_no || 'No Operation Number',
-         "Mode":this.get_report[i].mode || '---',
+         "Operator Name":this.g_report[i].route_card_report[j].operator_name[0] || 'No Operator Name',
+         "Operator Id":this.g_report[i].route_card_report[j].operator_id[0] || 'No Operator Id',
+         "Operation Number":this.g_report[i].route_card_report[j].opeation_no || 'No Operation Number',
+         "Mode":this.g_report[i].route_card_report[j].mode || '---',
 
-         "Route Card Number": this.get_report[i].card_no || '---',
-         "Route Card Start Time": this.get_report[i].rout_start || '---',
+         "Route Card Number": this.g_report[i].route_card_report[j].card_no || '---',
+         "Route Card Start Time": this.g_report[i].route_card_report[j].rout_start || '---',
        
-         "Route Card End Time": this.get_report[i].rout_end || '---',
-         "Duration": this.g_report.duration || '---',
+         "Route Card End Time": this.g_report[i].route_card_report[j].rout_end || '---',
+         "Duration": this.g_report[i].duration || '---',
 
-         "Target": this.get_report[i].tar ,
-         "Actual": this.get_report[i].actual ,
-         "NCQ" : this.get_report[i].rejection,
-         "Accept": this.get_report[i].accept ,
-         "Reject": this.get_report[i].rejection1 ,
-         "Rework": this.get_report[i].rework ,
-         "Efficiency(%)": this.get_report[i].efficiency ,
+         "Target": this.g_report[i].route_card_report[j].tar ,
+         "Actual": this.g_report[i].route_card_report[j].actual ,
+         "NCQ" : this.g_report[i].route_card_report[j].rejection,
+         "Accept": this.g_report[i].route_card_report[j].accept ,
+         "Reject": this.g_report[i].route_card_report[j].rejection1 ,
+         "Rework": this.g_report[i].route_card_report[j].rework ,
+         "Efficiency(%)": this.g_report[i].route_card_report[j].efficiency ,
 
  
 
       });
-    }
+        }
+
+      }
+    // for(var i=0;i<this.get_report.length;i++){
+    //   Swal.fire('Download Successfully')
+
+    //   this.export_excel.push({
+    //      "S.No": i+1,
+    //      "Date": this.g_report.date || '---',
+    //      "Shift": this.g_report.shift_num || '---',
+
+    //      "Line":this.get_report[i].line || '---',
+    //      "Machine Name":this.g_report.machine_name || '---',
+
+    //      "Operator Name":this.g_report.operator[0] || 'No Operator Name',
+    //      "Operator Id":this.g_report.operator_id[0] || 'No Operator Id',
+    //      "Operation Number":this.g_report.opeation_no || 'No Operation Number',
+    //      "Mode":this.get_report[i].mode || '---',
+
+    //      "Route Card Number": this.get_report[i].card_no || '---',
+    //      "Route Card Start Time": this.get_report[i].rout_start || '---',
+       
+    //      "Route Card End Time": this.get_report[i].rout_end || '---',
+    //      "Duration": this.g_report.duration || '---',
+
+    //      "Target": this.get_report[i].tar ,
+    //      "Actual": this.get_report[i].actual ,
+    //      "NCQ" : this.get_report[i].rejection,
+    //      "Accept": this.get_report[i].accept ,
+    //      "Reject": this.get_report[i].rejection1 ,
+    //      "Rework": this.get_report[i].rework ,
+    //      "Efficiency(%)": this.get_report[i].efficiency ,
+
+ 
+
+    //   });
+    // }
+    Swal.fire('Download Successfully')
       this.exportService.exportAsExcelFile(this.export_excel, 'Efficiency Report Details');
   }
   })
@@ -232,6 +273,19 @@ export class EfficiencyComponent implements OnInit {
         this.g_report = res[0];
         this.get_report = res[0].route_card_report;
         this.fina = res;
+
+        this.count=0
+        this.array=[]
+        this.array1=[]
+        for(let i in this.fina){
+          for(let j in this.fina[i].route_card_report){
+
+            this.count=this.count+1;
+            this.array1.push(this.count)
+          }
+          this.array.push(this.array1)
+          this.array1=[]
+        }
         // this.dataSource = new MatTableDataSource(this.get_report);
      
 

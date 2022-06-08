@@ -73,6 +73,21 @@
                     <mat-error *ngIf="userForm.controls['role'].errors?.required"> Role is Required
                     </mat-error>
                 </mat-form-field>
+
+                <mat-form-field appearance="outline">
+                    <mat-label>Select Pages</mat-label>
+                    
+                    <mat-select  formControlName="user_auth"  [(value)]="selectedpages" multiple >
+                       
+                        <!-- <button color="primary" mat-raised-button (click)="events1('1')">All</button>   <button color="primary" mat-raised-button (click)="events1('2')">Clear All</button> -->
+                        <div class="select-all">
+                            <mat-checkbox [(ngModel)]="allSelecteds"
+                                            [ngModelOptions]="{standalone: true}"
+                                            (change)="toggleAllSelections()">All</mat-checkbox>
+                        </div>
+                        <mat-option *ngFor="let p of pagess" [value]="p">{{p}}</mat-option>
+                    </mat-select>
+                  </mat-form-field>
             </div>
             <div class="form-button text-right">
                 <button mat-raised-button color="primary" type="submit" class="filter_btn btn_orange ml-16"

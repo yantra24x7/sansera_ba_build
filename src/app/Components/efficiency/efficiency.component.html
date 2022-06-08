@@ -105,14 +105,14 @@
                     </thead>
                     <tbody *ngFor="let gating of fina;let i = index">
                       <!-- {{gating.accept}} -->
-                        <tr *ngFor="let show_report of gating.route_card_report;let i = index">
-                            <td>{{i+1}}</td>
-                            <td>{{g_report?.date | date:'dd-MM-yyyy'}}</td>
+                        <tr *ngFor="let show_report of gating.route_card_report;let j = index">
+                            <td>{{array[i][j]}}</td>
+                            <td>{{gating?.date | date:'dd-MM-yyyy'}}</td>
 
-                            <td>{{g_report?.shift_num || '---'}}</td>
+                            <td>{{gating?.shift_num || '---'}}</td>
                             <td>{{show_report?.line || '---'}}</td>
 
-                             <td>{{g_report?.machine_name || '---'}}</td>
+                             <td>{{gating?.machine_name || '---'}}</td>
                              <td>
                                  
                                 <span *ngIf="show_report?.operator_name.length === 0">No Operator Name</span>

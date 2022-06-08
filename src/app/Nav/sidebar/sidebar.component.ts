@@ -35,6 +35,7 @@ export class SidebarComponent implements OnInit {
       shareReplay()
     );
   rolename: string;
+  showpages: any=[];
 
   constructor(private servie:LoginService,public nav: NavbarService, private route: Router, private breakpointObserver: BreakpointObserver) {
     this.nav.hide();
@@ -44,6 +45,7 @@ export class SidebarComponent implements OnInit {
   ngOnInit() {
 
     this.tenant_name = localStorage.getItem('ten_name');
+  
 
     this.servie.true().pipe(untilDestroyed(this)).subscribe(res=>{
       localStorage.setItem('sign', res);
@@ -53,6 +55,11 @@ export class SidebarComponent implements OnInit {
 
     this.rolename = localStorage.getItem('role_name');
   
+  }
+
+  hidepages(val){
+    this.showpages=JSON.parse(localStorage.getItem("paages"))
+    return this.showpages.includes(val)
   }
   changeTheme(primary: string) {
 
