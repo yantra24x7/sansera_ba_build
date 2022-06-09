@@ -74,7 +74,7 @@ export class LoginComponent implements OnInit {
       localStorage.setItem('role_name', res.role);
       localStorage.setItem('ten_name', res.tenant);
       localStorage.setItem('mod_name', res.module[0]);
-      localStorage.setItem("paages",JSON.stringify(res.user.user_auth))
+      // localStorage.setItem("paages",JSON.stringify(res.user.user_auth))
 
       // localStorage.setItem('color_theme',res.clr_code)
 

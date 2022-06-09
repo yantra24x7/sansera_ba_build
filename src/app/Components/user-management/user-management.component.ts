@@ -141,9 +141,9 @@ export class User {
   editMode = false;
   roles: any;
   hide: boolean = true;
-  pagess:any=["oee report","Efficiency report","General Report","Idle reason report",
-  "Compare chart","Alarm","Alarm report","Machine","user",
-  "Component","Operator","Reason"]
+  // pagess:any=["oee report","Efficiency report","General Report","Idle reason report",
+  // "Compare chart","Alarm","Alarm report","Machine","user",
+  // "Component","Operator","Reason"]
   selectedpages:any=[]
   allSelecteds=false;
   constructor(public dialogRef: MatDialogRef<User>, @Inject(MAT_DIALOG_DATA) public data: User, private fb: FormBuilder, private user: UserService, private toast: ToastrService, private userService: UserService) {
@@ -161,7 +161,7 @@ export class User {
         phone_no: ["", Validators.required],
         remarks: ["",Validators.required],
         role: ["", Validators.required],
-        user_auth:["" ,Validators.required]
+        // user_auth:["" ,Validators.required]
       })
     } else {
       this.editMode = true;
@@ -173,7 +173,7 @@ export class User {
         phone_no: [this.value.edit_user.phone_no, Validators.required],
         remarks: [this.value.edit_user.remarks, Validators.required],
         role: [this.value.edit_user.role, Validators.required],
-        user_auth:[this.value.edit_user.user_auth ,Validators.required]
+        // user_auth:[this.value.edit_user.user_auth ,Validators.required]
       })
 
     }
@@ -187,14 +187,14 @@ export class User {
     })
 
   }
-  toggleAllSelections(){
-    if (this.allSelecteds) {
-      this.selectedpages=this.pagess
-      this.userForm.get(['user_auth']).setValue(this.pagess)
-    } else {
-      this.selectedpages=[]
-    }
-  }
+  // toggleAllSelections(){
+  //   if (this.allSelecteds) {
+  //     this.selectedpages=this.pagess
+  //     this.userForm.get(['user_auth']).setValue(this.pagess)
+  //   } else {
+  //     this.selectedpages=[]
+  //   }
+  // }
   keyPress(event: any) {
     const pattern = /[0-9]/;
     let inputChar = String.fromCharCode(event.charCode);

@@ -77,13 +77,13 @@
       </li>
     </ul>
     </div> -->
-    <!-- *ngIf="rolename === 'Admin'" -->
+    <!--  -->
 
     <!-- pagess:any=["oee report","Efficiency report","General Report","Idle reason report",
     "Compare chart","Alarm","Alarm report","Machine","user",
     "Component","Operator","Reason"] -->
 
-    <div  class="sidenav_view"> 
+    <div  class="sidenav_view" *ngIf="rolename === 'Admin'"> 
       <a href="javascript:;" class="sidenav_logo">
         <img src="../../../assets/images/Sansera-Logo.png">
       </a>
@@ -103,7 +103,7 @@
 
 
         
-        <li  *ngIf="hidepages('oee report')===true" [routerLink]="['/idle_reason']" (click)="shifting()" routerLinkActive="active-link">
+        <li   [routerLink]="['/idle_reason']" (click)="shifting()" routerLinkActive="active-link">
           <a href="javascript:;">
             <mat-icon class="v-align-middle display">assignment
             </mat-icon>
@@ -111,7 +111,7 @@
           </a>
         </li>
 
-        <li [routerLink]="['/efficiency']" *ngIf="hidepages('Efficiency report')===true"  (click)="shifting()" routerLinkActive="active-link">
+        <li [routerLink]="['/efficiency']"   (click)="shifting()" routerLinkActive="active-link">
           <a href="javascript:;">
             <mat-icon class="v-align-middle display">timelapse
             </mat-icon>
@@ -120,7 +120,7 @@
         </li>
 
         
-        <li [routerLink]="['/report']" *ngIf="hidepages('General Report')===true" (click)="shifting()" routerLinkActive="active-link">
+        <li [routerLink]="['/report']"  (click)="shifting()" routerLinkActive="active-link">
           <a href="javascript:;">
             <mat-icon class="v-align-middle display">file_copy
             </mat-icon>
@@ -129,7 +129,7 @@
         </li>
 
         
-        <li [routerLink]="['/report_idle']" *ngIf="hidepages('Idle reason report')===true" (click)="shifting()" routerLinkActive="active-link">
+        <li [routerLink]="['/report_idle']"  (click)="shifting()" routerLinkActive="active-link">
           <a href="javascript:;">
             <mat-icon class="v-align-middle display">data_usage
             </mat-icon>
@@ -138,7 +138,7 @@
         </li>
 
 
-        <li [routerLink]="['/comparechart']" *ngIf="hidepages('Compare chart')===true" (click)="shifting()" routerLinkActive="active-link">
+        <li [routerLink]="['/comparechart']"  (click)="shifting()" routerLinkActive="active-link">
           <a href="javascript:;">
             <mat-icon class="v-align-middle display">compare
             </mat-icon>
@@ -147,14 +147,14 @@
         </li>
 
 
-        <li [routerLink]="['/alarm']" (click)="shifting()" *ngIf="hidepages('Alarm')===true" routerLinkActive="active-link">
+        <li [routerLink]="['/alarm']" (click)="shifting()"  routerLinkActive="active-link">
           <a href="javascript:;">
             <mat-icon class="v-align-middle display">notifications
             </mat-icon>
             <span>Alarms</span>
           </a>
         </li>
-        <li [routerLink]="['/alarmreport']" (click)="shifting()"*ngIf="hidepages('Alarm report')===true" routerLinkActive="active-link">
+        <li [routerLink]="['/alarmreport']" (click)="shifting()" routerLinkActive="active-link">
           <a href="javascript:;">
             <mat-icon class="v-align-middle display">notifications
             </mat-icon>
@@ -163,7 +163,7 @@
         </li>
 
 
-        <li [routerLink]="['/machine_registration']" *ngIf="hidepages('Machine')===true" (click)="shifting()" routerLinkActive="active-link">
+        <li [routerLink]="['/machine_registration']"  (click)="shifting()" routerLinkActive="active-link">
           <a href="javascript:;">
             <mat-icon class="v-align-middle display">widgets
             </mat-icon>
@@ -172,7 +172,7 @@
         </li>
 
 
-        <li [routerLink]="['/shift']" (click)="shifting()" *ngIf="hidepages('oee report')===true" routerLinkActive="active-link">
+        <li [routerLink]="['/shift']" (click)="shifting()"  routerLinkActive="active-link">
           <a href="javascript:;">
             <mat-icon class="v-align-middle display">insert_invitation
             </mat-icon>
@@ -181,14 +181,14 @@
         </li>
 
 
-        <li [routerLink]="['/user_management']" (click)="shifting()" *ngIf="hidepages('user')===true" routerLinkActive="active-link">
+        <li [routerLink]="['/user_management']" (click)="shifting()"  routerLinkActive="active-link">
           <a href="javascript:;">
             <mat-icon class="v-align-middle display">person
             </mat-icon>
             <span>User</span>
           </a>
         </li>
-        <li [routerLink]="['/component']" *ngIf="hidepages('Component')===true" routerLinkActive="active-link">
+        <li [routerLink]="['/component']"  routerLinkActive="active-link">
           <a href="javascript:;">
             <mat-icon class="v-align-middle display">markunread_mailbox
             </mat-icon>
@@ -197,7 +197,7 @@
         </li>
 
 
-        <li [routerLink]="['/operator_registration']" *ngIf="hidepages('Operator')===true" (click)="shifting()" routerLinkActive="active-link">
+        <li [routerLink]="['/operator_registration']"  (click)="shifting()" routerLinkActive="active-link">
           <a href="javascript:;">
             <mat-icon class="v-align-middle display">account_circle
             </mat-icon>
@@ -206,7 +206,7 @@
         </li>
 
 
-        <li [routerLink]="['/reason_lmw']" *ngIf="hidepages('Reason')===true" (click)="shifting()" routerLinkActive="active-link">
+        <li [routerLink]="['/reason_lmw']"  (click)="shifting()" routerLinkActive="active-link">
           <a href="javascript:;">
             <mat-icon class="v-align-middle display">list
             </mat-icon>
@@ -230,7 +230,7 @@
       </li>
       </ul>
       </div>
-    <!-- <div *ngIf="rolename === 'Supervisor'" class="sidenav_view">
+    <div *ngIf="rolename === 'Supervisor'" class="sidenav_view">
       <a href="javascript:;" class="sidenav_logo">
         <img src="../../../assets/images/Sansera-Logo.png">
       </a>
@@ -329,7 +329,7 @@
       
       </ul>
 
-    </div> -->
+    </div>
   </div>
   <div class="as-content">
     <router-outlet></router-outlet>
