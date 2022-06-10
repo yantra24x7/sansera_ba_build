@@ -18,7 +18,7 @@
 
  <h1 class="d-none d-sm-none d-lg-block"> {{tenant_name}}</h1>
         <h1 class="d-lg-none d-sm-block">{{tenant_name}}</h1><br> 
-       <h1 class="d-none d-sm-none d-lg-block" *ngIf="rolename === 'Supervisor' || rolename === 'QA'">{{modu_name}} Module</h1> 
+       <!-- <h1 class="d-none d-sm-none d-lg-block" *ngIf="rolename === 'Supervisor' || rolename === 'QA'">{{modu_name}} Module</h1>  -->
 
 
 
@@ -172,7 +172,7 @@
         </li>
 
 
-        <li [routerLink]="['/shift']" (click)="shifting()" *ngIf="hidepages('oee report')===true" routerLinkActive="active-link">
+        <li [routerLink]="['/shift']" (click)="shifting()" *ngIf="hidepages('shift')===true" routerLinkActive="active-link">
           <a href="javascript:;">
             <mat-icon class="v-align-middle display">insert_invitation
             </mat-icon>

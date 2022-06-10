@@ -142,7 +142,7 @@ export class User {
   roles: any;
   hide: boolean = true;
   pagess:any=["oee report","Efficiency report","General Report","Idle reason report",
-  "Compare chart","Alarm","Alarm report","Machine","user",
+  "Compare chart","Alarm","Alarm report","Machine","user","shift",
   "Component","Operator","Reason"]
   selectedpages:any=[]
   allSelecteds=false;
