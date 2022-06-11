@@ -29,7 +29,7 @@ const routes: Routes = [
 { path: 'chart', loadChildren: () => import('./Components/chart/chart.module').then(m => m.ChartModule) },
 { path: 'andon-dashboard', loadChildren: () => import('./Components/andon-dashboard/andon-dashboard.module').then(m => m.AndonDashboardModule) },
 { path: 'sdashboard', loadChildren: () => import('./Components/sdashboard/sdashboard.module').then(m => m.SdashboardModule) },
-// { path: 'quality', loadChildren: () => import('./Components/quality/quality.module').then(m => m.QualityModule) },
+{ path: 'quality', loadChildren: () => import('./Components/quality/quality.module').then(m => m.QualityModule) },
 { path: 'dashboardline', loadChildren: () => import('./Components/dashboardline/dashboardline.module').then(m => m.DashboardlineModule) },
 { path: 'component', loadChildren: () => import('./Components/component/component.module').then(m => m.ComponentModule) },
 { path: 'eff_report', loadChildren: () => import('./Components/eff-report/eff-report.module').then(m => m.EffReportModule) },

@@ -195,7 +195,13 @@
             <span>Component</span>
           </a>
         </li>
-
+        <li [routerLink]="['/quality']" *ngIf="hidepages('Quality Entry')===true" (click)="shifting()" routerLinkActive="active-link">
+          <a href="javascript:;">
+            <mat-icon class="v-align-middle display">timelapse
+            </mat-icon>
+            <span>Quality Entry</span>
+          </a>
+        </li>
 
         <li [routerLink]="['/operator_registration']" *ngIf="hidepages('Operator')===true" (click)="shifting()" routerLinkActive="active-link">
           <a href="javascript:;">
